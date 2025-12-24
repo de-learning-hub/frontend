@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import {
   Box,
-  Grid,
+  Flex,
   VStack,
-  Heading,
   Text,
   Link as ChakraLink,
   useColorModeValue,
@@ -26,56 +26,68 @@ interface MegaMenuProps {
 // Styles
 const styles = {
   popoverContent: {
-    maxW: '1200px',
+    maxW: '800px',
     w: 'full',
     borderRadius: 'lg',
     shadow: 'xl',
   },
   body: {
-    p: 8,
+    p: 0,
   },
-  grid: {
-    columns: { base: 1, sm: 2, md: 3, lg: 4 },
-    spacing: 6,
+  container: {
     w: 'full',
+    minH: '400px',
   },
-  category: {
-    wrapper: {
-      align: 'stretch' as const,
-      spacing: 3,
-    },
-    header: {
-      wrapper: {
-        align: 'center' as const,
-        spacing: 2,
-        mb: 2,
-      },
-      icon: {
-        fontSize: '2xl',
-      },
-      title: {
-        size: 'sm',
-        fontWeight: 'bold',
-      },
-    },
-    description: {
-      fontSize: 'xs',
-      mb: 3,
-    },
+  leftColumn: {
+    w: '280px',
+    borderRight: '2px solid',
+    p: 4,
   },
-  topicList: {
-    wrapper: {
-      as: 'nav' as const,
-      align: 'stretch' as const,
-      spacing: 2,
-      pl: 2,
-    },
+  rightColumn: {
+    flex: 1,
+    p: 6,
+  },
+  categoryItem: {
+    w: 'full',
+    px: 4,
+    py: 3,
+    borderRadius: 'md',
+    fontSize: 'sm',
+    fontWeight: '500',
+    transition: 'all 0.2s',
+    cursor: 'pointer',
+    textAlign: 'left' as const,
+  },
+  topicLink: {
+    w: 'full',
+    px: 4,
+    py: 2,
+    borderRadius: 'md',
+    fontSize: 'sm',
+    fontWeight: 'medium',
+    transition: 'all 0.2s',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  rightHeader: {
+    fontSize: 'lg',
+    fontWeight: 'bold',
+    mb: 2,
+  },
+  rightDescription: {
+    fontSize: 'sm',
+    mb: 4,
+  },
+  topicsList: {
+    spacing: 1,
+    align: 'stretch' as const,
   },
 } as const;
 
 /**
- * MegaMenu component for category navigation
- * Displays categories and their topics in a popover dropdown
+ * MegaMenu component with two-level navigation
+ * Left column: categories, Right column: topics on hover
  */
 export const MegaMenu: React.FC<MegaMenuProps> = ({
   trigger,
@@ -84,11 +96,26 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
   onClose,
   onOpen,
 }) => {
-  const categoryBg = useColorModeValue('gray.50', 'gray.700');
+  // State for tracking hovered category
+  const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
+    categories[0]?.id || null
+  );
+
+  // Theme colors
+  const borderColor = useColorModeValue('gray.200', 'gray.700');
+  const leftColumnBg = useColorModeValue('gray.50', 'gray.900');
+  const categoryBg = useColorModeValue('transparent', 'transparent');
+  const categoryHoverBg = useColorModeValue('blue.50', 'blue.900');
+  const categoryActiveBg = useColorModeValue('blue.100', 'blue.800');
+  const categoryColor = useColorModeValue('gray.700', 'gray.200');
+  const categoryActiveColor = useColorModeValue('blue.600', 'blue.300');
   const linkColor = useColorModeValue('gray.700', 'gray.200');
   const linkHoverColor = useColorModeValue('blue.600', 'blue.300');
   const linkHoverBg = useColorModeValue('blue.50', 'blue.900');
   const descColor = useColorModeValue('gray.600', 'gray.400');
+
+  // Get currently hovered category
+  const activeCategory = categories.find((cat) => cat.id === hoveredCategoryId);
 
   return (
     <Popover
@@ -104,78 +131,78 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
       <PopoverTrigger>{trigger}</PopoverTrigger>
       <PopoverContent {...styles.popoverContent}>
         <PopoverBody {...styles.body}>
-          <Grid {...styles.grid}>
-            {categories
-              .sort((a, b) => a.order - b.order)
-              .map((category) => (
-                <Box
-                  key={category.id}
-                  bg={categoryBg}
-                  p={4}
-                  borderRadius="md"
-                  transition="all 0.2s"
-                  _hover={{ shadow: 'md' }}
-                >
-                  <VStack {...styles.category.wrapper}>
-                    {/* Category Header */}
-                    <Box {...styles.category.header.wrapper} w="full">
-                      <Text {...styles.category.header.icon}>
-                        {category.icon}
-                      </Text>
-                      <Heading {...styles.category.header.title}>
-                        {category.name}
-                      </Heading>
-                    </Box>
+          <Flex {...styles.container}>
+            {/* Left Column - Categories */}
+            <Box {...styles.leftColumn} borderColor={borderColor} bg={leftColumnBg}>
+              <VStack spacing={1} align="stretch">
+                {categories
+                  .sort((a, b) => a.order - b.order)
+                  .map((category) => {
+                    const isActive = category.id === hoveredCategoryId;
+                    return (
+                      <Box
+                        key={category.id}
+                        {...styles.categoryItem}
+                        bg={isActive ? categoryActiveBg : categoryBg}
+                        color={isActive ? categoryActiveColor : categoryColor}
+                        _hover={{
+                          bg: categoryHoverBg,
+                          color: categoryActiveColor,
+                        }}
+                        onMouseEnter={() => setHoveredCategoryId(category.id)}
+                      >
+                        <Text>{category.name}</Text>
+                      </Box>
+                    );
+                  })}
+              </VStack>
+            </Box>
 
-                    {/* Category Description */}
-                    <Text color={descColor} {...styles.category.description}>
-                      {category.description}
-                    </Text>
+            {/* Right Column - Topics */}
+            <Box {...styles.rightColumn}>
+              {activeCategory && (
+                <Box>
+                  {/* Category name and description */}
+                  <Text {...styles.rightHeader}>{activeCategory.name}</Text>
+                  <Text color={descColor} {...styles.rightDescription}>
+                    {activeCategory.description}
+                  </Text>
 
-                    {/* Topics List */}
-                    <VStack {...styles.topicList.wrapper}>
-                      {category.topics.map((topic) => (
-                        <ChakraLink
-                          key={topic.id}
-                          as={RouterLink}
-                          to={`/catalog/${category.slug}/${topic.slug}`}
-                          onClick={onClose}
-                          w="full"
-                          px={3}
-                          py={2}
-                          borderRadius="md"
-                          fontSize="sm"
-                          fontWeight="medium"
-                          color={linkColor}
-                          transition="all 0.2s"
-                          _hover={{
-                            color: linkHoverColor,
-                            bg: linkHoverBg,
-                            textDecoration: 'none',
-                            transform: 'translateX(4px)',
-                          }}
-                          display="flex"
-                          alignItems="center"
-                          justifyContent="space-between"
-                        >
-                          <Text>{topic.name}</Text>
-                          {topic.resourceCount > 0 && (
-                            <Text
-                              as="span"
-                              fontSize="xs"
-                              color={descColor}
-                              fontWeight="normal"
-                            >
-                              {topic.resourceCount}
-                            </Text>
-                          )}
-                        </ChakraLink>
-                      ))}
-                    </VStack>
+                  {/* Topics list */}
+                  <VStack {...styles.topicsList}>
+                    {activeCategory.topics.map((topic) => (
+                      <ChakraLink
+                        key={topic.id}
+                        as={RouterLink}
+                        to={`/catalog/${activeCategory.slug}/${topic.slug}`}
+                        onClick={onClose}
+                        {...styles.topicLink}
+                        color={linkColor}
+                        _hover={{
+                          color: linkHoverColor,
+                          bg: linkHoverBg,
+                          textDecoration: 'none',
+                          transform: 'translateX(4px)',
+                        }}
+                      >
+                        <Text>{topic.name}</Text>
+                        {topic.resourceCount > 0 && (
+                          <Text
+                            as="span"
+                            fontSize="xs"
+                            color={descColor}
+                            fontWeight="normal"
+                          >
+                            {topic.resourceCount}
+                          </Text>
+                        )}
+                      </ChakraLink>
+                    ))}
                   </VStack>
                 </Box>
-              ))}
-          </Grid>
+              )}
+            </Box>
+          </Flex>
         </PopoverBody>
       </PopoverContent>
     </Popover>

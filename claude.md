@@ -999,6 +999,9 @@ export const Button = () => { /* ... */ };
 - ✅ No period at the end
 - ✅ Keep first line under 72 characters
 - ✅ Scope is optional but recommended
+- ❌ **DO NOT** add "Generated with Claude Code" or similar AI tool mentions
+- ❌ **DO NOT** add "Co-Authored-By: Claude" or AI attribution
+- ✅ Commits should appear as written by the human developer only
 
 **Examples:**
 

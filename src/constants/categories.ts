@@ -10,7 +10,6 @@ export const CATEGORIES: Category[] = [
     id: 'data-engineering',
     name: 'Data Engineering',
     slug: 'data-engineering',
-    icon: '🗄️',
     description: 'Оркестрация данных и ETL/ELT инструменты',
     order: 1,
     topics: [
@@ -52,7 +51,6 @@ export const CATEGORIES: Category[] = [
     id: 'databases',
     name: 'Databases',
     slug: 'databases',
-    icon: '💾',
     description: 'Реляционные и NoSQL базы данных',
     order: 2,
     topics: [
@@ -94,7 +92,6 @@ export const CATEGORIES: Category[] = [
     id: 'devops',
     name: 'DevOps & Infrastructure',
     slug: 'devops',
-    icon: '🐳',
     description: 'Контейнеризация, оркестрация, CI/CD',
     order: 3,
     topics: [
@@ -136,7 +133,6 @@ export const CATEGORIES: Category[] = [
     id: 'programming',
     name: 'Programming',
     slug: 'programming',
-    icon: '🐍',
     description: 'Языки программирования и скриптинг',
     order: 4,
     topics: [
@@ -170,7 +166,6 @@ export const CATEGORIES: Category[] = [
     id: 'data-modeling',
     name: 'Data Modeling',
     slug: 'data-modeling',
-    icon: '📊',
     description: 'Моделирование данных и архитектура DWH',
     order: 5,
     topics: [
@@ -204,7 +199,6 @@ export const CATEGORIES: Category[] = [
     id: 'cloud',
     name: 'Cloud Platforms',
     slug: 'cloud',
-    icon: '☁️',
     description: 'Облачные платформы и сервисы',
     order: 6,
     topics: [
@@ -238,7 +232,6 @@ export const CATEGORIES: Category[] = [
     id: 'streaming',
     name: 'Streaming & Real-time',
     slug: 'streaming',
-    icon: '⚡',
     description: 'Потоковая обработка данных в реальном времени',
     order: 7,
     topics: [
@@ -280,7 +273,6 @@ export const CATEGORIES: Category[] = [
     id: 'mlops',
     name: 'ML Ops',
     slug: 'mlops',
-    icon: '🤖',
     description: 'ML инфраструктура и операции',
     order: 8,
     topics: [

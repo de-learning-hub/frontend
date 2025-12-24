@@ -87,7 +87,7 @@ export const Catalog = () => {
           bgGradient="linear(to-r, blue.400, purple.500)"
           bgClip="text"
         >
-          📚 Каталог тем
+          Каталог тем
         </Heading>
         <Text fontSize="lg" color={descColor}>
           Структурированные материалы по Data Engineering
@@ -109,8 +109,7 @@ export const Catalog = () => {
             }}
           >
             {/* Category Header */}
-            <Box {...styles.category.header.wrapper}>
-              <Text {...styles.category.header.icon}>{category.icon}</Text>
+            <Box>
               <Heading {...styles.category.header.title}>
                 {category.name}
               </Heading>

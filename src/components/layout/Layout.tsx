@@ -199,7 +199,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                       textDecoration: 'none',
                     }}
                   >
-                    Каталог 📚
+                    Каталог
                   </ChakraLink>
                 }
                 categories={CATEGORIES}
