@@ -45,18 +45,20 @@ const styles = {
       position: 'sticky' as const,
       top: 0,
       zIndex: 1000,
-      h: '72px',
+      h: { base: '64px', md: '80px' }, // Mobile: 64px, Desktop: 80px (multiples of 8)
       bgGradient: 'linear(135deg, #0F2027, #203A43, #2C5364)',
       boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
     },
     container: {
       maxW: 'container.xl' as const,
       h: '100%',
+      px: { base: 4, md: 6 }, // 16px mobile, 24px desktop
     },
     flex: {
       justify: 'space-between' as const,
       align: 'center' as const,
       h: '100%',
+      gap: { base: 4, md: 6 }, // Spacing between logo and nav: 16px mobile, 24px desktop
     },
     catalogWrapper: {
       position: 'relative' as const,
@@ -70,13 +72,13 @@ const styles = {
     },
   },
   logo: {
-    h: '40px',
+    h: { base: '32px', md: '40px' }, // Mobile: 32px, Desktop: 40px (recommended 40-60px)
     w: 'auto',
     cursor: 'pointer',
   },
   nav: {
     wrapper: {
-      spacing: 6,
+      spacing: { base: 4, md: 8 }, // Mobile: 16px, Desktop: 32px (recommended 30-40px)
       display: { base: 'none', md: 'flex' },
       align: 'center' as const,
       position: 'relative' as const,
@@ -128,7 +130,8 @@ const styles = {
   },
   main: {
     maxW: 'container.xl' as const,
-    py: 8,
+    py: { base: 10, md: 16 }, // 40px mobile, 64px desktop (recommended 40-80px)
+    px: { base: 4, md: 8 }, // 16px mobile, 32px desktop (recommended 20-50px)
   },
   footer: {
     wrapper: {
@@ -187,11 +190,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               _hover={{ bg: 'whiteAlpha.200' }}
             />
 
-            {/* Logo + Text */}
-            <HStack spacing={3} as={Link} to="/" _hover={{ opacity: 0.8 }}>
-              <Logo height="32px" />
-              <Text {...styles.header.logoText}>DE LEARNING HUB</Text>
-            </HStack>
+            {/* Logo */}
+            <Box as={Link} to="/" _hover={{ opacity: 0.8 }} {...styles.logo}>
+              <Logo height="100%" />
+            </Box>
 
             {/* Navigation */}
             <HStack {...styles.nav.wrapper}>
