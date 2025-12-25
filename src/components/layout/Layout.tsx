@@ -91,7 +91,7 @@ const styles = {
   },
   nav: {
     wrapper: {
-      spacing: 8, // 32px gap between nav items
+      spacing: 3, // 12px gap between nav items (compact)
       display: { base: 'none', md: 'flex' },
       align: 'center' as const,
       position: 'relative' as const,
