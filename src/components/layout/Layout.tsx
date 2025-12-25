@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -11,6 +11,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { FaMoon, FaSun, FaBars } from 'react-icons/fa';
 import { MegaMenu, MobileMenu } from '@/components/navigation';
 import { Logo } from '@/components/ui';
@@ -70,14 +71,9 @@ const styles = {
       spacing: 1,
       display: { base: 'none', md: 'flex' },
       align: 'center' as const,
+      position: 'relative' as const,
     },
     link: {
-      px: 3,
-      py: 2,
-      borderRadius: 'md',
-      fontSize: 'sm',
-      fontWeight: '500',
-      transition: 'all 0.2s',
       textDecoration: 'none',
     },
     catalogButton: {
@@ -88,6 +84,13 @@ const styles = {
       variant: 'ghost' as const,
       h: 'auto',
       minH: 0,
+    },
+    indicator: {
+      position: 'absolute' as const,
+      bottom: '-1px',
+      height: '2px',
+      borderRadius: '2px',
+      pointerEvents: 'none' as const,
     },
   },
   backdrop: {
@@ -144,17 +147,37 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   // State
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+
+  // Refs for navigation items
+  const navRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
+  const catalogRef = useRef<HTMLAnchorElement | null>(null);
 
   // Hooks
   const { colorMode, toggleColorMode } = useColorMode();
   const location = useLocation();
-  const bgColor = useColorModeValue('white', 'gray.800');
-  const borderColor = useColorModeValue('gray.200', 'gray.700');
-  const footerBg = useColorModeValue('gray.50', 'gray.900');
-  const linkColor = useColorModeValue('gray.700', 'gray.200');
-  const linkHoverColor = useColorModeValue('blue.600', 'blue.300');
-  const linkHoverBg = useColorModeValue('blue.50', 'blue.900');
-  const linkActiveBg = useColorModeValue('blue.100', 'blue.800');
+  const bgColor = useColorModeValue('white', 'navy.600');
+  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const footerBg = useColorModeValue('gray.50', 'navy.700');
+  const linkHoverColor = useColorModeValue('accent.600', 'accent.300');
+  const indicatorBg = useColorModeValue('accent.600', 'accent.400');
+
+  // Update indicator position based on active route
+  const updateIndicatorPosition = (path: string) => {
+    const element = path === '/catalog' ? catalogRef.current : navRefs.current[path];
+    if (element) {
+      const { offsetLeft, offsetWidth } = element;
+      setIndicatorStyle({
+        left: offsetLeft + offsetWidth * 0.1, // 10% padding from left
+        width: offsetWidth * 0.8, // 80% of item width
+      });
+    }
+  };
+
+  // Update indicator on route change
+  useEffect(() => {
+    updateIndicatorPosition(location.pathname);
+  }, [location.pathname]);
 
   // Render
   return (
@@ -186,16 +209,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <MegaMenu
                 trigger={
                   <ChakraLink
+                    ref={catalogRef}
                     as={Link}
                     to="/catalog"
                     {...styles.nav.link}
-                    color={linkColor}
-                    bg={location.pathname === '/catalog' ? linkActiveBg : 'transparent'}
-                    _hover={{
-                      color: linkHoverColor,
-                      bg: linkHoverBg,
-                      textDecoration: 'none',
-                    }}
+                    layerStyle="indicator"
+                    color={location.pathname === '/catalog' ? linkHoverColor : undefined}
+                    _hover={{ color: linkHoverColor }}
                   >
                     Каталог
                   </ChakraLink>
@@ -212,21 +232,36 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 return (
                   <ChakraLink
                     key={item.path}
+                    ref={(el) => (navRefs.current[item.path] = el)}
                     as={Link}
                     to={item.path}
                     {...styles.nav.link}
-                    color={linkColor}
-                    bg={isActive ? linkActiveBg : 'transparent'}
-                    _hover={{
-                      color: linkHoverColor,
-                      bg: linkHoverBg,
-                      textDecoration: 'none',
-                    }}
+                    layerStyle="indicator"
+                    color={isActive ? linkHoverColor : undefined}
+                    _hover={{ color: linkHoverColor }}
                   >
                     {item.label}
                   </ChakraLink>
                 );
               })}
+
+              {/* Animated sliding indicator */}
+              <Box
+                as={motion.div}
+                {...styles.nav.indicator}
+                bg={indicatorBg}
+                animate={{
+                  left: indicatorStyle.left,
+                  width: indicatorStyle.width,
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 380,
+                  damping: 30,
+                  duration: 0.3,
+                }}
+                initial={false}
+              />
             </HStack>
 
             {/* Theme Toggle */}

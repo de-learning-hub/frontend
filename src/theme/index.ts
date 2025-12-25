@@ -102,6 +102,42 @@ export const theme = extendTheme({
     },
   },
 
+  // Layer styles for reusable style combinations
+  layerStyles: {
+    // Navigation link style for header (without underline - handled by animated indicator)
+    indicator: {
+      px: 4,
+      py: 2,
+      fontSize: 'sm',
+      fontWeight: '500',
+      cursor: 'pointer',
+      position: 'relative',
+      transition: 'color 0.2s ease',
+      _hover: {
+        color: 'accent.600',
+        _dark: {
+          color: 'accent.300',
+        },
+      },
+    },
+    // Menu item style for dropdowns (no underline)
+    menuItem: {
+      px: 4,
+      py: 2,
+      fontSize: 'sm',
+      fontWeight: '500',
+      transition: 'all 0.2s',
+      cursor: 'pointer',
+      _hover: {
+        color: 'accent.600',
+        transform: 'translateX(4px)',
+        _dark: {
+          color: 'accent.300',
+        },
+      },
+    },
+  },
+
   components: {
     // Heading components
     Heading: {
