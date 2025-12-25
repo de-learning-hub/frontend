@@ -12,9 +12,14 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Button,
 } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaMoon, FaSun, FaBars, FaSearch, FaGithub } from 'react-icons/fa';
+import { FaMoon, FaSun, FaBars, FaSearch, FaGlobe, FaUser, FaChevronDown } from 'react-icons/fa';
 import { MegaMenu, MobileMenu } from '@/components/navigation';
 import { Logo } from '@/components/ui';
 import { CATEGORIES } from '@/constants';
@@ -48,20 +53,19 @@ const styles = {
       position: 'sticky' as const,
       top: 0,
       zIndex: 1000,
-      h: { base: '64px', md: '80px' }, // Mobile: 64px, Desktop: 80px (multiples of 8)
+      h: '64px', // Header height: 64px for all screen sizes
       bgGradient: 'linear(135deg, #0F2027, #203A43, #2C5364)',
       boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
     },
     container: {
       maxW: 'container.xl' as const,
       h: '100%',
-      px: { base: 4, md: 6 }, // 16px mobile, 24px desktop
+      px: 6, // 24px padding from screen edge
     },
     flex: {
       justify: 'space-between' as const,
       align: 'center' as const,
       h: '100%',
-      gap: { base: 4, md: 6 }, // Spacing between logo and nav: 16px mobile, 24px desktop
     },
     catalogWrapper: {
       position: 'relative' as const,
@@ -81,10 +85,11 @@ const styles = {
   },
   nav: {
     wrapper: {
-      spacing: { base: 4, md: 8 }, // Mobile: 16px, Desktop: 32px (recommended 30-40px)
+      spacing: 8, // 32px gap between nav items
       display: { base: 'none', md: 'flex' },
       align: 'center' as const,
       position: 'relative' as const,
+      ml: 8, // 32px margin from logo
     },
     link: {
       textDecoration: 'none',
@@ -122,29 +127,37 @@ const styles = {
   },
   themeToggle: {
     variant: 'ghost' as const,
-    size: 'md' as const,
+    h: '36px',
+    w: '36px',
+    minW: '36px',
   },
   burgerButton: {
     variant: 'ghost' as const,
-    size: 'md' as const,
+    h: '36px',
+    w: '36px',
+    minW: '36px',
     display: { base: 'flex', md: 'none' },
   },
   search: {
     wrapper: {
       display: { base: 'none', md: 'block' },
-      flex: 1,
-      maxW: '400px',
-      mx: 4,
+      w: '200px',
+      transition: 'width 0.2s ease',
+      _focusWithin: {
+        w: '280px',
+      },
     },
     inputGroup: {
-      size: 'md' as const,
+      h: '36px',
     },
     input: {
+      h: '36px',
       bg: 'whiteAlpha.100',
       border: '1px solid',
       borderColor: 'whiteAlpha.200',
       borderRadius: 'lg',
       color: 'white',
+      fontSize: 'sm',
       _placeholder: {
         color: 'whiteAlpha.600',
       },
@@ -160,12 +173,26 @@ const styles = {
     iconButton: {
       display: { base: 'flex', md: 'none' },
       variant: 'ghost' as const,
-      size: 'md' as const,
+      h: '36px',
+      w: '36px',
+      minW: '36px',
     },
   },
-  githubButton: {
-    variant: 'ghost' as const,
-    size: 'md' as const,
+  language: {
+    button: {
+      variant: 'ghost' as const,
+      h: '36px',
+      px: 3,
+      gap: 1.5,
+    },
+  },
+  login: {
+    button: {
+      variant: 'ghost' as const,
+      h: '36px',
+      px: 4,
+      gap: 2,
+    },
   },
   main: {
     maxW: 'container.xl' as const,
@@ -270,8 +297,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Navigation */}
             <HStack {...styles.nav.wrapper}>
-              {/* Regular navigation links */}
-              {NAV_ITEMS.map((item) => {
+              {/* First item: Главная */}
+              {NAV_ITEMS[0] && (() => {
+                const item = NAV_ITEMS[0];
                 const isActive = location.pathname === item.path;
                 return (
                   <ChakraLink
@@ -289,9 +317,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     {item.label}
                   </ChakraLink>
                 );
-              })}
+              })()}
 
-              {/* Catalog Link with MegaMenu Preview */}
+              {/* Second item: Catalog with MegaMenu */}
               <MegaMenu
                 trigger={
                   <ChakraLink
@@ -314,6 +342,27 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 onOpen={() => setIsMegaMenuOpen(true)}
               />
 
+              {/* Rest of navigation items */}
+              {NAV_ITEMS.slice(1).map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <ChakraLink
+                    key={item.path}
+                    as={Link}
+                    to={item.path}
+                    ref={(el) => {
+                      if (el) navRefs.current[item.path] = el;
+                    }}
+                    {...styles.nav.link}
+                    color="white"
+                    opacity={isActive ? 1 : 0.85}
+                    _hover={{ opacity: 1 }}
+                  >
+                    {item.label}
+                  </ChakraLink>
+                );
+              })}
+
               {/* Animated Indicator */}
               <Box
                 {...styles.nav.indicator}
@@ -325,7 +374,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             </HStack>
 
             {/* Right Actions Group */}
-            <HStack spacing={2}>
+            <HStack spacing={{ base: 3, md: 4 }} ml={{ base: 'auto', md: 6 }}>
               {/* Search Icon (Mobile) */}
               <IconButton
                 aria-label="Search"
@@ -348,18 +397,36 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 _hover={{ bg: 'whiteAlpha.200' }}
               />
 
-              {/* GitHub Link */}
-              <IconButton
-                as="a"
-                href="https://github.com/de-learning-hub"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                icon={<FaGithub />}
-                {...styles.githubButton}
+              {/* Language Dropdown (Desktop only) */}
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  {...styles.language.button}
+                  color="white"
+                  _hover={{ bg: 'whiteAlpha.200' }}
+                  _active={{ bg: 'whiteAlpha.300' }}
+                  leftIcon={<FaGlobe />}
+                  rightIcon={<FaChevronDown size={12} />}
+                  display={{ base: 'none', md: 'flex' }}
+                >
+                  RU
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Русский (RU)</MenuItem>
+                  <MenuItem>English (EN)</MenuItem>
+                </MenuList>
+              </Menu>
+
+              {/* Login Button (Desktop only) */}
+              <Button
+                {...styles.login.button}
                 color="white"
                 _hover={{ bg: 'whiteAlpha.200' }}
-              />
+                leftIcon={<FaUser />}
+                display={{ base: 'none', md: 'flex' }}
+              >
+                Войти
+              </Button>
             </HStack>
           </Flex>
         </Container>
