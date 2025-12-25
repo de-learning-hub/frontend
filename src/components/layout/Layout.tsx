@@ -91,7 +91,7 @@ const styles = {
   },
   nav: {
     wrapper: {
-      spacing: 3, // 12px gap between nav items (compact)
+      spacing: 2, // 12px gap between nav items (compact)
       display: { base: 'none', md: 'flex' },
       align: 'center' as const,
       position: 'relative' as const,
@@ -225,7 +225,7 @@ const styles = {
       fontSize: 'sm',
     },
     links: {
-      spacing: 4,
+      spacing: 2,
       color: 'gray.500',
       fontSize: 'sm',
     },
@@ -379,7 +379,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             />
 
             {/* Right Actions Group */}
-            <HStack spacing={{ base: 3, md: 4 }} ml={{ base: 'auto', md: 6 }}>
+            <HStack spacing={2} ml={{ base: 'auto', md: 8 }}>
               {/* Search Icon (Mobile) */}
               <IconButton
                 aria-label="Search"
@@ -403,42 +403,36 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               {/* Language Dropdown (Desktop only) */}
               <Menu>
                 <MenuButton
-                  as={Button}
-                  {...styles.language.button}
+                  as={IconButton}
+                  aria-label="Language"
+                  icon={<FaGlobe />}
+                  variant="ghost"
                   color="white"
+                  h="36px"
+                  w="36px"
+                  minW="36px"
+                  display={{ base: 'none', md: 'flex' }}
                   _hover={{ bg: 'whiteAlpha.200' }}
                   _active={{ bg: 'whiteAlpha.300' }}
-                  leftIcon={<FaGlobe />}
-                  rightIcon={<FaChevronDown size={12} />}
-                  display={{ base: 'none', md: 'flex' }}
-                >
-                  RU
-                </MenuButton>
+                />
                 <MenuList>
                   <MenuItem>Русский (RU)</MenuItem>
                   <MenuItem>English (EN)</MenuItem>
                 </MenuList>
               </Menu>
 
-              {/* Login Dropdown (Desktop only) */}
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  {...styles.login.button}
-                  color="white"
-                  _hover={{ bg: 'whiteAlpha.200' }}
-                  _active={{ bg: 'whiteAlpha.300' }}
-                  leftIcon={<FaUser />}
-                  rightIcon={<FaChevronDown size={12} />}
-                  display={{ base: 'none', md: 'flex' }}
-                >
-                  Войти
-                </MenuButton>
-                <MenuList>
-                  <MenuItem>Войти</MenuItem>
-                  <MenuItem>Регистрация</MenuItem>
-                </MenuList>
-              </Menu>
+              {/* Login Icon (Desktop only) */}
+              <IconButton
+                aria-label="Login"
+                icon={<FaUser />}
+                variant="ghost"
+                color="white"
+                h="36px"
+                w="36px"
+                minW="36px"
+                display={{ base: 'none', md: 'flex' }}
+                _hover={{ bg: 'whiteAlpha.200' }}
+              />
             </HStack>
           </Flex>
         </Container>
