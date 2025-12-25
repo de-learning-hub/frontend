@@ -75,11 +75,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   onCatalogClick,
 }) => {
   const linkColor = useColorModeValue('gray.700', 'gray.200');
-  const linkHoverColor = useColorModeValue('accent.600', 'accent.300');
-  const linkHoverBg = useColorModeValue('accent.50', 'accent.900');
-  const linkActiveBg = useColorModeValue('accent.100', 'accent.800');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
-  const headerColor = useColorModeValue('navy.500', 'gray.100');
+  const linkHoverColor = useColorModeValue('accent.600', 'white');
+  const linkHoverBg = useColorModeValue('accent.50', 'whiteAlpha.100');
+  const linkActiveBg = useColorModeValue('accent.100', 'whiteAlpha.200');
+  const borderColor = useColorModeValue('gray.200', 'navy.400');
+  const headerColor = useColorModeValue('navy.500', 'white');
 
   const handleCatalogClick = () => {
     onClose();

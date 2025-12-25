@@ -105,6 +105,7 @@ export const theme = extendTheme({
   // Layer styles for reusable style combinations
   layerStyles: {
     // Navigation link style for header (without underline - handled by animated indicator)
+    // Minimalist approach in dark mode: white/gray colors
     indicator: {
       px: 4,
       py: 2,
@@ -116,11 +117,12 @@ export const theme = extendTheme({
       _hover: {
         color: 'accent.600',
         _dark: {
-          color: 'accent.300',
+          color: 'white',
         },
       },
     },
     // Menu item style for dropdowns (no underline)
+    // Minimalist approach in dark mode: white on hover
     menuItem: {
       px: 4,
       py: 2,
@@ -132,7 +134,7 @@ export const theme = extendTheme({
         color: 'accent.600',
         transform: 'translateX(4px)',
         _dark: {
-          color: 'accent.300',
+          color: 'white',
         },
       },
     },

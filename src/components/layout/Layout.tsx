@@ -157,10 +157,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const location = useLocation();
   const bgColor = useColorModeValue('white', 'navy.600');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const borderColor = useColorModeValue('gray.200', 'navy.400');
   const footerBg = useColorModeValue('gray.50', 'navy.700');
-  const linkHoverColor = useColorModeValue('accent.600', 'accent.300');
-  const indicatorBg = useColorModeValue('accent.600', 'accent.400');
+  const linkColor = useColorModeValue('brand.500', 'gray.100');
+  const linkHoverColor = useColorModeValue('accent.600', 'white');
+  const indicatorBg = useColorModeValue('accent.600', 'white');
 
   // Update indicator position based on active route
   const updateIndicatorPosition = (path: string) => {
@@ -214,7 +215,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     to="/catalog"
                     {...styles.nav.link}
                     layerStyle="indicator"
-                    color={location.pathname === '/catalog' ? linkHoverColor : undefined}
+                    color={location.pathname === '/catalog' ? linkHoverColor : linkColor}
                     _hover={{ color: linkHoverColor }}
                   >
                     Каталог
@@ -237,7 +238,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     to={item.path}
                     {...styles.nav.link}
                     layerStyle="indicator"
-                    color={isActive ? linkHoverColor : undefined}
+                    color={isActive ? linkHoverColor : linkColor}
                     _hover={{ color: linkHoverColor }}
                   >
                     {item.label}

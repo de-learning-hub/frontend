@@ -95,13 +95,13 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
   );
 
   // Theme colors
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const borderColor = useColorModeValue('gray.200', 'navy.400');
   const leftColumnBg = useColorModeValue('gray.50', 'navy.700');
-  const categoryActiveBg = useColorModeValue('accent.100', 'accent.800');
-  const categoryActiveColor = useColorModeValue('accent.600', 'accent.300');
+  const categoryActiveBg = useColorModeValue('accent.100', 'whiteAlpha.100');
+  const categoryActiveColor = useColorModeValue('accent.600', 'white');
   const linkColor = useColorModeValue('gray.700', 'gray.200');
-  const linkHoverColor = useColorModeValue('accent.600', 'accent.300');
-  const linkHoverBg = useColorModeValue('accent.50', 'accent.900');
+  const linkHoverColor = useColorModeValue('accent.600', 'white');
+  const linkHoverBg = useColorModeValue('accent.50', 'whiteAlpha.100');
   const descColor = useColorModeValue('gray.600', 'gray.400');
 
   // Get currently hovered category

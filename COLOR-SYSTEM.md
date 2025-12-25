@@ -300,13 +300,13 @@ navy.900  #030c16  - почти черный
 | Вторичный текст | `gray.600` | `gray.400` | Описания, подписи |
 | Третичный текст | `gray.500` | `gray.500` | Метаданные, timestamps |
 | **Границы** |
-| Основные границы | `gray.200` | `gray.600` | Borders, dividers |
+| Основные границы | `gray.200` | `transparent` или `navy.400` | Borders - в dark mode почти невидимые или отсутствуют |
 | Активные границы | `brand.500` | `brand.400` | Active states |
-| **Навигация и ссылки (30% - Brand)** |
-| Ссылки | `brand.500` | `brand.300` | Навигационные ссылки |
-| Ссылки hover | `accent.600` | `accent.300` | Hover состояние ссылок |
-| Активная ссылка | `accent.600` | `accent.300` | Текущая страница |
-| Индикатор навигации | `accent.600` | `accent.400` | Подчеркивание |
+| **Навигация и ссылки (минималистичный подход в dark mode)** |
+| Ссылки | `brand.500` | `gray.100` | Навигационные ссылки (в dark - белые/нейтральные) |
+| Ссылки hover | `accent.600` | `white` | Hover состояние ссылок (ярче) |
+| Активная ссылка | `accent.600` | `white` | Текущая страница (яркий белый) |
+| Индикатор навигации | `accent.600` | `white` | Подчеркивание (белое для контраста) |
 | **Кнопки и акценты (10% - Accent)** |
 | Primary button bg | `accent.500` | `accent.500` | Главные кнопки (достаточно контрастны) |
 | Primary button hover | `accent.600` | `accent.600` | Hover на кнопках |
@@ -350,26 +350,31 @@ const metaColor = useColorModeValue('gray.500', 'gray.500');
 
 #### Границы
 ```tsx
-// Обычные границы
-const borderColor = useColorModeValue('gray.200', 'gray.600');
+// Обычные границы (в dark mode почти невидимые или отсутствуют)
+const borderColor = useColorModeValue('gray.200', 'transparent');
+// Или очень тонкие темные:
+const borderColor = useColorModeValue('gray.200', 'navy.400');
 
 // Активные границы
 const activeBorder = useColorModeValue('brand.500', 'brand.400');
 ```
 
-#### Навигация (30% - Brand)
+#### Навигация (минималистичный подход в dark mode)
 ```tsx
-// Цвет ссылок
-const linkColor = useColorModeValue('brand.500', 'brand.300');
+// Цвет ссылок - в dark mode белый/нейтральный
+const linkColor = useColorModeValue('brand.500', 'gray.100');
 
-// Hover цвет ссылок
-const linkHoverColor = useColorModeValue('accent.600', 'accent.300');
+// Hover цвет ссылок - в dark mode ярко-белый
+const linkHoverColor = useColorModeValue('accent.600', 'white');
 
-// Индикатор подчеркивания
-const indicatorBg = useColorModeValue('accent.600', 'accent.400');
+// Активная ссылка - в dark mode ярко-белый
+const activeLinkColor = useColorModeValue('accent.600', 'white');
 
-// Фон при hover
-const linkHoverBg = useColorModeValue('accent.50', 'accent.900');
+// Индикатор подчеркивания - в dark mode белый
+const indicatorBg = useColorModeValue('accent.600', 'white');
+
+// Фон при hover - в dark mode едва заметный
+const linkHoverBg = useColorModeValue('accent.50', 'whiteAlpha.200');
 ```
 
 #### Кнопки (10% - Accent)
@@ -399,12 +404,19 @@ const linkHoverBg = useColorModeValue('accent.50', 'accent.900');
 // Левая колонка
 const leftColumnBg = useColorModeValue('gray.50', 'navy.700');
 
-// Активный пункт категории
-const categoryActiveBg = useColorModeValue('accent.100', 'accent.800');
-const categoryActiveColor = useColorModeValue('accent.600', 'accent.300');
+// Границы - в dark mode едва заметные или отсутствуют
+const borderColor = useColorModeValue('gray.200', 'navy.400');
 
-// Hover на ссылку
-const linkHoverBg = useColorModeValue('accent.50', 'accent.900');
+// Активный пункт категории - в dark mode минималистично
+const categoryActiveBg = useColorModeValue('accent.100', 'whiteAlpha.100');
+const categoryActiveColor = useColorModeValue('accent.600', 'white');
+
+// Цвет ссылок в меню
+const linkColor = useColorModeValue('gray.700', 'gray.200');
+const linkHoverColor = useColorModeValue('accent.600', 'white');
+
+// Hover фон - в dark mode едва заметный
+const linkHoverBg = useColorModeValue('accent.50', 'whiteAlpha.100');
 ```
 
 ### ❌ Частые ошибки
