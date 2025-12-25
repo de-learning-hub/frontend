@@ -71,6 +71,30 @@ const latestMaterials = [
   },
 ];
 
+// Mock data for roadmaps
+const roadmaps = [
+  {
+    id: 1,
+    title: 'Data Engineer Roadmap',
+    description: 'Путь от новичка до junior дата инженера за 6 месяцев интенсивного обучения',
+    level: 'Junior Level',
+    modulesCount: 8,
+    duration: '3-6 месяцев',
+    materialsCount: 45,
+    slug: 'junior-data-engineer',
+  },
+  {
+    id: 2,
+    title: 'Senior DE Path',
+    description: 'Продвинутый путь развития для middle дата инженеров к senior уровню',
+    level: 'Middle Level',
+    modulesCount: 12,
+    duration: '6-12 месяцев',
+    materialsCount: 68,
+    slug: 'middle-to-senior',
+  },
+];
+
 // Mock data for popular topics
 const popularTopics = [
   { tag: 'Apache Airflow', count: 45, slug: 'airflow' },
@@ -285,6 +309,119 @@ const styles = {
       ml: 1.5,
     },
   },
+  roadmaps: {
+    wrapper: {
+      py: '80px',
+      px: { base: 4, md: 8 },
+    },
+    heading: {
+      fontFamily: 'heading', // Russo One
+      fontSize: '48px',
+      textAlign: 'center' as const,
+      mb: 12,
+    },
+    grid: {
+      columns: { base: 1, md: 2 },
+      gap: 8,
+      maxW: '1000px',
+      mx: 'auto',
+    },
+    card: {
+      p: 8,
+      borderWidth: '2px',
+      borderRadius: '16px',
+      transition: 'all 0.2s ease',
+      _hover: {
+        borderColor: 'teal.500',
+        boxShadow: '0 12px 32px rgba(49,151,149,0.15)',
+      },
+    },
+    levelBadge: {
+      fontFamily: 'body',
+      fontWeight: 'semibold',
+      fontSize: '12px',
+      bg: 'purple.500',
+      color: 'white',
+      px: 4,
+      py: 1.5,
+      borderRadius: '6px',
+      textTransform: 'uppercase' as const,
+      letterSpacing: '0.8px',
+      display: 'inline-block',
+      mb: 5,
+    },
+    title: {
+      fontFamily: 'body',
+      fontWeight: 'bold',
+      fontSize: '28px',
+      lineHeight: '1.2',
+      mb: 4,
+    },
+    description: {
+      fontFamily: 'body',
+      fontSize: '16px',
+      lineHeight: '1.6',
+      mb: 6,
+    },
+    features: {
+      listStyleType: 'none',
+      p: 0,
+      m: 0,
+      mb: 6,
+    },
+    featureItem: {
+      fontFamily: 'body',
+      fontSize: '14px',
+      lineHeight: '2',
+      display: 'flex',
+      alignItems: 'center',
+    },
+    featureIcon: {
+      mr: 2.5,
+      fontSize: '18px',
+      color: 'teal.500',
+    },
+    ctaButton: {
+      fontFamily: 'body',
+      fontWeight: 'semibold',
+      fontSize: '16px',
+      w: '100%',
+      bg: 'teal.500',
+      color: 'white',
+      px: 6,
+      py: 3.5,
+      borderRadius: '8px',
+      transition: 'all 0.2s ease',
+      _hover: {
+        bg: 'teal.600',
+        boxShadow: '0 4px 12px rgba(49,151,149,0.3)',
+      },
+    },
+    ctaWrapper: {
+      display: 'flex',
+      justifyContent: 'center',
+      mt: 12,
+    },
+    viewAllButton: {
+      fontFamily: 'body',
+      fontWeight: 'semibold',
+      fontSize: '16px',
+      color: 'teal.600',
+      bg: 'transparent',
+      borderWidth: '2px',
+      borderColor: 'teal.600',
+      px: 8,
+      py: 3,
+      borderRadius: '8px',
+      transition: 'all 0.2s ease',
+      _hover: {
+        bg: 'teal.50',
+        _dark: { bg: 'teal.900' },
+        borderColor: 'teal.700',
+        color: 'teal.700',
+      },
+    },
+  },
 } as const;
 
 export const Home = () => {
@@ -295,6 +432,14 @@ export const Home = () => {
   const tagBorderColor = useColorModeValue('gray.200', 'gray.600');
   const tagColor = useColorModeValue('gray.700', 'gray.200');
   const tagCountColor = useColorModeValue('gray.500', 'gray.400');
+  const roadmapCardBg = useColorModeValue(
+    'linear(135deg, teal.50, purple.50)',
+    'linear(135deg, gray.800, gray.700)'
+  );
+  const roadmapCardBorderColor = useColorModeValue('teal.200', 'teal.700');
+  const roadmapTitleColor = useColorModeValue('gray.900', 'white');
+  const roadmapDescColor = useColorModeValue('gray.700', 'gray.300');
+  const roadmapFeatureColor = useColorModeValue('gray.600', 'gray.400');
 
   return (
     <VStack spacing={0} align="stretch">
@@ -409,7 +554,68 @@ export const Home = () => {
         </Flex>
       </Box>
 
-      {/* TODO: Roadmaps Preview Section (Phase 6) */}
+      {/* Roadmaps Preview Section */}
+      <Box bg={sectionBg} {...styles.roadmaps.wrapper}>
+        <Heading {...styles.roadmaps.heading} color={headingColor}>
+          Roadmaps обучения
+        </Heading>
+
+        <SimpleGrid {...styles.roadmaps.grid}>
+          {roadmaps.map((roadmap) => (
+            <Box
+              key={roadmap.id}
+              bgGradient={roadmapCardBg}
+              borderColor={roadmapCardBorderColor}
+              {...styles.roadmaps.card}
+            >
+              <Badge {...styles.roadmaps.levelBadge}>
+                {roadmap.level}
+              </Badge>
+
+              <Heading as="h3" color={roadmapTitleColor} {...styles.roadmaps.title}>
+                {roadmap.title}
+              </Heading>
+
+              <Text color={roadmapDescColor} {...styles.roadmaps.description}>
+                {roadmap.description}
+              </Text>
+
+              <VStack align="start" {...styles.roadmaps.features}>
+                <Box color={roadmapFeatureColor} {...styles.roadmaps.featureItem}>
+                  <Text {...styles.roadmaps.featureIcon}>✓</Text>
+                  <Text>{roadmap.modulesCount} модулей</Text>
+                </Box>
+                <Box color={roadmapFeatureColor} {...styles.roadmaps.featureItem}>
+                  <Text {...styles.roadmaps.featureIcon}>⏱</Text>
+                  <Text>{roadmap.duration}</Text>
+                </Box>
+                <Box color={roadmapFeatureColor} {...styles.roadmaps.featureItem}>
+                  <Text {...styles.roadmaps.featureIcon}>📚</Text>
+                  <Text>{roadmap.materialsCount} материалов</Text>
+                </Box>
+              </VStack>
+
+              <Button
+                as={RouterLink}
+                to={`/roadmaps/${roadmap.slug}`}
+                {...styles.roadmaps.ctaButton}
+              >
+                Начать обучение
+              </Button>
+            </Box>
+          ))}
+        </SimpleGrid>
+
+        <Box {...styles.roadmaps.ctaWrapper}>
+          <Button
+            as={RouterLink}
+            to="/roadmaps"
+            {...styles.roadmaps.viewAllButton}
+          >
+            Смотреть все roadmaps →
+          </Button>
+        </Box>
+      </Box>
     </VStack>
   );
 };
