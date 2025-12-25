@@ -19,6 +19,7 @@ import { FaCheckCircle, FaStar } from 'react-icons/fa';
 
 export const About = () => {
   const cardBg = useColorModeValue('white', 'gray.800');
+  const headingColor = useColorModeValue('navy.500', 'gray.100');
 
   return (
     <VStack spacing={10} align="stretch">
@@ -27,8 +28,7 @@ export const About = () => {
         <Heading
           as="h1"
           size="2xl"
-          bgGradient="linear(to-r, blue.400, cyan.400, purple.500)"
-          bgClip="text"
+          color={headingColor}
           mb={4}
         >
           О проекте DE Learning Hub

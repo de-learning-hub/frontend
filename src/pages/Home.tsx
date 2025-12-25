@@ -22,6 +22,7 @@ import { categories, resources, stats } from '@/data/mockData';
 export const Home = () => {
   const cardBg = useColorModeValue('white', 'gray.800');
   const cardHoverBg = useColorModeValue('gray.50', 'gray.700');
+  const headingColor = useColorModeValue('navy.500', 'gray.100');
   const latestResources = resources.slice(0, 5);
 
   // Category color mapping
@@ -49,13 +50,12 @@ export const Home = () => {
         <Heading
           as="h1"
           size="2xl"
-          bgGradient="linear(to-r, blue.400, cyan.400, purple.500)"
-          bgClip="text"
+          color={headingColor}
           mb={4}
         >
           Добро пожаловать в DE Learning Hub
         </Heading>
-        <Text fontSize="lg" color="gray.500" maxW="2xl" mx="auto">
+        <Text fontSize="lg" color="gray.600" maxW="2xl" mx="auto">
           Систематизированная база знаний для русскоязычных Data Engineers.
           <br />
           Обучающие материалы, roadmaps и вопросы для подготовки к собеседованиям.
@@ -68,7 +68,7 @@ export const Home = () => {
           <CardBody>
             <Stat>
               <StatLabel>Ресурсов в каталоге</StatLabel>
-              <StatNumber color="green.500">{stats.totalResources}</StatNumber>
+              <StatNumber color="accent.500">{stats.totalResources}</StatNumber>
               <StatHelpText>Статьи, видео, курсы</StatHelpText>
             </Stat>
           </CardBody>
@@ -77,7 +77,7 @@ export const Home = () => {
           <CardBody>
             <Stat>
               <StatLabel>Категорий</StatLabel>
-              <StatNumber color="blue.500">{stats.totalCategories}</StatNumber>
+              <StatNumber color="brand.500">{stats.totalCategories}</StatNumber>
               <StatHelpText>SQL, Python, Airflow...</StatHelpText>
             </Stat>
           </CardBody>
@@ -86,7 +86,7 @@ export const Home = () => {
           <CardBody>
             <Stat>
               <StatLabel>Вопросов для собесов</StatLabel>
-              <StatNumber color="purple.500">{stats.totalQuestions}</StatNumber>
+              <StatNumber color="brand.600">{stats.totalQuestions}</StatNumber>
               <StatHelpText>По всем темам</StatHelpText>
             </Stat>
           </CardBody>

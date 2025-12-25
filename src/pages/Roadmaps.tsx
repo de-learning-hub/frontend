@@ -13,6 +13,7 @@ import {
 
 export const Roadmaps = () => {
   const cardBg = useColorModeValue('white', 'gray.800');
+  const headingColor = useColorModeValue('navy.500', 'gray.100');
 
   const comingRoadmaps = [
     {
@@ -48,8 +49,7 @@ export const Roadmaps = () => {
             as="h1"
             size="xl"
             textAlign="center"
-            bgGradient="linear(to-r, blue.400, purple.500)"
-            bgClip="text"
+            color={headingColor}
           >
             Roadmaps для Data Engineers
           </Heading>

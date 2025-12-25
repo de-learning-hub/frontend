@@ -72,9 +72,10 @@ export const Catalog = () => {
   const categoryHoverBg = useColorModeValue('gray.50', 'gray.700');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
   const linkColor = useColorModeValue('gray.700', 'gray.200');
-  const linkHoverColor = useColorModeValue('blue.600', 'blue.300');
-  const linkHoverBg = useColorModeValue('blue.50', 'blue.900');
+  const linkHoverColor = useColorModeValue('accent.600', 'accent.300');
+  const linkHoverBg = useColorModeValue('accent.50', 'accent.900');
   const descColor = useColorModeValue('gray.600', 'gray.400');
+  const headingColor = useColorModeValue('navy.500', 'gray.100');
 
   return (
     <VStack spacing={8} align="stretch">
@@ -84,8 +85,7 @@ export const Catalog = () => {
           as="h1"
           size="xl"
           mb={2}
-          bgGradient="linear(to-r, blue.400, purple.500)"
-          bgClip="text"
+          color={headingColor}
         >
           Каталог тем
         </Heading>

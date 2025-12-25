@@ -47,34 +47,58 @@ export const theme = extendTheme({
   },
 
   colors: {
+    // Brand colors - 60-30-10 rule applied
     brand: {
-      50: '#e0f7ff',
-      100: '#b3ebff',
-      200: '#80dfff',
-      300: '#4dd3ff',
-      400: '#26c9ff',
-      500: '#12BFE9',  // Primary cyan
-      600: '#0ea8cf',
-      700: '#0a8fb5',
-      800: '#07769b',
-      900: '#045d81',
+      // Primary color (30% usage) - #134074
+      50: '#e8eff6',
+      100: '#c5d7e8',
+      200: '#9fbdd9',
+      300: '#79a3ca',
+      400: '#5c8fbe',
+      500: '#134074',  // Primary - navigation, UI elements
+      600: '#0f3566',
+      700: '#0c2a56',
+      800: '#092046',
+      900: '#051128',
     },
-    // Category color coding
-    category: {
-      sql: '#1976d2',         // blue
-      python: '#4caf50',      // green
-      airflow: '#00bcd4',     // cyan
-      spark: '#ff9800',       // orange
-      database: '#9c27b0',    // purple
-      docker: '#2196f3',      // light blue
-      dataModeling: '#f44336', // red
-      cicd: '#607d8b',        // gray
+    // Accent color (10% usage) - #13315C
+    accent: {
+      50: '#e8eef5',
+      100: '#c6d4e5',
+      200: '#a0b8d4',
+      300: '#7a9cc3',
+      400: '#5e86b6',
+      500: '#13315C',  // Accent - buttons, links, CTAs
+      600: '#0f2a4e',
+      700: '#0c223e',
+      800: '#081a2f',
+      900: '#041119',
     },
-    // Difficulty level color coding
-    difficulty: {
-      junior: '#4caf50',  // green
-      middle: '#ff9800',  // orange
-      senior: '#f44336',  // red
+    // Secondary color (borders, icons) - #8DA9C4
+    secondary: {
+      50: '#f4f7fa',
+      100: '#e3ebf2',
+      200: '#d1dfe9',
+      300: '#bfd3e0',
+      400: '#b0c8da',
+      500: '#8DA9C4',  // Secondary - borders, icons, disabled states
+      600: '#7a98b5',
+      700: '#6585a3',
+      800: '#517391',
+      900: '#3d5670',
+    },
+    // Dark/Text color - #0B2545
+    navy: {
+      50: '#e7e9ed',
+      100: '#c3c9d2',
+      200: '#9ba5b5',
+      300: '#738197',
+      400: '#556781',
+      500: '#0B2545',  // Dark mode background, dark text
+      600: '#09203c',
+      700: '#071a31',
+      800: '#051427',
+      900: '#030c16',
     },
   },
 
@@ -82,46 +106,47 @@ export const theme = extendTheme({
     // Heading components
     Heading: {
       baseStyle: {
-        fontWeight: 'normal', // Russo One is already bold, no need for extra weight
+        fontWeight: 'normal',
         lineHeight: 'shorter',
+        // Color is now controlled per-component with useColorModeValue
       },
       sizes: {
         '4xl': {
-          fontSize: ['6xl', null, '7xl'], // 48px -> 64px on larger screens
-          fontFamily: 'heading', // Russo One
+          fontSize: ['6xl', null, '7xl'],
+          fontFamily: 'heading',
         },
         '3xl': {
-          fontSize: ['5xl', null, '6xl'], // 40px -> 48px
-          fontFamily: 'heading', // Russo One
+          fontSize: ['5xl', null, '6xl'],
+          fontFamily: 'heading',
         },
         '2xl': {
-          fontSize: '4xl', // 32px
-          fontFamily: 'body', // Montserrat Bold
+          fontSize: '4xl',
+          fontFamily: 'body',
           fontWeight: 'bold',
         },
         'xl': {
-          fontSize: '3xl', // 28px
-          fontFamily: 'body', // Montserrat SemiBold
+          fontSize: '3xl',
+          fontFamily: 'body',
           fontWeight: 'semibold',
         },
         'lg': {
-          fontSize: '2xl', // 24px
-          fontFamily: 'body', // Montserrat SemiBold
+          fontSize: '2xl',
+          fontFamily: 'body',
           fontWeight: 'semibold',
         },
         'md': {
-          fontSize: 'xl', // 20px
-          fontFamily: 'body', // Montserrat SemiBold
+          fontSize: 'xl',
+          fontFamily: 'body',
           fontWeight: 'semibold',
         },
         'sm': {
-          fontSize: 'lg', // 18px
-          fontFamily: 'body', // Montserrat Medium
+          fontSize: 'lg',
+          fontFamily: 'body',
           fontWeight: 'medium',
         },
         'xs': {
-          fontSize: 'md', // 16px
-          fontFamily: 'body', // Montserrat Medium
+          fontSize: 'md',
+          fontFamily: 'body',
           fontWeight: 'medium',
         },
       },
@@ -137,19 +162,19 @@ export const theme = extendTheme({
       },
       sizes: {
         lg: {
-          fontSize: 'lg', // 18px
+          fontSize: 'lg',
           lineHeight: 'tall',
         },
         md: {
-          fontSize: 'md', // 16px
+          fontSize: 'md',
           lineHeight: 'base',
         },
         sm: {
-          fontSize: 'sm', // 14px
+          fontSize: 'sm',
           lineHeight: 'base',
         },
         xs: {
-          fontSize: 'xs', // 12px
+          fontSize: 'xs',
           lineHeight: 'short',
         },
       },
@@ -161,73 +186,76 @@ export const theme = extendTheme({
     // Button components
     Button: {
       baseStyle: {
-        fontFamily: 'body', // Montserrat
+        fontFamily: 'body',
         fontWeight: 'semibold',
         borderRadius: 'md',
       },
       sizes: {
         lg: {
-          fontSize: 'md', // 16px
+          fontSize: 'md',
           px: 6,
           py: 3,
           h: '48px',
         },
         md: {
-          fontSize: 'sm', // 14px
+          fontSize: 'sm',
           px: 5,
           py: 2.5,
           h: '40px',
         },
         sm: {
-          fontSize: 'sm', // 14px
+          fontSize: 'sm',
           px: 4,
           py: 2,
           h: '32px',
         },
       },
       variants: {
-        // Hero/CTA button with Russo One
+        // Hero/CTA button with Russo One - uses accent color (10%)
         hero: {
-          fontFamily: 'heading', // Russo One
-          fontSize: 'lg', // 18px
+          fontFamily: 'heading',
+          fontSize: 'lg',
           px: 8,
           py: 4,
           h: '56px',
           textTransform: 'uppercase',
           letterSpacing: '0.5px',
-          bg: 'brand.500',
+          bg: 'accent.500',
           color: 'white',
           _hover: {
-            bg: 'brand.600',
+            bg: 'accent.600',
             transform: 'translateY(-2px)',
             boxShadow: 'lg',
           },
           _active: {
-            bg: 'brand.700',
+            bg: 'accent.700',
             transform: 'translateY(0)',
           },
         },
+        // Solid variant - uses accent color (10%)
         solid: {
-          bg: 'brand.500',
+          bg: 'accent.500',
           color: 'white',
           _hover: {
-            bg: 'brand.600',
+            bg: 'accent.600',
           },
           _active: {
-            bg: 'brand.700',
+            bg: 'accent.700',
           },
         },
+        // Outline variant - uses accent color
         outline: {
-          borderColor: 'brand.500',
-          color: 'brand.500',
+          borderColor: 'accent.500',
+          color: 'accent.500',
           _hover: {
-            bg: 'brand.50',
+            bg: 'accent.50',
           },
         },
+        // Ghost variant - uses accent color
         ghost: {
-          color: 'brand.500',
+          color: 'accent.500',
           _hover: {
-            bg: 'brand.50',
+            bg: 'accent.50',
           },
         },
       },
@@ -237,12 +265,14 @@ export const theme = extendTheme({
       },
     },
 
-    // Link component (for navigation)
+    // Link component (for navigation) - uses primary color (30%)
     Link: {
       baseStyle: {
         fontWeight: 'medium',
+        color: 'brand.500',
         _hover: {
           textDecoration: 'none',
+          color: 'accent.500',
         },
       },
     },
@@ -253,6 +283,25 @@ export const theme = extendTheme({
         container: {
           borderRadius: 'lg',
           overflow: 'hidden',
+          borderWidth: '1px',
+          borderColor: 'secondary.200',
+        },
+      },
+    },
+
+    // Badge component
+    Badge: {
+      baseStyle: {
+        fontWeight: 'semibold',
+      },
+      variants: {
+        solid: {
+          bg: 'brand.500',
+          color: 'white',
+        },
+        subtle: {
+          bg: 'secondary.100',
+          color: 'brand.700',
         },
       },
     },
@@ -261,14 +310,17 @@ export const theme = extendTheme({
   styles: {
     global: (props: any) => ({
       body: {
-        bg: props.colorMode === 'dark' ? 'gray.900' : 'gray.50',
-        color: props.colorMode === 'dark' ? 'gray.100' : 'gray.900',
+        bg: props.colorMode === 'dark' ? 'navy.500' : 'gray.50',
+        color: props.colorMode === 'dark' ? 'gray.100' : 'navy.500',
         fontSize: 'md',
         lineHeight: 'base',
       },
-      // Make sure all headings use proper line height
       'h1, h2, h3, h4, h5, h6': {
         lineHeight: 'shorter',
+      },
+      // Remove gradients globally
+      '*[data-gradient]': {
+        backgroundImage: 'none !important',
       },
     }),
   },
