@@ -10,24 +10,26 @@ export const theme = extendTheme({
 
   // Typography
   fonts: {
-    // Russo One for large headings (H1, H2)
-    heading: `'Russo One', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`,
-    // Montserrat for body text, navigation, buttons
+    // Russo One ТОЛЬКО для H1, H2 и hero CTA кнопок
+    heading: `'Russo One', sans-serif`,
+    // Montserrat для всего остального
     body: `'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`,
+    // JetBrains Mono для кода
+    mono: `'JetBrains Mono', 'Fira Code', 'Courier New', monospace`,
   },
 
   fontSizes: {
-    xs: '0.75rem',    // 12px - captions, helper text
-    sm: '0.875rem',   // 14px - small text, navigation
-    md: '1rem',       // 16px - body text (default)
-    lg: '1.125rem',   // 18px - large body text
-    xl: '1.25rem',    // 20px - H6
-    '2xl': '1.5rem',  // 24px - H5
-    '3xl': '1.75rem', // 28px - H4
-    '4xl': '2rem',    // 32px - H3
-    '5xl': '2.5rem',  // 40px - H2
-    '6xl': '3rem',    // 48px - H1
-    '7xl': '4rem',    // 64px - Hero H1
+    xs: '0.75rem',    // 12px
+    sm: '0.875rem',   // 14px
+    md: '1rem',       // 16px
+    lg: '1.125rem',   // 18px
+    xl: '1.25rem',    // 20px
+    '2xl': '1.5rem',  // 24px
+    '3xl': '1.75rem', // 28px
+    '4xl': '2rem',    // 32px
+    '5xl': '2.5rem',  // 40px
+    '6xl': '3rem',    // 48px
+    '7xl': '4rem',    // 64px
   },
 
   fontWeights: {
@@ -39,73 +41,99 @@ export const theme = extendTheme({
   },
 
   lineHeights: {
-    shorter: 1.2,
-    short: 1.375,
+    tight: 1.25,
+    shorter: 1.25,
+    normal: 1.5,
     base: 1.5,
-    tall: 1.625,
-    taller: 2,
+    relaxed: 1.75,
+    tall: 1.75,
   },
 
   colors: {
-    // Brand colors - 60-30-10 rule applied
-    brand: {
-      // Primary color (30% usage) - #134074
-      50: '#e8eff6',
-      100: '#c5d7e8',
-      200: '#9fbdd9',
-      300: '#79a3ca',
-      400: '#5c8fbe',
-      500: '#134074',  // Primary - navigation, UI elements
-      600: '#0f3566',
-      700: '#0c2a56',
-      800: '#092046',
-      900: '#051128',
+    // Primary color - Teal (from spec)
+    teal: {
+      50: '#E6FFFA',
+      100: '#B2F5EA',
+      200: '#81E6D9',
+      300: '#4FD1C5',
+      400: '#38B2AC',
+      500: '#38B2AC',  // Primary color
+      600: '#319795',  // Primary dark
+      700: '#2C7A7B',  // Primary darker
+      800: '#285E61',
+      900: '#234E52',
     },
-    // Accent color (10% usage) - #13315C
-    accent: {
-      50: '#e8eef5',
-      100: '#c6d4e5',
-      200: '#a0b8d4',
-      300: '#7a9cc3',
-      400: '#5e86b6',
-      500: '#13315C',  // Accent - buttons, links, CTAs
-      600: '#0f2a4e',
-      700: '#0c223e',
-      800: '#081a2f',
-      900: '#041119',
+    // Secondary color - Purple (from spec)
+    purple: {
+      50: '#FAF5FF',
+      100: '#E9D8FD',
+      200: '#D6BCFA',
+      300: '#B794F4',
+      400: '#9F7AEA',
+      500: '#805AD5',  // Secondary color
+      600: '#6B46C1',  // Secondary dark
+      700: '#553C9A',
+      800: '#44337A',
+      900: '#322659',
     },
-    // Secondary color (borders, icons) - #8DA9C4
-    secondary: {
-      50: '#f4f7fa',
-      100: '#e3ebf2',
-      200: '#d1dfe9',
-      300: '#bfd3e0',
-      400: '#b0c8da',
-      500: '#8DA9C4',  // Secondary - borders, icons, disabled states
-      600: '#7a98b5',
-      700: '#6585a3',
-      800: '#517391',
-      900: '#3d5670',
+    // Semantic colors (from spec)
+    green: {
+      100: '#C6F6D5',
+      500: '#48BB78',
+      800: '#276749',
     },
-    // Dark/Text color - #0B2545
-    navy: {
-      50: '#e7e9ed',
-      100: '#c3c9d2',
-      200: '#9ba5b5',
-      300: '#738197',
-      400: '#556781',
-      500: '#0B2545',  // Dark mode background, dark text
-      600: '#09203c',
-      700: '#071a31',
-      800: '#051427',
-      900: '#030c16',
+    orange: {
+      100: '#FEEBC8',
+      500: '#ED8936',
+      800: '#9C4221',
     },
+    red: {
+      100: '#FED7D7',
+      500: '#F56565',
+      800: '#9B2C2C',
+    },
+  },
+
+  // Spacing system
+  space: {
+    1: '4px',
+    2: '8px',
+    3: '12px',
+    4: '16px',
+    6: '24px',
+    8: '32px',
+    10: '40px',
+    12: '48px',
+    16: '64px',
+    20: '80px',
+    24: '96px',
+    32: '128px',
+  },
+
+  // Border radius
+  radii: {
+    sm: '4px',
+    md: '6px',
+    lg: '8px',
+    xl: '12px',
+    '2xl': '16px',
+    full: '9999px',
+  },
+
+  // Shadows
+  shadows: {
+    sm: '0 2px 8px rgba(0,0,0,0.08)',
+    md: '0 4px 12px rgba(0,0,0,0.12)',
+    lg: '0 8px 24px rgba(0,0,0,0.15)',
+    xl: '0 12px 32px rgba(0,0,0,0.2)',
+    // Colored shadows (from spec)
+    teal: '0 4px 12px rgba(49,151,149,0.3)',
+    purple: '0 4px 12px rgba(107,70,193,0.3)',
   },
 
   // Layer styles for reusable style combinations
   layerStyles: {
-    // Navigation link style for header (without underline - handled by animated indicator)
-    // Minimalist approach in dark mode: white/gray colors
+    // Navigation link style for header
     indicator: {
       px: 4,
       py: 2,
@@ -115,14 +143,13 @@ export const theme = extendTheme({
       position: 'relative',
       transition: 'color 0.2s ease',
       _hover: {
-        color: 'accent.600',
+        color: 'teal.600',
         _dark: {
           color: 'white',
         },
       },
     },
-    // Menu item style for dropdowns (no underline)
-    // Minimalist approach in dark mode: white on hover
+    // Menu item style for dropdowns
     menuItem: {
       px: 4,
       py: 2,
@@ -131,7 +158,7 @@ export const theme = extendTheme({
       transition: 'all 0.2s',
       cursor: 'pointer',
       _hover: {
-        color: 'accent.600',
+        color: 'teal.600',
         transform: 'translateX(4px)',
         _dark: {
           color: 'white',
@@ -146,44 +173,45 @@ export const theme = extendTheme({
       baseStyle: {
         fontWeight: 'normal',
         lineHeight: 'shorter',
-        // Color is now controlled per-component with useColorModeValue
       },
       sizes: {
+        // H1, H2 sizes use Russo One (from heading font)
         '4xl': {
-          fontSize: ['6xl', null, '7xl'],
-          fontFamily: 'heading',
+          fontSize: ['6xl', null, '7xl'], // 48px → 64px
+          fontFamily: 'heading', // Russo One
         },
         '3xl': {
-          fontSize: ['5xl', null, '6xl'],
-          fontFamily: 'heading',
+          fontSize: ['5xl', null, '6xl'], // 40px → 48px
+          fontFamily: 'heading', // Russo One
         },
+        // Smaller headings use Montserrat (from body font)
         '2xl': {
-          fontSize: '4xl',
-          fontFamily: 'body',
+          fontSize: '4xl', // 32px
+          fontFamily: 'body', // Montserrat
           fontWeight: 'bold',
         },
         'xl': {
-          fontSize: '3xl',
+          fontSize: '3xl', // 28px
           fontFamily: 'body',
           fontWeight: 'semibold',
         },
         'lg': {
-          fontSize: '2xl',
+          fontSize: '2xl', // 24px
           fontFamily: 'body',
           fontWeight: 'semibold',
         },
         'md': {
-          fontSize: 'xl',
+          fontSize: 'xl', // 20px
           fontFamily: 'body',
           fontWeight: 'semibold',
         },
         'sm': {
-          fontSize: 'lg',
+          fontSize: 'lg', // 18px
           fontFamily: 'body',
           fontWeight: 'medium',
         },
         'xs': {
-          fontSize: 'md',
+          fontSize: 'md', // 16px
           fontFamily: 'body',
           fontWeight: 'medium',
         },
@@ -213,7 +241,7 @@ export const theme = extendTheme({
         },
         xs: {
           fontSize: 'xs',
-          lineHeight: 'short',
+          lineHeight: 'shorter',
         },
       },
       defaultProps: {
@@ -221,12 +249,13 @@ export const theme = extendTheme({
       },
     },
 
-    // Button components
+    // Button components (from spec)
     Button: {
       baseStyle: {
-        fontFamily: 'body',
+        fontFamily: 'body', // Montserrat
         fontWeight: 'semibold',
-        borderRadius: 'md',
+        borderRadius: 'lg',
+        transition: 'all 0.2s ease-in-out',
       },
       sizes: {
         lg: {
@@ -249,51 +278,60 @@ export const theme = extendTheme({
         },
       },
       variants: {
-        // Hero/CTA button with Russo One - uses accent color (10%)
+        // Hero CTA button with Russo One (from spec)
         hero: {
-          fontFamily: 'heading',
+          fontFamily: 'heading', // Russo One
           fontSize: 'lg',
-          px: 8,
+          textTransform: 'uppercase',
+          letterSpacing: '1.5px',
+          px: 12,
           py: 4,
           h: '56px',
-          textTransform: 'uppercase',
-          letterSpacing: '0.5px',
-          bg: 'accent.500',
+          bgGradient: 'linear(135deg, teal.600, teal.500)',
           color: 'white',
+          boxShadow: 'teal',
           _hover: {
-            bg: 'accent.600',
+            bgGradient: 'linear(135deg, teal.700, teal.600)',
+            boxShadow: '0 6px 16px rgba(49,151,149,0.4)',
             transform: 'translateY(-2px)',
-            boxShadow: 'lg',
           },
           _active: {
-            bg: 'accent.700',
             transform: 'translateY(0)',
           },
         },
-        // Solid variant - uses accent color (10%)
+        // Regular solid button (Montserrat)
         solid: {
-          bg: 'accent.500',
+          bg: 'teal.500',
           color: 'white',
           _hover: {
-            bg: 'accent.600',
+            bg: 'teal.600',
           },
           _active: {
-            bg: 'accent.700',
+            bg: 'teal.700',
           },
         },
-        // Outline variant - uses accent color
+        // Outline button
         outline: {
-          borderColor: 'accent.500',
-          color: 'accent.500',
+          borderWidth: '2px',
+          borderColor: 'teal.600',
+          color: 'teal.600',
           _hover: {
-            bg: 'accent.50',
+            bg: 'teal.50',
+            borderColor: 'teal.700',
+            color: 'teal.700',
+            _dark: {
+              bg: 'teal.900',
+            },
           },
         },
-        // Ghost variant - uses accent color
+        // Ghost button
         ghost: {
-          color: 'accent.500',
+          color: 'teal.500',
           _hover: {
-            bg: 'accent.50',
+            bg: 'teal.50',
+            _dark: {
+              bg: 'whiteAlpha.100',
+            },
           },
         },
       },
@@ -303,14 +341,14 @@ export const theme = extendTheme({
       },
     },
 
-    // Link component (for navigation) - uses primary color (30%)
+    // Link component
     Link: {
       baseStyle: {
         fontWeight: 'medium',
-        color: 'brand.500',
+        color: 'teal.500',
         _hover: {
           textDecoration: 'none',
-          color: 'accent.500',
+          color: 'teal.600',
         },
       },
     },
@@ -319,10 +357,21 @@ export const theme = extendTheme({
     Card: {
       baseStyle: {
         container: {
-          borderRadius: 'lg',
-          overflow: 'hidden',
+          bg: 'white',
+          borderRadius: 'xl',
           borderWidth: '1px',
-          borderColor: 'secondary.200',
+          borderColor: 'gray.200',
+          overflow: 'hidden',
+          transition: 'all 0.2s ease',
+          _dark: {
+            bg: 'gray.800',
+            borderColor: 'gray.700',
+          },
+          _hover: {
+            borderColor: 'teal.500',
+            boxShadow: '0 8px 24px rgba(49,151,149,0.12)',
+            transform: 'translateY(-4px)',
+          },
         },
       },
     },
@@ -330,16 +379,66 @@ export const theme = extendTheme({
     // Badge component
     Badge: {
       baseStyle: {
-        fontWeight: 'semibold',
+        fontFamily: 'body',
+        fontWeight: 'medium',
+        fontSize: 'xs',
+        textTransform: 'uppercase',
+        letterSpacing: '0.5px',
+        borderRadius: 'md',
+        px: 3,
+        py: 1,
       },
       variants: {
+        // Tech badge (teal)
         solid: {
-          bg: 'brand.500',
-          color: 'white',
+          bg: 'teal.100',
+          color: 'teal.800',
+          _dark: {
+            bg: 'teal.900',
+            color: 'teal.200',
+          },
         },
-        subtle: {
-          bg: 'secondary.100',
-          color: 'brand.700',
+        // Level badges
+        beginner: {
+          bg: 'green.100',
+          color: 'green.800',
+          _dark: {
+            bg: 'green.900',
+            color: 'green.200',
+          },
+        },
+        intermediate: {
+          bg: 'orange.100',
+          color: 'orange.800',
+          _dark: {
+            bg: 'orange.900',
+            color: 'orange.200',
+          },
+        },
+        advanced: {
+          bg: 'red.100',
+          color: 'red.800',
+          _dark: {
+            bg: 'red.900',
+            color: 'red.200',
+          },
+        },
+      },
+    },
+
+    // Code block styling
+    Code: {
+      baseStyle: {
+        fontFamily: 'mono', // JetBrains Mono
+        fontSize: 'sm',
+        bg: 'gray.50',
+        color: 'gray.800',
+        px: 2,
+        py: 1,
+        borderRadius: 'sm',
+        _dark: {
+          bg: 'gray.800',
+          color: 'gray.200',
         },
       },
     },
@@ -348,17 +447,13 @@ export const theme = extendTheme({
   styles: {
     global: (props: any) => ({
       body: {
-        bg: props.colorMode === 'dark' ? 'navy.500' : 'gray.50',
-        color: props.colorMode === 'dark' ? 'gray.100' : 'navy.500',
+        bg: props.colorMode === 'dark' ? 'gray.900' : 'white',
+        color: props.colorMode === 'dark' ? 'gray.100' : 'gray.800',
         fontSize: 'md',
         lineHeight: 'base',
       },
       'h1, h2, h3, h4, h5, h6': {
         lineHeight: 'shorter',
-      },
-      // Remove gradients globally
-      '*[data-gradient]': {
-        backgroundImage: 'none !important',
       },
     }),
   },
