@@ -13,6 +13,7 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import { FaMoon, FaSun, FaBars } from 'react-icons/fa';
 import { MegaMenu, MobileMenu } from '@/components/navigation';
+import { Logo } from '@/components/ui';
 import { CATEGORIES } from '@/constants';
 
 // Types
@@ -60,10 +61,9 @@ const styles = {
     },
   },
   logo: {
-    fontSize: '2xl',
-    fontWeight: 'bold',
-    bgGradient: 'linear(to-r, blue.400, cyan.400)',
-    bgClip: 'text',
+    h: '40px',
+    w: 'auto',
+    cursor: 'pointer',
   },
   nav: {
     wrapper: {
@@ -177,9 +177,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Logo */}
             <Link to="/">
-              <Text {...styles.logo}>
-                📚 DE Learning Hub
-              </Text>
+              <Logo height={styles.logo.h} />
             </Link>
 
             {/* Navigation */}
