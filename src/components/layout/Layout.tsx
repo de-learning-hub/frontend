@@ -364,29 +364,18 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               />
             </HStack>
 
-            {/* Search Button (Desktop) */}
-            <IconButton
-              aria-label="Search"
-              icon={<FaSearch />}
-              onClick={() => setIsSearchOpen(true)}
-              variant="ghost"
-              color="white"
-              h="36px"
-              w="36px"
-              minW="36px"
-              display={{ base: 'none', md: 'flex' }}
-              _hover={{ bg: 'whiteAlpha.200' }}
-            />
-
             {/* Right Actions Group */}
-            <HStack spacing={2} ml={{ base: 'auto', md: 8 }}>
-              {/* Search Icon (Mobile) */}
+            <HStack spacing={1} ml={{ base: 'auto', md: 6 }}>
+              {/* Search Icon */}
               <IconButton
                 aria-label="Search"
                 icon={<FaSearch />}
                 onClick={() => setIsSearchOpen(true)}
-                {...styles.search.iconButton}
+                variant="ghost"
                 color="white"
+                h="36px"
+                w="36px"
+                minW="36px"
                 _hover={{ bg: 'whiteAlpha.200' }}
               />
 
