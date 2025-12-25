@@ -7,6 +7,8 @@ import {
   HStack,
   SimpleGrid,
   Badge,
+  Flex,
+  Tag,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -67,6 +69,25 @@ const latestMaterials = [
     date: '12 дек 2024',
     readingTime: '18 мин',
   },
+];
+
+// Mock data for popular topics
+const popularTopics = [
+  { tag: 'Apache Airflow', count: 45, slug: 'airflow' },
+  { tag: 'Python', count: 40, slug: 'python' },
+  { tag: 'ETL', count: 35, slug: 'etl' },
+  { tag: 'dbt', count: 32, slug: 'dbt' },
+  { tag: 'PostgreSQL', count: 28, slug: 'postgresql' },
+  { tag: 'Docker', count: 24, slug: 'docker' },
+  { tag: 'Kubernetes', count: 18, slug: 'kubernetes' },
+  { tag: 'Spark', count: 15, slug: 'spark' },
+  { tag: 'ClickHouse', count: 12, slug: 'clickhouse' },
+  { tag: 'Kafka', count: 10, slug: 'kafka' },
+  { tag: 'MongoDB', count: 9, slug: 'mongodb' },
+  { tag: 'Redis', count: 8, slug: 'redis' },
+  { tag: 'Snowflake', count: 7, slug: 'snowflake' },
+  { tag: 'BigQuery', count: 6, slug: 'bigquery' },
+  { tag: 'Terraform', count: 5, slug: 'terraform' },
 ];
 
 // Styles
@@ -225,11 +246,55 @@ const styles = {
       },
     },
   },
+  popularTopics: {
+    wrapper: {
+      py: '80px',
+      px: { base: 4, md: 8 },
+    },
+    heading: {
+      fontFamily: 'heading', // Russo One
+      fontSize: '48px',
+      textAlign: 'center' as const,
+      mb: 12,
+    },
+    tagsContainer: {
+      display: 'flex',
+      flexWrap: 'wrap' as const,
+      gap: 4,
+      justifyContent: 'center',
+      maxW: '900px',
+      mx: 'auto',
+    },
+    tag: {
+      fontFamily: 'body',
+      fontWeight: 'medium',
+      fontSize: '14px',
+      px: 5,
+      py: 2.5,
+      borderRadius: '24px',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+      _hover: {
+        bg: 'teal.500',
+        color: 'white',
+        borderColor: 'teal.500',
+        transform: 'scale(1.05)',
+      },
+    },
+    count: {
+      ml: 1.5,
+    },
+  },
 } as const;
 
 export const Home = () => {
   const sectionBg = useColorModeValue('white', 'gray.900');
+  const topicsSectionBg = useColorModeValue('gray.50', 'gray.800');
   const headingColor = useColorModeValue('gray.800', 'white');
+  const tagBg = useColorModeValue('white', 'gray.700');
+  const tagBorderColor = useColorModeValue('gray.200', 'gray.600');
+  const tagColor = useColorModeValue('gray.700', 'gray.200');
+  const tagCountColor = useColorModeValue('gray.500', 'gray.400');
 
   return (
     <VStack spacing={0} align="stretch">
@@ -317,7 +382,33 @@ export const Home = () => {
         </Box>
       </Box>
 
-      {/* TODO: Popular Topics Section (Phase 5) */}
+      {/* Popular Topics Section */}
+      <Box bg={topicsSectionBg} {...styles.popularTopics.wrapper}>
+        <Heading {...styles.popularTopics.heading} color={headingColor}>
+          Популярные темы
+        </Heading>
+
+        <Flex {...styles.popularTopics.tagsContainer}>
+          {popularTopics.map((topic) => (
+            <Tag
+              key={topic.slug}
+              as={RouterLink}
+              to={`/catalog?tag=${topic.slug}`}
+              bg={tagBg}
+              borderWidth="1px"
+              borderColor={tagBorderColor}
+              color={tagColor}
+              {...styles.popularTopics.tag}
+            >
+              {topic.tag}
+              <Text as="span" color={tagCountColor} {...styles.popularTopics.count}>
+                ({topic.count})
+              </Text>
+            </Tag>
+          ))}
+        </Flex>
+      </Box>
+
       {/* TODO: Roadmaps Preview Section (Phase 6) */}
     </VStack>
   );
