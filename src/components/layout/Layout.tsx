@@ -9,9 +9,12 @@ import {
   useColorModeValue,
   Container,
   Text,
+  Input,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaMoon, FaSun, FaBars } from 'react-icons/fa';
+import { FaMoon, FaSun, FaBars, FaSearch, FaGithub } from 'react-icons/fa';
 import { MegaMenu, MobileMenu } from '@/components/navigation';
 import { Logo } from '@/components/ui';
 import { CATEGORIES } from '@/constants';
@@ -30,7 +33,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { path: '/', label: 'Главная' },
   { path: '/roadmaps', label: 'Roadmaps' },
-  { path: '/interview', label: 'Вопросы для собесов' },
+  { path: '/interview', label: 'Собесы' },
   { path: '/about', label: 'О проекте' },
 ];
 
@@ -126,6 +129,44 @@ const styles = {
     size: 'md' as const,
     display: { base: 'flex', md: 'none' },
   },
+  search: {
+    wrapper: {
+      display: { base: 'none', md: 'block' },
+      flex: 1,
+      maxW: '400px',
+      mx: 4,
+    },
+    inputGroup: {
+      size: 'md' as const,
+    },
+    input: {
+      bg: 'whiteAlpha.100',
+      border: '1px solid',
+      borderColor: 'whiteAlpha.200',
+      borderRadius: 'lg',
+      color: 'white',
+      _placeholder: {
+        color: 'whiteAlpha.600',
+      },
+      _focus: {
+        bg: 'white',
+        color: 'gray.800',
+        borderColor: 'teal.500',
+        _placeholder: {
+          color: 'gray.400',
+        },
+      },
+    },
+    iconButton: {
+      display: { base: 'flex', md: 'none' },
+      variant: 'ghost' as const,
+      size: 'md' as const,
+    },
+  },
+  githubButton: {
+    variant: 'ghost' as const,
+    size: 'md' as const,
+  },
   main: {
     maxW: 'container.xl' as const,
     py: { base: 10, md: 16 }, // 40px mobile, 64px desktop (recommended 40-80px)
@@ -165,6 +206,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Refs
   const navRefs = useRef<Record<string, HTMLElement | null>>({});
@@ -209,6 +251,21 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* Logo */}
             <Box as={Link} to="/" _hover={{ opacity: 0.8 }} {...styles.logo}>
               <Logo height="100%" />
+            </Box>
+
+            {/* Search Input (Desktop) */}
+            <Box {...styles.search.wrapper}>
+              <InputGroup {...styles.search.inputGroup}>
+                <InputLeftElement pointerEvents="none">
+                  <FaSearch color="white" opacity={0.6} />
+                </InputLeftElement>
+                <Input
+                  {...styles.search.input}
+                  placeholder="Поиск..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </InputGroup>
             </Box>
 
             {/* Navigation */}
@@ -267,15 +324,43 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               />
             </HStack>
 
-            {/* Theme Toggle */}
-            <IconButton
-              aria-label="Toggle color mode"
-              icon={colorMode === 'light' ? <FaMoon /> : <FaSun />}
-              onClick={toggleColorMode}
-              {...styles.themeToggle}
-              color="white"
-              _hover={{ bg: 'whiteAlpha.200' }}
-            />
+            {/* Right Actions Group */}
+            <HStack spacing={2}>
+              {/* Search Icon (Mobile) */}
+              <IconButton
+                aria-label="Search"
+                icon={<FaSearch />}
+                onClick={() => {
+                  // TODO: Implement search modal/drawer for mobile
+                }}
+                {...styles.search.iconButton}
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200' }}
+              />
+
+              {/* Theme Toggle */}
+              <IconButton
+                aria-label="Toggle color mode"
+                icon={colorMode === 'light' ? <FaMoon /> : <FaSun />}
+                onClick={toggleColorMode}
+                {...styles.themeToggle}
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200' }}
+              />
+
+              {/* GitHub Link */}
+              <IconButton
+                as="a"
+                href="https://github.com/de-learning-hub"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                icon={<FaGithub />}
+                {...styles.githubButton}
+                color="white"
+                _hover={{ bg: 'whiteAlpha.200' }}
+              />
+            </HStack>
           </Flex>
         </Container>
       </Box>
