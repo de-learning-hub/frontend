@@ -5,7 +5,8 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "WebFetch(domain:v2.chakra-ui.com)",
-      "WebFetch(domain:www.chakra-ui.com)"
+      "WebFetch(domain:www.chakra-ui.com)",
+      "Bash(npm run build:*)"
     ]
   }
 }

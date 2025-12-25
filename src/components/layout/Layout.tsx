@@ -5,6 +5,7 @@ import {
   HStack,
   Link as ChakraLink,
   IconButton,
+  Button,
   useColorMode,
   useColorModeValue,
   Container,
@@ -16,16 +17,14 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Button,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaMoon, FaSun, FaBars, FaSearch, FaGlobe, FaUser, FaChevronDown } from 'react-icons/fa';
+import { FaMoon, FaSun, FaBars, FaSearch, FaGlobe } from 'react-icons/fa';
 import { MegaMenu, MobileMenu } from '@/components/navigation';
 import { Logo } from '@/components/ui';
 import { CATEGORIES } from '@/constants';
@@ -410,18 +409,23 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </MenuList>
               </Menu>
 
-              {/* Login Icon (Desktop only) */}
-              <IconButton
-                aria-label="Login"
-                icon={<FaUser />}
-                variant="ghost"
+              {/* Login Button (Desktop only) */}
+              <Button
+                variant="outline"
                 color="white"
+                borderColor="white"
                 h="36px"
-                w="36px"
-                minW="36px"
+                px={4}
+                fontSize="sm"
+                fontWeight="medium"
                 display={{ base: 'none', md: 'flex' }}
-                _hover={{ bg: 'whiteAlpha.200' }}
-              />
+                _hover={{
+                  bg: 'whiteAlpha.200',
+                  borderColor: 'white',
+                }}
+              >
+                Войти
+              </Button>
             </HStack>
           </Flex>
         </Container>
@@ -462,6 +466,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 GitHub
               </ChakraLink>
               <ChakraLink
+                href="https://github.com/de-learning-hub/frontend/blob/main/CONTRIBUTING.md"
+                isExternal
+                color={styles.footer.text.color}
+                fontSize={styles.footer.text.fontSize}
+              >
+                Contribute
+              </ChakraLink>
+              <ChakraLink
                 as={Link}
                 to="/about"
                 color={styles.footer.text.color}
@@ -478,9 +490,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Modal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} size="xl">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Поиск</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody pt={10} pb={6}>
             <InputGroup>
               <InputLeftElement pointerEvents="none">
                 <FaSearch color="gray" />

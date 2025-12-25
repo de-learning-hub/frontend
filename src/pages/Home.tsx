@@ -6,12 +6,16 @@ import {
   VStack,
   HStack,
   SimpleGrid,
-  Badge,
   Flex,
   Tag,
+  Input,
+  InputGroup,
+  InputLeftElement,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa';
+import { Card } from '@/components/ui';
 
 // Mock data for latest materials
 const latestMaterials = [
@@ -71,27 +75,31 @@ const latestMaterials = [
   },
 ];
 
-// Mock data for roadmaps
-const roadmaps = [
+// Data for contribution cards
+const contributionWays = [
   {
     id: 1,
-    title: 'Data Engineer Roadmap',
-    description: 'Путь от новичка до junior дата инженера за 6 месяцев интенсивного обучения',
-    level: 'Junior Level',
-    modulesCount: 8,
-    duration: '3-6 месяцев',
-    materialsCount: 45,
-    slug: 'junior-data-engineer',
+    icon: '✍️',
+    title: 'Добавь статью',
+    description: 'Поделись своими знаниями и опытом. Напиши статью о технологии, которую хорошо знаешь',
+    action: 'Написать статью',
+    link: 'https://github.com/de-learning-hub/frontend/blob/main/CONTRIBUTING.md',
   },
   {
     id: 2,
-    title: 'Senior DE Path',
-    description: 'Продвинутый путь развития для middle дата инженеров к senior уровню',
-    level: 'Middle Level',
-    modulesCount: 12,
-    duration: '6-12 месяцев',
-    materialsCount: 68,
-    slug: 'middle-to-senior',
+    icon: '🔧',
+    title: 'Улучши материал',
+    description: 'Заметил ошибку или неточность? Дополни существующий материал своим опытом',
+    action: 'Предложить улучшение',
+    link: 'https://github.com/de-learning-hub/frontend/issues',
+  },
+  {
+    id: 3,
+    icon: '📢',
+    title: 'Поделись проектом',
+    description: 'Расскажи коллегам о проекте. Чем больше нас, тем качественнее база знаний',
+    action: 'Поделиться',
+    link: 'https://github.com/de-learning-hub',
   },
 ];
 
@@ -189,14 +197,16 @@ const styles = {
     },
     card: {
       bg: 'white',
-      _dark: { bg: 'gray.800' },
       borderWidth: '1px',
       borderColor: 'gray.200',
-      _dark: { borderColor: 'gray.700' },
       borderRadius: '12px',
       p: 5,
       cursor: 'pointer',
       transition: 'all 0.2s ease-in-out',
+      _dark: {
+        bg: 'gray.800',
+        borderColor: 'gray.700',
+      },
       _hover: {
         borderColor: 'teal.500',
         boxShadow: '0 8px 24px rgba(49,151,149,0.12)',
@@ -432,14 +442,6 @@ export const Home = () => {
   const tagBorderColor = useColorModeValue('gray.200', 'gray.600');
   const tagColor = useColorModeValue('gray.700', 'gray.200');
   const tagCountColor = useColorModeValue('gray.500', 'gray.400');
-  const roadmapCardBg = useColorModeValue(
-    'linear(135deg, teal.50, purple.50)',
-    'linear(135deg, gray.800, gray.700)'
-  );
-  const roadmapCardBorderColor = useColorModeValue('teal.200', 'teal.700');
-  const roadmapTitleColor = useColorModeValue('gray.900', 'white');
-  const roadmapDescColor = useColorModeValue('gray.700', 'gray.300');
-  const roadmapFeatureColor = useColorModeValue('gray.600', 'gray.400');
 
   return (
     <VStack spacing={0} align="stretch">
@@ -451,17 +453,67 @@ export const Home = () => {
           </Heading>
 
           <Text {...styles.hero.subtitle}>
-            Русскоязычная база знаний для дата инженеров
+            Открытая база знаний для Data Engineers. Создаётся сообществом, доступна всем бесплатно
           </Text>
 
-          <Button
-            as={RouterLink}
-            to="/getting-started"
-            variant="hero"
-            {...styles.hero.button}
-          >
-            НАЧАТЬ ОБУЧЕНИЕ
-          </Button>
+          {/* Search bar */}
+          <InputGroup maxW="600px" mb={6} size="lg">
+            <InputLeftElement pointerEvents="none" h="100%">
+              <FaSearch color="rgba(255,255,255,0.6)" />
+            </InputLeftElement>
+            <Input
+              placeholder="Поиск по статьям, roadmaps, вопросам..."
+              bg="whiteAlpha.200"
+              border="2px solid"
+              borderColor="whiteAlpha.300"
+              color="white"
+              h="56px"
+              fontSize="16px"
+              _placeholder={{ color: 'whiteAlpha.700' }}
+              _hover={{
+                bg: 'whiteAlpha.300',
+                borderColor: 'whiteAlpha.400',
+              }}
+              _focus={{
+                bg: 'white',
+                color: 'gray.800',
+                borderColor: 'teal.400',
+                _placeholder: { color: 'gray.400' },
+              }}
+              onClick={() => {
+                // TODO: Open search modal or navigate to search page
+              }}
+            />
+          </InputGroup>
+
+          {/* CTA Buttons */}
+          <HStack spacing={4} mb={10}>
+            <Button
+              as={RouterLink}
+              to="/catalog"
+              variant="hero"
+            >
+              К КАТАЛОГУ МАТЕРИАЛОВ
+            </Button>
+            <Button
+              as={RouterLink}
+              to="/about"
+              variant="outline"
+              color="white"
+              borderColor="white"
+              h="48px"
+              px={8}
+              fontSize="14px"
+              fontWeight="semibold"
+              letterSpacing="0.5px"
+              _hover={{
+                bg: 'whiteAlpha.200',
+                borderColor: 'white',
+              }}
+            >
+              О ПРОЕКТЕ
+            </Button>
+          </HStack>
 
           <HStack {...styles.hero.stats.wrapper}>
             <Box {...styles.hero.stats.item}>
@@ -494,25 +546,16 @@ export const Home = () => {
 
         <SimpleGrid {...styles.latestMaterials.grid}>
           {latestMaterials.map((material) => (
-            <Box key={material.id} {...styles.latestMaterials.card}>
-              <Box {...styles.latestMaterials.badges}>
-                <Badge variant="solid">{material.techTag}</Badge>
-                <Badge variant={material.level}>{material.level}</Badge>
-              </Box>
-
-              <Heading as="h3" {...styles.latestMaterials.title}>
-                {material.title}
-              </Heading>
-
-              <Text {...styles.latestMaterials.description}>
-                {material.description}
-              </Text>
-
-              <Box {...styles.latestMaterials.meta}>
-                <Text>📅 {material.date}</Text>
-                <Text>⏱ {material.readingTime} чтения</Text>
-              </Box>
-            </Box>
+            <Card
+              key={material.id}
+              variant="material"
+              title={material.title}
+              description={material.description}
+              techTag={material.techTag}
+              level={material.level}
+              date={material.date}
+              readingTime={material.readingTime}
+            />
           ))}
         </SimpleGrid>
 
@@ -522,7 +565,7 @@ export const Home = () => {
             to="/catalog"
             {...styles.latestMaterials.ctaButton}
           >
-            Смотреть все материалы →
+            Смотреть материалы
           </Button>
         </Box>
       </Box>
@@ -554,53 +597,80 @@ export const Home = () => {
         </Flex>
       </Box>
 
-      {/* Roadmaps Preview Section */}
+      {/* Contribution Section */}
       <Box bg={sectionBg} {...styles.roadmaps.wrapper}>
         <Heading {...styles.roadmaps.heading} color={headingColor}>
-          Roadmaps обучения
+          Помоги проекту расти
         </Heading>
 
-        <SimpleGrid {...styles.roadmaps.grid}>
-          {roadmaps.map((roadmap) => (
+        <Text
+          textAlign="center"
+          fontSize="18px"
+          color={useColorModeValue('gray.600', 'gray.400')}
+          maxW="700px"
+          mx="auto"
+          mb={12}
+        >
+          DE Learning Hub создаётся силами сообщества. Каждый может внести свой вклад
+        </Text>
+
+        <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} maxW="1200px" mx="auto" mb={12}>
+          {contributionWays.map((way) => (
             <Box
-              key={roadmap.id}
-              bgGradient={roadmapCardBg}
-              borderColor={roadmapCardBorderColor}
-              {...styles.roadmaps.card}
+              key={way.id}
+              p={8}
+              bgGradient={useColorModeValue(
+                'linear(135deg, teal.50, purple.50)',
+                'linear(135deg, gray.800, gray.700)'
+              )}
+              borderWidth="2px"
+              borderColor={useColorModeValue('teal.200', 'teal.700')}
+              borderRadius="16px"
+              transition="all 0.2s ease"
+              _hover={{
+                borderColor: 'teal.500',
+                boxShadow: '0 12px 32px rgba(49,151,149,0.15)',
+                transform: 'translateY(-4px)',
+              }}
             >
-              <Badge {...styles.roadmaps.levelBadge}>
-                {roadmap.level}
-              </Badge>
-
-              <Heading as="h3" color={roadmapTitleColor} {...styles.roadmaps.title}>
-                {roadmap.title}
-              </Heading>
-
-              <Text color={roadmapDescColor} {...styles.roadmaps.description}>
-                {roadmap.description}
-              </Text>
-
-              <VStack align="start" {...styles.roadmaps.features}>
-                <Box color={roadmapFeatureColor} {...styles.roadmaps.featureItem}>
-                  <Text {...styles.roadmaps.featureIcon}>✓</Text>
-                  <Text>{roadmap.modulesCount} модулей</Text>
-                </Box>
-                <Box color={roadmapFeatureColor} {...styles.roadmaps.featureItem}>
-                  <Text {...styles.roadmaps.featureIcon}>⏱</Text>
-                  <Text>{roadmap.duration}</Text>
-                </Box>
-                <Box color={roadmapFeatureColor} {...styles.roadmaps.featureItem}>
-                  <Text {...styles.roadmaps.featureIcon}>📚</Text>
-                  <Text>{roadmap.materialsCount} материалов</Text>
-                </Box>
-              </VStack>
-
-              <Button
-                as={RouterLink}
-                to={`/roadmaps/${roadmap.slug}`}
-                {...styles.roadmaps.ctaButton}
+              <Text fontSize="48px" mb={4}>{way.icon}</Text>
+              <Heading
+                as="h3"
+                fontSize="24px"
+                fontWeight="bold"
+                mb={3}
+                color={headingColor}
               >
-                Начать обучение
+                {way.title}
+              </Heading>
+              <Text
+                fontSize="16px"
+                lineHeight="1.6"
+                mb={6}
+                color={useColorModeValue('gray.700', 'gray.300')}
+              >
+                {way.description}
+              </Text>
+              <Button
+                as="a"
+                href={way.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                w="100%"
+                bg="teal.500"
+                color="white"
+                fontWeight="semibold"
+                fontSize="16px"
+                px={6}
+                py={3.5}
+                borderRadius="8px"
+                transition="all 0.2s ease"
+                _hover={{
+                  bg: 'teal.600',
+                  boxShadow: '0 4px 12px rgba(49,151,149,0.3)',
+                }}
+              >
+                {way.action}
               </Button>
             </Box>
           ))}
@@ -608,11 +678,33 @@ export const Home = () => {
 
         <Box {...styles.roadmaps.ctaWrapper}>
           <Button
-            as={RouterLink}
-            to="/roadmaps"
-            {...styles.roadmaps.viewAllButton}
+            as="a"
+            href="https://github.com/de-learning-hub"
+            target="_blank"
+            rel="noopener noreferrer"
+            fontFamily="body"
+            fontWeight="semibold"
+            fontSize="16px"
+            bg="gray.800"
+            color="white"
+            px={8}
+            py={3}
+            borderRadius="8px"
+            transition="all 0.2s ease"
+            leftIcon={<Text fontSize="20px">⭐</Text>}
+            _hover={{
+              bg: 'gray.900',
+              transform: 'translateY(-2px)',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+            }}
+            _dark={{
+              bg: 'whiteAlpha.200',
+              _hover: {
+                bg: 'whiteAlpha.300',
+              },
+            }}
           >
-            Смотреть все roadmaps →
+            Contribute on GitHub
           </Button>
         </Box>
       </Box>
