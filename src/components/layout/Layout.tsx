@@ -76,13 +76,21 @@ const styles = {
   },
   nav: {
     wrapper: {
-      spacing: 1,
+      spacing: 6,
       display: { base: 'none', md: 'flex' },
       align: 'center' as const,
       position: 'relative' as const,
     },
     link: {
       textDecoration: 'none',
+      px: 3,
+      py: 2,
+      borderBottom: '2px solid',
+      borderColor: 'transparent',
+      transition: 'all 0.2s ease',
+    },
+    linkActive: {
+      borderColor: 'white',
     },
     catalogButton: {
       px: 3,
@@ -194,9 +202,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     as={Link}
                     to="/catalog"
                     {...styles.nav.link}
+                    {...(location.pathname === '/catalog' && styles.nav.linkActive)}
                     color="white"
                     opacity={location.pathname === '/catalog' ? 1 : 0.85}
-                    _hover={{ opacity: 1 }}
+                    _hover={{ opacity: 1, borderColor: 'whiteAlpha.500' }}
                   >
                     Каталог
                   </ChakraLink>
@@ -216,9 +225,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     as={Link}
                     to={item.path}
                     {...styles.nav.link}
+                    {...(isActive && styles.nav.linkActive)}
                     color="white"
                     opacity={isActive ? 1 : 0.85}
-                    _hover={{ opacity: 1 }}
+                    _hover={{ opacity: 1, borderColor: 'whiteAlpha.500' }}
                   >
                     {item.label}
                   </ChakraLink>
