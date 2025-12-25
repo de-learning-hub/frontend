@@ -49,13 +49,6 @@ const styles = {
   },
   categoryItem: {
     w: 'full',
-    px: 4,
-    py: 3,
-    borderRadius: 'md',
-    fontSize: 'sm',
-    fontWeight: '500',
-    transition: 'all 0.2s',
-    cursor: 'pointer',
     textAlign: 'left' as const,
   },
   topicLink: {
@@ -102,16 +95,13 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
   );
 
   // Theme colors
-  const borderColor = useColorModeValue('gray.200', 'gray.700');
-  const leftColumnBg = useColorModeValue('gray.50', 'gray.900');
-  const categoryBg = useColorModeValue('transparent', 'transparent');
-  const categoryHoverBg = useColorModeValue('blue.50', 'blue.900');
-  const categoryActiveBg = useColorModeValue('blue.100', 'blue.800');
-  const categoryColor = useColorModeValue('gray.700', 'gray.200');
-  const categoryActiveColor = useColorModeValue('blue.600', 'blue.300');
+  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const leftColumnBg = useColorModeValue('gray.50', 'navy.700');
+  const categoryActiveBg = useColorModeValue('accent.100', 'accent.800');
+  const categoryActiveColor = useColorModeValue('accent.600', 'accent.300');
   const linkColor = useColorModeValue('gray.700', 'gray.200');
-  const linkHoverColor = useColorModeValue('blue.600', 'blue.300');
-  const linkHoverBg = useColorModeValue('blue.50', 'blue.900');
+  const linkHoverColor = useColorModeValue('accent.600', 'accent.300');
+  const linkHoverBg = useColorModeValue('accent.50', 'accent.900');
   const descColor = useColorModeValue('gray.600', 'gray.400');
 
   // Get currently hovered category
@@ -143,15 +133,22 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({
                       <Box
                         key={category.id}
                         {...styles.categoryItem}
-                        bg={isActive ? categoryActiveBg : categoryBg}
-                        color={isActive ? categoryActiveColor : categoryColor}
-                        _hover={{
-                          bg: categoryHoverBg,
+                        layerStyle="menuItem"
+                        role="button"
+                        tabIndex={0}
+                        aria-label={`View ${category.name} topics`}
+                        {...(isActive && {
+                          bg: categoryActiveBg,
                           color: categoryActiveColor,
-                        }}
+                        })}
                         onMouseEnter={() => setHoveredCategoryId(category.id)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            setHoveredCategoryId(category.id);
+                          }
+                        }}
                       >
-                        <Text>{category.name}</Text>
+                        {category.name}
                       </Box>
                     );
                   })}
