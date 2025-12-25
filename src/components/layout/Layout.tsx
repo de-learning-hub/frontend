@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Flex,
@@ -11,7 +11,6 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { FaMoon, FaSun, FaBars } from 'react-icons/fa';
 import { MegaMenu, MobileMenu } from '@/components/navigation';
 import { Logo } from '@/components/ui';
@@ -45,20 +44,29 @@ const styles = {
       as: 'header' as const,
       position: 'sticky' as const,
       top: 0,
-      zIndex: 10,
-      borderBottom: '1px',
-      boxShadow: 'sm',
+      zIndex: 1000,
+      h: '72px',
+      bgGradient: 'linear(135deg, #0F2027, #203A43, #2C5364)',
+      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
     },
     container: {
       maxW: 'container.xl' as const,
-      py: 4,
+      h: '100%',
     },
     flex: {
       justify: 'space-between' as const,
       align: 'center' as const,
+      h: '100%',
     },
     catalogWrapper: {
       position: 'relative' as const,
+    },
+    logoText: {
+      fontFamily: 'heading', // Russo One
+      fontSize: '20px',
+      color: 'white',
+      ml: 3,
+      letterSpacing: '1px',
     },
   },
   logo: {
@@ -147,48 +155,18 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   // State
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
-
-  // Refs for navigation items
-  const navRefs = useRef<{ [key: string]: HTMLAnchorElement | null }>({});
-  const catalogRef = useRef<HTMLAnchorElement | null>(null);
 
   // Hooks
   const { colorMode, toggleColorMode } = useColorMode();
   const location = useLocation();
-  const bgColor = useColorModeValue('white', 'navy.600');
-  const borderColor = useColorModeValue('gray.200', 'navy.400');
-  const footerBg = useColorModeValue('gray.50', 'navy.700');
-  const linkColor = useColorModeValue('brand.500', 'gray.100');
-  const linkHoverColor = useColorModeValue('accent.600', 'white');
-  const indicatorBg = useColorModeValue('accent.600', 'white');
-
-  // Update indicator position based on active route
-  const updateIndicatorPosition = (path: string) => {
-    const element = path === '/catalog' ? catalogRef.current : navRefs.current[path];
-    if (element) {
-      const { offsetLeft, offsetWidth } = element;
-      setIndicatorStyle({
-        left: offsetLeft + offsetWidth * 0.1, // 10% padding from left
-        width: offsetWidth * 0.8, // 80% of item width
-      });
-    }
-  };
-
-  // Update indicator on route change
-  useEffect(() => {
-    updateIndicatorPosition(location.pathname);
-  }, [location.pathname]);
+  const footerBg = useColorModeValue('gray.50', 'gray.900');
+  const footerBorderColor = useColorModeValue('gray.200', 'gray.700');
 
   // Render
   return (
     <Box {...styles.container}>
       {/* Sticky Header */}
-      <Box
-        {...styles.header.wrapper}
-        bg={bgColor}
-        borderColor={borderColor}
-      >
+      <Box {...styles.header.wrapper}>
         <Container {...styles.header.container}>
           <Flex {...styles.header.flex}>
             {/* Burger Menu Button (Mobile Only) */}
@@ -197,12 +175,15 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               icon={<FaBars />}
               onClick={() => setIsMobileMenuOpen(true)}
               {...styles.burgerButton}
+              color="white"
+              _hover={{ bg: 'whiteAlpha.200' }}
             />
 
-            {/* Logo */}
-            <Link to="/">
-              <Logo height={styles.logo.h} />
-            </Link>
+            {/* Logo + Text */}
+            <HStack spacing={3} as={Link} to="/" _hover={{ opacity: 0.8 }}>
+              <Logo height="32px" />
+              <Text {...styles.header.logoText}>DE LEARNING HUB</Text>
+            </HStack>
 
             {/* Navigation */}
             <HStack {...styles.nav.wrapper}>
@@ -210,13 +191,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <MegaMenu
                 trigger={
                   <ChakraLink
-                    ref={catalogRef}
                     as={Link}
                     to="/catalog"
                     {...styles.nav.link}
-                    layerStyle="indicator"
-                    color={location.pathname === '/catalog' ? linkHoverColor : linkColor}
-                    _hover={{ color: linkHoverColor }}
+                    color="white"
+                    opacity={location.pathname === '/catalog' ? 1 : 0.85}
+                    _hover={{ opacity: 1 }}
                   >
                     Каталог
                   </ChakraLink>
@@ -233,36 +213,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 return (
                   <ChakraLink
                     key={item.path}
-                    ref={(el) => (navRefs.current[item.path] = el)}
                     as={Link}
                     to={item.path}
                     {...styles.nav.link}
-                    layerStyle="indicator"
-                    color={isActive ? linkHoverColor : linkColor}
-                    _hover={{ color: linkHoverColor }}
+                    color="white"
+                    opacity={isActive ? 1 : 0.85}
+                    _hover={{ opacity: 1 }}
                   >
                     {item.label}
                   </ChakraLink>
                 );
               })}
-
-              {/* Animated sliding indicator */}
-              <Box
-                as={motion.div}
-                {...styles.nav.indicator}
-                bg={indicatorBg}
-                animate={{
-                  left: indicatorStyle.left,
-                  width: indicatorStyle.width,
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 380,
-                  damping: 30,
-                  duration: 0.3,
-                }}
-                initial={false}
-              />
             </HStack>
 
             {/* Theme Toggle */}
@@ -271,6 +232,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               icon={colorMode === 'light' ? <FaMoon /> : <FaSun />}
               onClick={toggleColorMode}
               {...styles.themeToggle}
+              color="white"
+              _hover={{ bg: 'whiteAlpha.200' }}
             />
           </Flex>
         </Container>
@@ -293,7 +256,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Footer */}
       <Box
         {...styles.footer.wrapper}
-        borderColor={borderColor}
+        borderColor={footerBorderColor}
         bg={footerBg}
       >
         <Container {...styles.footer.container}>
