@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Box,
   Flex,
@@ -87,12 +87,17 @@ const styles = {
       textDecoration: 'none',
       px: 3,
       py: 2,
-      borderBottom: '2px solid',
-      borderColor: 'transparent',
-      transition: 'all 0.2s ease',
+      transition: 'opacity 0.2s ease',
+      position: 'relative' as const,
     },
-    linkActive: {
-      borderColor: 'white',
+    indicator: {
+      position: 'absolute' as const,
+      bottom: 0,
+      height: '2px',
+      bg: 'white',
+      borderRadius: '2px',
+      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+      pointerEvents: 'none' as const,
     },
     catalogButton: {
       px: 3,
@@ -102,13 +107,6 @@ const styles = {
       variant: 'ghost' as const,
       h: 'auto',
       minH: 0,
-    },
-    indicator: {
-      position: 'absolute' as const,
-      bottom: '-1px',
-      height: '2px',
-      borderRadius: '2px',
-      pointerEvents: 'none' as const,
     },
   },
   backdrop: {
@@ -166,12 +164,30 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   // State
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+
+  // Refs
+  const navRefs = useRef<Record<string, HTMLElement | null>>({});
 
   // Hooks
   const { colorMode, toggleColorMode } = useColorMode();
   const location = useLocation();
   const footerBg = useColorModeValue('gray.50', 'gray.900');
   const footerBorderColor = useColorModeValue('gray.200', 'gray.700');
+
+  // Update indicator position when route changes
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const element = navRefs.current[currentPath];
+
+    if (element) {
+      const { offsetLeft, offsetWidth } = element;
+      setIndicatorStyle({
+        left: offsetLeft,
+        width: offsetWidth,
+      });
+    }
+  }, [location.pathname]);
 
   // Render
   return (
@@ -197,17 +213,40 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Navigation */}
             <HStack {...styles.nav.wrapper}>
+              {/* Regular navigation links */}
+              {NAV_ITEMS.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <ChakraLink
+                    key={item.path}
+                    as={Link}
+                    to={item.path}
+                    ref={(el) => {
+                      if (el) navRefs.current[item.path] = el;
+                    }}
+                    {...styles.nav.link}
+                    color="white"
+                    opacity={isActive ? 1 : 0.85}
+                    _hover={{ opacity: 1 }}
+                  >
+                    {item.label}
+                  </ChakraLink>
+                );
+              })}
+
               {/* Catalog Link with MegaMenu Preview */}
               <MegaMenu
                 trigger={
                   <ChakraLink
                     as={Link}
                     to="/catalog"
+                    ref={(el) => {
+                      if (el) navRefs.current['/catalog'] = el;
+                    }}
                     {...styles.nav.link}
-                    {...(location.pathname === '/catalog' && styles.nav.linkActive)}
                     color="white"
                     opacity={location.pathname === '/catalog' ? 1 : 0.85}
-                    _hover={{ opacity: 1, borderColor: 'whiteAlpha.500' }}
+                    _hover={{ opacity: 1 }}
                   >
                     Каталог
                   </ChakraLink>
@@ -218,24 +257,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 onOpen={() => setIsMegaMenuOpen(true)}
               />
 
-              {/* Regular navigation links */}
-              {NAV_ITEMS.map((item) => {
-                const isActive = location.pathname === item.path;
-                return (
-                  <ChakraLink
-                    key={item.path}
-                    as={Link}
-                    to={item.path}
-                    {...styles.nav.link}
-                    {...(isActive && styles.nav.linkActive)}
-                    color="white"
-                    opacity={isActive ? 1 : 0.85}
-                    _hover={{ opacity: 1, borderColor: 'whiteAlpha.500' }}
-                  >
-                    {item.label}
-                  </ChakraLink>
-                );
-              })}
+              {/* Animated Indicator */}
+              <Box
+                {...styles.nav.indicator}
+                style={{
+                  left: `${indicatorStyle.left}px`,
+                  width: `${indicatorStyle.width}px`,
+                }}
+              />
             </HStack>
 
             {/* Theme Toggle */}
