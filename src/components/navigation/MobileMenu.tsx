@@ -75,10 +75,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
   onCatalogClick,
 }) => {
   const linkColor = useColorModeValue('gray.700', 'gray.200');
-  const linkHoverColor = useColorModeValue('blue.600', 'blue.300');
-  const linkHoverBg = useColorModeValue('blue.50', 'blue.900');
-  const linkActiveBg = useColorModeValue('blue.100', 'blue.800');
-  const borderColor = useColorModeValue('gray.200', 'gray.700');
+  const linkHoverColor = useColorModeValue('accent.600', 'accent.300');
+  const linkHoverBg = useColorModeValue('accent.50', 'accent.900');
+  const linkActiveBg = useColorModeValue('accent.100', 'accent.800');
+  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const headerColor = useColorModeValue('navy.500', 'gray.100');
 
   const handleCatalogClick = () => {
     onClose();
@@ -91,12 +92,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
       <DrawerContent {...styles.drawer.content}>
         <DrawerCloseButton />
         <DrawerHeader {...styles.header} borderColor={borderColor}>
-          <Text
-            fontSize="lg"
-            fontWeight="bold"
-            bgGradient="linear(to-r, blue.400, cyan.400)"
-            bgClip="text"
-          >
+          <Text fontSize="lg" fontWeight="bold" color={headerColor}>
             📚 DE Learning Hub
           </Text>
         </DrawerHeader>
