@@ -17,6 +17,12 @@ import {
   MenuList,
   MenuItem,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
 } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaMoon, FaSun, FaBars, FaSearch, FaGlobe, FaUser, FaChevronDown } from 'react-icons/fa';
@@ -95,6 +101,8 @@ const styles = {
       textDecoration: 'none',
       px: 3,
       py: 2,
+      fontSize: 'sm', // 14px like Chakra UI
+      fontWeight: '500',
       transition: 'opacity 0.2s ease',
       position: 'relative' as const,
     },
@@ -231,6 +239,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Refs
   const navRefs = useRef<Record<string, HTMLElement | null>>({});
@@ -355,20 +364,19 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               />
             </HStack>
 
-            {/* Search Input (Desktop) */}
-            <Box {...styles.search.wrapper}>
-              <InputGroup {...styles.search.inputGroup}>
-                <InputLeftElement pointerEvents="none">
-                  <FaSearch color="white" opacity={0.6} />
-                </InputLeftElement>
-                <Input
-                  {...styles.search.input}
-                  placeholder="Поиск..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </InputGroup>
-            </Box>
+            {/* Search Button (Desktop) */}
+            <IconButton
+              aria-label="Search"
+              icon={<FaSearch />}
+              onClick={() => setIsSearchOpen(true)}
+              variant="ghost"
+              color="white"
+              h="36px"
+              w="36px"
+              minW="36px"
+              display={{ base: 'none', md: 'flex' }}
+              _hover={{ bg: 'whiteAlpha.200' }}
+            />
 
             {/* Right Actions Group */}
             <HStack spacing={{ base: 3, md: 4 }} ml={{ base: 'auto', md: 6 }}>
@@ -376,9 +384,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <IconButton
                 aria-label="Search"
                 icon={<FaSearch />}
-                onClick={() => {
-                  // TODO: Implement search modal/drawer for mobile
-                }}
+                onClick={() => setIsSearchOpen(true)}
                 {...styles.search.iconButton}
                 color="white"
                 _hover={{ bg: 'whiteAlpha.200' }}
@@ -484,6 +490,29 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Flex>
         </Container>
       </Box>
+
+      {/* Search Modal */}
+      <Modal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} size="xl">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Поиск</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <InputGroup>
+              <InputLeftElement pointerEvents="none">
+                <FaSearch color="gray" />
+              </InputLeftElement>
+              <Input
+                placeholder="Поиск по сайту..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+            </InputGroup>
+            {/* TODO: Add search results here */}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };
