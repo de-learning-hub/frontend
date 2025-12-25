@@ -53,7 +53,7 @@ const styles = {
       position: 'sticky' as const,
       top: 0,
       zIndex: 1000,
-      h: '64px', // Header height: 64px for all screen sizes
+      h: '72px', // Header height: 72px for all screen sizes (Chakra-inspired)
       bgGradient: 'linear(135deg, #0F2027, #203A43, #2C5364)',
       boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
     },
@@ -141,11 +141,8 @@ const styles = {
   search: {
     wrapper: {
       display: { base: 'none', md: 'block' },
-      w: '200px',
-      transition: 'width 0.2s ease',
-      _focusWithin: {
-        w: '280px',
-      },
+      w: '256px', // Chakra UI-inspired width
+      mx: 4, // Margin on sides
     },
     inputGroup: {
       h: '36px',
@@ -280,21 +277,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <Logo height="100%" />
             </Box>
 
-            {/* Search Input (Desktop) */}
-            <Box {...styles.search.wrapper}>
-              <InputGroup {...styles.search.inputGroup}>
-                <InputLeftElement pointerEvents="none">
-                  <FaSearch color="white" opacity={0.6} />
-                </InputLeftElement>
-                <Input
-                  {...styles.search.input}
-                  placeholder="Поиск..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-              </InputGroup>
-            </Box>
-
             {/* Navigation */}
             <HStack {...styles.nav.wrapper}>
               {/* First item: Главная */}
@@ -373,6 +355,21 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               />
             </HStack>
 
+            {/* Search Input (Desktop) */}
+            <Box {...styles.search.wrapper}>
+              <InputGroup {...styles.search.inputGroup}>
+                <InputLeftElement pointerEvents="none">
+                  <FaSearch color="white" opacity={0.6} />
+                </InputLeftElement>
+                <Input
+                  {...styles.search.input}
+                  placeholder="Поиск..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </InputGroup>
+            </Box>
+
             {/* Right Actions Group */}
             <HStack spacing={{ base: 3, md: 4 }} ml={{ base: 'auto', md: 6 }}>
               {/* Search Icon (Mobile) */}
@@ -417,16 +414,25 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 </MenuList>
               </Menu>
 
-              {/* Login Button (Desktop only) */}
-              <Button
-                {...styles.login.button}
-                color="white"
-                _hover={{ bg: 'whiteAlpha.200' }}
-                leftIcon={<FaUser />}
-                display={{ base: 'none', md: 'flex' }}
-              >
-                Войти
-              </Button>
+              {/* Login Dropdown (Desktop only) */}
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  {...styles.login.button}
+                  color="white"
+                  _hover={{ bg: 'whiteAlpha.200' }}
+                  _active={{ bg: 'whiteAlpha.300' }}
+                  leftIcon={<FaUser />}
+                  rightIcon={<FaChevronDown size={12} />}
+                  display={{ base: 'none', md: 'flex' }}
+                >
+                  Войти
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Войти</MenuItem>
+                  <MenuItem>Регистрация</MenuItem>
+                </MenuList>
+              </Menu>
             </HStack>
           </Flex>
         </Container>
