@@ -223,11 +223,19 @@ export const Card: React.FC<CardProps> = ({
         {title}
       </Heading>
 
-      {/* Tags after title (DEV.to pattern) */}
-      {(techTag || level) && (
+      {/* Level badge - separate and prominent (like Interview section) */}
+      {level && (
+        <Box mb={2}>
+          <Badge variant={level} fontSize="sm">
+            {level}
+          </Badge>
+        </Box>
+      )}
+
+      {/* Tech tags - separate row below level */}
+      {techTag && (
         <Box {...styles.badges}>
-          {techTag && <Badge variant="solid">{techTag}</Badge>}
-          {level && <Badge variant={level}>{level}</Badge>}
+          <Badge variant="solid">{techTag}</Badge>
         </Box>
       )}
 
