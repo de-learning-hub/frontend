@@ -252,12 +252,12 @@ export const Home = () => {
           </Text>
 
           {/* Search bar */}
-          <InputGroup maxW="600px" mb={6} size="lg">
+          <InputGroup maxW="600px" mb={8} size="lg">
             <InputLeftElement pointerEvents="none" h="100%">
               <FaSearch color={searchPlaceholderColor} />
             </InputLeftElement>
             <Input
-              placeholder="Поиск по статьям, roadmaps, вопросам..."
+              placeholder="Поиск по материалам..."
               bg={searchBg}
               border="2px solid"
               borderColor={searchBorderColor}
@@ -277,25 +277,45 @@ export const Home = () => {
             />
           </InputGroup>
 
-          {/* CTA Buttons */}
-          <HStack spacing={4} mb={10}>
+          {/* Quick Links */}
+          <Text
+            fontSize="sm"
+            color={heroSubtitleColor}
+            mb={4}
+          >
+            Или начните с:
+          </Text>
+          <HStack spacing={4} mb={12}>
             <Button
               as={RouterLink}
               to="/catalog"
-              variant="hero"
+              variant="outline"
+              size="md"
+              leftIcon={<Text fontSize="18px">📚</Text>}
             >
-              К КАТАЛОГУ МАТЕРИАЛОВ
+              Материалы
             </Button>
             <Button
               as={RouterLink}
-              to="/about"
+              to="/roadmaps"
               variant="outline"
-              size="lg"
+              size="md"
+              leftIcon={<Text fontSize="18px">🗺️</Text>}
             >
-              О ПРОЕКТЕ
+              Roadmaps
+            </Button>
+            <Button
+              as={RouterLink}
+              to="/interview"
+              variant="outline"
+              size="md"
+              leftIcon={<Text fontSize="18px">💼</Text>}
+            >
+              Собесы
             </Button>
           </HStack>
 
+          {/* Stats */}
           <HStack
             justify="center"
             gap={{ base: 3, md: 8 }}

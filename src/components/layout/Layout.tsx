@@ -310,7 +310,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 );
               })()}
 
-              {/* Second item: Catalog with MegaMenu */}
+              {/* Second item: Materials with MegaMenu */}
               <MegaMenu
                 trigger={
                   <ChakraLink
@@ -324,7 +324,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     opacity={location.pathname === '/catalog' ? 1 : 0.85}
                     _hover={{ opacity: 1 }}
                   >
-                    Каталог
+                    Материалы
                   </ChakraLink>
                 }
                 categories={CATEGORIES}

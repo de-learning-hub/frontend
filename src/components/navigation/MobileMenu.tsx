@@ -99,9 +99,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 
         <DrawerBody {...styles.body}>
           <VStack {...styles.navList}>
-            {/* Catalog Button */}
+            {/* Materials Button */}
             <Button onClick={handleCatalogClick} {...styles.catalogButton}>
-              Каталог 📚
+              Материалы 📚
             </Button>
 
             <Divider {...styles.divider} borderColor={borderColor} />

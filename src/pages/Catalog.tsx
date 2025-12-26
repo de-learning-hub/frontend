@@ -87,7 +87,7 @@ export const Catalog = () => {
           mb={2}
           color={headingColor}
         >
-          Каталог тем
+          Материалы
         </Heading>
         <Text fontSize="lg" color={descColor}>
           Структурированные материалы по Data Engineering
