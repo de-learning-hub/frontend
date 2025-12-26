@@ -1,6 +1,6 @@
 import { Box, Badge, Heading, Text, VStack, Button, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { IoTime, IoEye, IoHeart, IoThumbsDown, IoChatbubble, IoBookmark } from 'react-icons/io5';
+import { IoTime, IoEye, IoThumbsUp, IoThumbsDown, IoChatbubble, IoBookmark } from 'react-icons/io5';
 
 // Types
 interface Feature {
@@ -239,11 +239,31 @@ export const Card: React.FC<CardProps> = ({
       display="flex"
       flexDirection="column"
     >
-      {/* Date at top (like DEV.to author section) */}
-      {date && (
-        <Text fontSize="sm" color={metaColor} mb={3}>
-          {date}
-        </Text>
+      {/* Header: date left, time+views right */}
+      {(date || readingTime || views) && (
+        <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+          {date && (
+            <Text fontSize="sm" color={metaColor}>
+              {date}
+            </Text>
+          )}
+          {(readingTime || views) && (
+            <Box {...styles.metricsInfo} color={metaColor} mb={0}>
+              {readingTime && (
+                <Box {...styles.metricItem}>
+                  <IoTime />
+                  <Text>{readingTime}</Text>
+                </Box>
+              )}
+              {views !== undefined && (
+                <Box {...styles.metricItem}>
+                  <IoEye />
+                  <Text>{views >= 1000 ? `${(views / 1000).toFixed(1)}k` : views}</Text>
+                </Box>
+              )}
+            </Box>
+          )}
+        </Box>
       )}
 
       {/* Title - large and dominant like DEV.to */}
@@ -264,53 +284,32 @@ export const Card: React.FC<CardProps> = ({
         {description}
       </Text>
 
-      {/* Metrics footer - Habr style */}
-      <Box mt="auto">
-        {/* Info row: reading time & views */}
-        {(readingTime || views) && (
-          <Box {...styles.metricsInfo} color={metaColor}>
-            {readingTime && (
-              <Box {...styles.metricItem}>
-                <IoTime />
-                <Text>{readingTime}</Text>
-              </Box>
-            )}
-            {views !== undefined && (
-              <Box {...styles.metricItem}>
-                <IoEye />
-                <Text>{views >= 1000 ? `${(views / 1000).toFixed(1)}k` : views}</Text>
-              </Box>
-            )}
-          </Box>
-        )}
-
-        {/* Actions row: likes, dislikes, comments, bookmarks */}
-        {(likes !== undefined || dislikes !== undefined || comments !== undefined) && (
-          <Box {...styles.metricsActions} color={metaColor}>
-            {likes !== undefined && (
-              <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-                <IoHeart />
-                <Text>{likes}</Text>
-              </Box>
-            )}
-            {dislikes !== undefined && (
-              <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-                <IoThumbsDown />
-                <Text>{dislikes}</Text>
-              </Box>
-            )}
-            {comments !== undefined && (
-              <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-                <IoChatbubble />
-                <Text>{comments}</Text>
-              </Box>
-            )}
+      {/* Actions footer: likes, dislikes, comments, bookmarks */}
+      {(likes !== undefined || dislikes !== undefined || comments !== undefined) && (
+        <Box {...styles.metricsActions} color={metaColor} mt="auto">
+          {likes !== undefined && (
             <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-              <IoBookmark />
+              <IoThumbsUp />
+              <Text>{likes}</Text>
             </Box>
+          )}
+          {dislikes !== undefined && (
+            <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+              <IoThumbsDown />
+              <Text>{dislikes}</Text>
+            </Box>
+          )}
+          {comments !== undefined && (
+            <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+              <IoChatbubble />
+              <Text>{comments}</Text>
+            </Box>
+          )}
+          <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+            <IoBookmark />
           </Box>
-        )}
-      </Box>
+        </Box>
+      )}
     </Box>
   );
 };
