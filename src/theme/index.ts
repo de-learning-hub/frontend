@@ -419,10 +419,10 @@ export const theme = extendTheme({
       baseStyle: {
         fontFamily: 'body',
         fontWeight: 'medium',
-        fontSize: 'xs',
+        fontSize: 'xs', // 12px like Hashnode
         textTransform: 'uppercase',
         letterSpacing: '0.5px',
-        borderRadius: 'md',
+        borderRadius: 'full', // pill shape like Hashnode
         px: 3,
         py: 1,
       },

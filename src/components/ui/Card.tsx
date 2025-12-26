@@ -35,7 +35,7 @@ const styles = {
   card: {
     p: 6,
     borderWidth: '1px',
-    borderRadius: 'lg',
+    borderRadius: '2xl', // 16px like Hashnode
     cursor: 'pointer',
     transition: 'all 0.2s ease',
     _hover: {
@@ -51,7 +51,7 @@ const styles = {
     color: 'white',
     px: 4,
     py: 1.5,
-    borderRadius: '6px',
+    borderRadius: 'full', // pill shape
     textTransform: 'uppercase' as const,
     letterSpacing: '0.8px',
     display: 'inline-block',
@@ -60,7 +60,7 @@ const styles = {
   badges: {
     display: 'flex',
     gap: 2,
-    mb: 4,
+    mb: 4, // 16px spacing to title (recommended for related components)
   },
   title: {
     fontFamily: 'body',
@@ -72,9 +72,9 @@ const styles = {
   materialTitle: {
     fontFamily: 'body',
     fontWeight: 'semibold',
-    fontSize: 'lg',
-    lineHeight: '1.4',
-    mb: 3,
+    fontSize: 'lg', // 18px
+    lineHeight: '1.25', // tighter line-height like Hashnode
+    mb: 2, // 8px spacing to description (related elements)
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: '-webkit-box',
@@ -92,7 +92,7 @@ const styles = {
   materialDescription: {
     fontFamily: 'body',
     fontSize: '15px',
-    lineHeight: '1.5',
+    lineHeight: '1.625', // improved readability
     mb: 5,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -123,7 +123,7 @@ const styles = {
   meta: {
     display: 'flex',
     justifyContent: 'space-between',
-    fontSize: '13px',
+    fontSize: '14px', // 0.875rem like Hashnode metadata
     mt: 'auto',
   },
 } as const;
