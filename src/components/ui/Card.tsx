@@ -33,15 +33,14 @@ interface CardProps {
 // Styles
 const styles = {
   card: {
-    p: 8,
-    borderWidth: '2px',
-    borderRadius: '16px',
+    p: 6,
+    borderWidth: '1px',
+    borderRadius: 'lg',
     cursor: 'pointer',
     transition: 'all 0.2s ease',
     _hover: {
       borderColor: 'teal.500',
-      boxShadow: '0 12px 32px rgba(49,151,149,0.15)',
-      transform: 'translateY(-4px)',
+      boxShadow: 'md',
     },
   },
   levelBadge: {
@@ -72,10 +71,10 @@ const styles = {
   },
   materialTitle: {
     fontFamily: 'body',
-    fontWeight: 'bold',
-    fontSize: '24px',
-    lineHeight: '1.3',
-    mb: 4,
+    fontWeight: 'semibold',
+    fontSize: 'lg',
+    lineHeight: '1.4',
+    mb: 3,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: '-webkit-box',
@@ -147,11 +146,8 @@ export const Card: React.FC<CardProps> = ({
   ctaLink,
   onClick,
 }) => {
-  const cardBg = useColorModeValue(
-    'linear(135deg, teal.50, purple.50)',
-    'linear(135deg, gray.800, gray.700)'
-  );
-  const cardBorderColor = useColorModeValue('teal.200', 'teal.700');
+  const cardBg = useColorModeValue('white', 'gray.800');
+  const cardBorderColor = useColorModeValue('gray.200', 'gray.700');
   const titleColor = useColorModeValue('gray.900', 'white');
   const descColor = useColorModeValue('gray.700', 'gray.300');
   const featureColor = useColorModeValue('gray.600', 'gray.400');
@@ -160,7 +156,7 @@ export const Card: React.FC<CardProps> = ({
   if (variant === 'roadmap') {
     return (
       <Box
-        bgGradient={cardBg}
+        bg={cardBg}
         borderColor={cardBorderColor}
         {...styles.card}
         onClick={onClick}
@@ -205,10 +201,10 @@ export const Card: React.FC<CardProps> = ({
     );
   }
 
-  // Material card variant (with roadmap styling)
+  // Material card variant
   return (
     <Box
-      bgGradient={cardBg}
+      bg={cardBg}
       borderColor={cardBorderColor}
       {...styles.card}
       onClick={onClick}
