@@ -1,6 +1,6 @@
 import { Box, Badge, Heading, Text, VStack, Button, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { IoTimeOutline, IoEyeOutline, IoHeartOutline, IoThumbsDownOutline, IoChatbubbleOutline, IoBookmarkOutline } from 'react-icons/io5';
+import { IoTime, IoEye, IoHeart, IoThumbsDown, IoChatbubble, IoBookmark } from 'react-icons/io5';
 
 // Types
 interface Feature {
@@ -271,13 +271,13 @@ export const Card: React.FC<CardProps> = ({
           <Box {...styles.metricsInfo} color={metaColor}>
             {readingTime && (
               <Box {...styles.metricItem}>
-                <IoTimeOutline />
+                <IoTime />
                 <Text>{readingTime}</Text>
               </Box>
             )}
             {views !== undefined && (
               <Box {...styles.metricItem}>
-                <IoEyeOutline />
+                <IoEye />
                 <Text>{views >= 1000 ? `${(views / 1000).toFixed(1)}k` : views}</Text>
               </Box>
             )}
@@ -289,24 +289,24 @@ export const Card: React.FC<CardProps> = ({
           <Box {...styles.metricsActions} color={metaColor}>
             {likes !== undefined && (
               <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-                <IoHeartOutline />
+                <IoHeart />
                 <Text>{likes}</Text>
               </Box>
             )}
             {dislikes !== undefined && (
               <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-                <IoThumbsDownOutline />
+                <IoThumbsDown />
                 <Text>{dislikes}</Text>
               </Box>
             )}
             {comments !== undefined && (
               <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-                <IoChatbubbleOutline />
+                <IoChatbubble />
                 <Text>{comments}</Text>
               </Box>
             )}
             <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-              <IoBookmarkOutline />
+              <IoBookmark />
             </Box>
           </Box>
         )}
