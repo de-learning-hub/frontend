@@ -31,7 +31,6 @@ const latestMaterials = [
     title: 'Настройка Connections в Airflow',
     description: 'Подробное руководство по настройке connections в Apache Airflow. Рассмотрим UI, CLI и API подходы для эффективной работы с внешними системами.',
     techTag: 'Airflow',
-    level: 'beginner',
     date: '24 дек 2024',
     readingTime: '8 мин',
     views: 1243,
@@ -42,7 +41,6 @@ const latestMaterials = [
     title: 'Основы SQL для Data Engineer',
     description: 'Полное руководство по SQL для начинающих дата инженеров. От базовых SELECT запросов до сложных аналитических функций и оптимизации.',
     techTag: 'SQL',
-    level: 'beginner',
     date: '22 дек 2024',
     readingTime: '12 мин',
     views: 2856,
@@ -53,7 +51,6 @@ const latestMaterials = [
     title: 'Построение Data Pipeline с dbt',
     description: 'Практическое руководство по созданию современного data pipeline используя dbt. Включает best practices и реальные примеры трансформаций.',
     techTag: 'dbt',
-    level: 'intermediate',
     date: '20 дек 2024',
     readingTime: '15 мин',
     views: 1567,
@@ -371,7 +368,6 @@ export const Home = () => {
               title={material.title}
               description={material.description}
               techTag={material.techTag}
-              level={material.level}
               date={material.date}
               readingTime={material.readingTime}
               views={material.views}

@@ -17,7 +17,6 @@ interface CardProps {
 
   // Material card props
   techTag?: string;
-  level?: string;
   date?: string;
   readingTime?: string;
   views?: number;
@@ -159,7 +158,6 @@ export const Card: React.FC<CardProps> = ({
   title,
   description,
   techTag,
-  level,
   date,
   readingTime,
   views,
@@ -267,11 +265,10 @@ export const Card: React.FC<CardProps> = ({
         {title}
       </Heading>
 
-      {/* Badges in one row - level first, then tech tags */}
-      {(level || techTag) && (
+      {/* Tech tag badge */}
+      {techTag && (
         <Box {...styles.badges}>
-          {level && <Badge variant={level}>{level}</Badge>}
-          {techTag && <Badge variant="solid">{techTag}</Badge>}
+          <Badge variant="solid">{techTag}</Badge>
         </Box>
       )}
 
