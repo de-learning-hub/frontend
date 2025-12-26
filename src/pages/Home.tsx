@@ -215,9 +215,9 @@ const styles = {
 } as const;
 
 export const Home = () => {
-  // Section backgrounds
-  const sectionBg = useColorModeValue('white', 'gray.900');
-  const topicsSectionBg = useColorModeValue('gray.50', 'gray.800');
+  // Section backgrounds - soft off-white instead of pure white
+  const sectionBg = useColorModeValue('gray.50', 'gray.900');
+  const topicsSectionBg = useColorModeValue('white', 'gray.800');
 
   // Hero section colors
   const heroBg = useColorModeValue('white', 'gray.900');
@@ -242,7 +242,10 @@ export const Home = () => {
     <VStack spacing={0} align="stretch">
       {/* Hero Section */}
       <Box
-        bg={heroBg}
+        bgGradient={useColorModeValue(
+          'radial(white 0%, gray.50 100%)',
+          'radial(gray.900 0%, gray.900 100%)'
+        )}
         py={{ base: '80px', md: '120px' }}
         px={{ base: 4, md: 8 }}
         textAlign="center"
@@ -259,10 +262,10 @@ export const Home = () => {
           </Heading>
 
           <Text
-            fontSize={{ base: '20px', md: '22px' }}
+            fontSize={{ base: '18px', md: '20px' }}
             fontWeight="medium"
             color={heroSubtitleColor}
-            lineHeight="1.7"
+            lineHeight="1.3"
             mb={10}
             maxW="600px"
             mx="auto"
