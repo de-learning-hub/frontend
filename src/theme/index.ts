@@ -10,9 +10,9 @@ export const theme = extendTheme({
 
   // Typography
   fonts: {
-    // Russo One ТОЛЬКО для H1, H2 и hero CTA кнопок
-    heading: `'Russo One', sans-serif`,
-    // Montserrat для всего остального
+    // Montserrat для всего (heading и body используют разные веса)
+    // Russo One удален - не поддерживает кириллицу
+    heading: `'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`,
     body: `'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`,
     // JetBrains Mono для кода
     mono: `'JetBrains Mono', 'Fira Code', 'Courier New', monospace`,
@@ -33,11 +33,11 @@ export const theme = extendTheme({
   },
 
   fontWeights: {
-    light: 300,
-    normal: 400,
-    medium: 500,
-    semibold: 600,
-    bold: 700,
+    // Используемые веса Montserrat в проекте
+    normal: 400,      // Обычный текст, параграфы
+    medium: 500,      // Навигация, ссылки, акцентный текст
+    semibold: 600,    // Кнопки, badges, акценты
+    bold: 700,        // Заголовки H1-H3, заголовки карточек
   },
 
   lineHeights: {
@@ -171,49 +171,48 @@ export const theme = extendTheme({
     // Heading components
     Heading: {
       baseStyle: {
-        fontWeight: 'normal',
+        fontFamily: 'heading', // Montserrat
         lineHeight: 'shorter',
       },
       sizes: {
-        // H1, H2 sizes use Russo One (from heading font)
+        // H1 - Montserrat Bold (700) для главных заголовков
         '4xl': {
           fontSize: ['6xl', null, '7xl'], // 48px → 64px
-          fontFamily: 'heading', // Russo One
+          fontWeight: 'bold', // 700
         },
+        // H2 - Montserrat Bold (700)
         '3xl': {
           fontSize: ['5xl', null, '6xl'], // 40px → 48px
-          fontFamily: 'heading', // Russo One
+          fontWeight: 'bold', // 700
         },
-        // Smaller headings use Montserrat (from body font)
+        // H3 - Montserrat Bold (700)
         '2xl': {
           fontSize: '4xl', // 32px
-          fontFamily: 'body', // Montserrat
-          fontWeight: 'bold',
+          fontWeight: 'bold', // 700
         },
+        // H4 - Montserrat SemiBold (600)
         'xl': {
           fontSize: '3xl', // 28px
-          fontFamily: 'body',
-          fontWeight: 'semibold',
+          fontWeight: 'semibold', // 600
         },
+        // H5 - Montserrat SemiBold (600)
         'lg': {
           fontSize: '2xl', // 24px
-          fontFamily: 'body',
-          fontWeight: 'semibold',
+          fontWeight: 'semibold', // 600
         },
+        // H6 - Montserrat SemiBold (600)
         'md': {
           fontSize: 'xl', // 20px
-          fontFamily: 'body',
-          fontWeight: 'semibold',
+          fontWeight: 'semibold', // 600
         },
+        // Small headings - Montserrat Medium (500)
         'sm': {
           fontSize: 'lg', // 18px
-          fontFamily: 'body',
-          fontWeight: 'medium',
+          fontWeight: 'medium', // 500
         },
         'xs': {
           fontSize: 'md', // 16px
-          fontFamily: 'body',
-          fontWeight: 'medium',
+          fontWeight: 'medium', // 500
         },
       },
       defaultProps: {
@@ -249,7 +248,7 @@ export const theme = extendTheme({
       },
     },
 
-    // Button components (from spec)
+    // Button components
     Button: {
       baseStyle: {
         fontFamily: 'body', // Montserrat
@@ -260,84 +259,123 @@ export const theme = extendTheme({
       sizes: {
         lg: {
           fontSize: 'md',
-          px: 6,
-          py: 3,
+          px: 8,
           h: '48px',
         },
         md: {
           fontSize: 'sm',
-          px: 5,
-          py: 2.5,
+          px: 6,
           h: '40px',
         },
         sm: {
           fontSize: 'sm',
           px: 4,
-          py: 2,
-          h: '32px',
+          h: '36px',
         },
       },
       variants: {
-        // Hero CTA button with Russo One (from spec)
-        hero: {
-          fontFamily: 'heading', // Russo One
-          fontSize: 'lg',
-          textTransform: 'uppercase',
-          letterSpacing: '1.5px',
-          px: 12,
-          py: 4,
-          h: '56px',
-          bgGradient: 'linear(135deg, teal.600, teal.500)',
-          color: 'white',
-          boxShadow: 'teal',
-          _hover: {
-            bgGradient: 'linear(135deg, teal.700, teal.600)',
-            boxShadow: '0 6px 16px rgba(49,151,149,0.4)',
-            transform: 'translateY(-2px)',
-          },
-          _active: {
-            transform: 'translateY(0)',
-          },
-        },
-        // Regular solid button (Montserrat)
-        solid: {
+        // Primary solid button - основные действия
+        primary: {
           bg: 'teal.500',
           color: 'white',
           _hover: {
             bg: 'teal.600',
+            boxShadow: '0 4px 12px rgba(49,151,149,0.3)',
           },
           _active: {
             bg: 'teal.700',
           },
+          _dark: {
+            bg: 'teal.600',
+            _hover: {
+              bg: 'teal.700',
+            },
+          },
         },
-        // Outline button
+        // Outline button - вторичные действия
         outline: {
           borderWidth: '2px',
           borderColor: 'teal.600',
           color: 'teal.600',
+          bg: 'transparent',
           _hover: {
             bg: 'teal.50',
             borderColor: 'teal.700',
             color: 'teal.700',
             _dark: {
               bg: 'teal.900',
+              borderColor: 'teal.500',
+              color: 'teal.400',
+            },
+          },
+          _active: {
+            bg: 'teal.100',
+            _dark: {
+              bg: 'teal.800',
             },
           },
         },
-        // Ghost button
+        // Secondary button - альтернативные действия (GitHub, external links)
+        secondary: {
+          bg: 'gray.800',
+          color: 'white',
+          _hover: {
+            bg: 'gray.900',
+            transform: 'translateY(-2px)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+          },
+          _active: {
+            transform: 'translateY(0)',
+          },
+          _dark: {
+            bg: 'whiteAlpha.200',
+            _hover: {
+              bg: 'whiteAlpha.300',
+            },
+          },
+        },
+        // Ghost button - минимальные действия
         ghost: {
-          color: 'teal.500',
+          bg: 'transparent',
+          color: 'teal.600',
           _hover: {
             bg: 'teal.50',
             _dark: {
               bg: 'whiteAlpha.100',
+              color: 'teal.400',
             },
+          },
+          _active: {
+            bg: 'teal.100',
+            _dark: {
+              bg: 'whiteAlpha.200',
+            },
+          },
+        },
+        // Hero CTA button - главные призывы к действию
+        hero: {
+          fontSize: 'sm',
+          fontWeight: 'bold',
+          textTransform: 'uppercase',
+          letterSpacing: '1px',
+          px: 12,
+          h: '48px',
+          bg: 'teal.500',
+          color: 'white',
+          _hover: {
+            bg: 'teal.600',
+            boxShadow: '0 6px 16px rgba(49,151,149,0.4)',
+            transform: 'translateY(-2px)',
+          },
+          _active: {
+            transform: 'translateY(0)',
+            bg: 'teal.700',
           },
         },
       },
       defaultProps: {
         size: 'md',
-        variant: 'solid',
+        variant: 'primary',
       },
     },
 

@@ -734,32 +734,193 @@ export const Card: React.FC<CardProps> = ({ isHighlighted, customWidth }) => {
 
 ### Theme Customization
 
-```typescript
-// theme/index.ts
-import { extendTheme } from '@chakra-ui/react';
+**Наша тема в `src/theme/index.ts` настроена со следующими параметрами:**
 
-export const theme = extendTheme({
-  colors: {
-    brand: {
-      50: '#e3f2fd',
-      100: '#bbdefb',
-      500: '#2196f3',
-      900: '#0d47a1',
-    },
-  },
-  fonts: {
-    heading: 'Inter, sans-serif',
-    body: 'Inter, sans-serif',
-  },
-  components: {
-    Button: {
-      defaultProps: {
-        colorScheme: 'brand',
-      },
-    },
-  },
-});
+#### Шрифты
+
+```typescript
+fonts: {
+  // Montserrat для всего (heading и body используют разные веса)
+  heading: `'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`,
+  body: `'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`,
+  // JetBrains Mono для кода
+  mono: `'JetBrains Mono', 'Fira Code', 'Courier New', monospace`,
+},
 ```
+
+**Использование начертаний Montserrat:**
+- **H1-H3 (Heading size='4xl', '3xl', '2xl')**: Bold (700) - главные заголовки
+- **H4-H6 (Heading size='xl', 'lg', 'md')**: SemiBold (600) - подзаголовки
+- **Навигация, ссылки**: Medium (500) - акцентный текст
+- **Обычный текст (Text)**: Regular (400) - основной контент
+- **Кнопки, badges**: SemiBold (600)
+
+**Доступные веса (используются только необходимые):**
+```typescript
+fontWeights: {
+  normal: 400,      // Обычный текст, параграфы
+  medium: 500,      // Навигация, ссылки, акцентный текст
+  semibold: 600,    // Кнопки, badges, акценты
+  bold: 700,        // Заголовки H1-H3, заголовки карточек
+},
+```
+
+**Примеры использования:**
+```typescript
+// ✅ Заголовки - автоматически получают правильный вес из темы
+<Heading size="4xl">H1 - Bold (700)</Heading>
+<Heading size="xl">H4 - SemiBold (600)</Heading>
+
+// ✅ Навигация и ссылки
+<Link fontWeight="medium">Ссылка - Medium (500)</Link>
+
+// ✅ Кнопки
+<Button fontWeight="semibold">Кнопка - SemiBold (600)</Button>
+
+// ✅ Обычный текст (по умолчанию)
+<Text>Текст - Regular (400)</Text>
+```
+
+#### Цвета
+
+**Используем стандартную палитру Chakra UI + кастомизация:**
+
+```typescript
+colors: {
+  // Primary color - Teal
+  teal: {
+    50: '#E6FFFA',
+    100: '#B2F5EA',
+    200: '#81E6D9',
+    300: '#4FD1C5',
+    400: '#38B2AC',
+    500: '#38B2AC',  // Primary color
+    600: '#319795',  // Primary dark
+    700: '#2C7A7B',  // Primary darker
+    800: '#285E61',
+    900: '#234E52',
+  },
+  // Secondary color - Purple
+  purple: {
+    50: '#FAF5FF',
+    100: '#E9D8FD',
+    200: '#D6BCFA',
+    300: '#B794F4',
+    400: '#9F7AEA',
+    500: '#805AD5',  // Secondary color
+    600: '#6B46C1',  // Secondary dark
+    700: '#553C9A',
+    800: '#44337A',
+    900: '#322659',
+  },
+  // Gray scale (используй из Chakra по умолчанию)
+  // white, gray.50, gray.100, ... gray.900, black
+},
+```
+
+**Правила использования цветов:**
+
+✅ **Всегда используй `useColorModeValue` для адаптивной темы:**
+```typescript
+const bgColor = useColorModeValue('white', 'gray.900');
+const textColor = useColorModeValue('gray.800', 'white');
+const borderColor = useColorModeValue('gray.200', 'gray.700');
+```
+
+✅ **Используй цвета из темы через названия:**
+```typescript
+// ✅ ПРАВИЛЬНО
+<Box bg="white" _dark={{ bg: 'gray.900' }}>
+<Text color={useColorModeValue('gray.600', 'gray.400')}>
+<Button colorScheme="teal">
+
+// ❌ НЕПРАВИЛЬНО - не используй hex напрямую
+<Box bg="#ffffff">
+<Text color="#666666">
+```
+
+✅ **Стандартные цветовые схемы компонентов:**
+- **Primary actions**: `colorScheme="teal"`
+- **Secondary actions**: `variant="outline"` с `colorScheme="teal"`
+- **Destructive actions**: `colorScheme="red"`
+- **Success**: `colorScheme="green"`
+- **Warning**: `colorScheme="orange"`
+
+✅ **Бейджи уровней сложности:**
+```typescript
+<Badge variant="beginner">Начинающий</Badge>    // green
+<Badge variant="intermediate">Средний</Badge>   // orange
+<Badge variant="advanced">Продвинутый</Badge>   // red
+```
+
+#### Кнопки
+
+**Унифицированные варианты кнопок в теме:**
+
+У нас есть 5 готовых вариантов кнопок. **ВСЕГДА используй эти варианты** вместо кастомных стилей.
+
+```typescript
+// 1. PRIMARY - основные действия (по умолчанию)
+<Button variant="primary">Основное действие</Button>
+<Button variant="primary" size="lg">Крупная кнопка</Button>
+
+// 2. OUTLINE - вторичные действия
+<Button variant="outline">Вторичное действие</Button>
+
+// 3. SECONDARY - альтернативные действия (GitHub, внешние ссылки)
+<Button variant="secondary">GitHub</Button>
+<Button variant="secondary" leftIcon={<Icon />}>С иконкой</Button>
+
+// 4. GHOST - минимальные действия
+<Button variant="ghost">Отмена</Button>
+
+// 5. HERO - главные CTA в hero-секции
+<Button variant="hero">ПРИЗЫВ К ДЕЙСТВИЮ</Button>
+```
+
+**Размеры:**
+- `size="sm"` - 36px высота (small actions, header)
+- `size="md"` - 40px высота (стандартный размер)
+- `size="lg"` - 48px высота (важные действия, CTA)
+
+**Когда использовать:**
+- **primary**: Главное действие на странице/форме ("Сохранить", "Создать", "Отправить")
+- **outline**: Второстепенные действия ("Отмена", "Назад", "Просмотреть все")
+- **secondary**: Альтернативные платформы/ссылки ("GitHub", "Telegram", внешние ссылки)
+- **ghost**: Минимальные действия, header buttons ("Войти", "Выйти")
+- **hero**: Только для главных CTA в hero-секции
+
+**Примеры:**
+
+```typescript
+// ✅ ПРАВИЛЬНО - использование готовых вариантов
+<Button variant="primary" size="lg">Начать обучение</Button>
+<Button variant="outline">Узнать больше</Button>
+<Button variant="secondary" leftIcon={<FaGithub />}>Star on GitHub</Button>
+
+// ✅ Full-width кнопка в карточке
+<Button variant="primary" size="lg" w="100%">
+  Подробнее
+</Button>
+
+// ❌ НЕПРАВИЛЬНО - не создавай кастомные стили
+<Button
+  bg="teal.500"
+  color="white"
+  px={8}
+  _hover={{ bg: 'teal.600' }}
+>
+  Плохо
+</Button>
+
+// ❌ НЕПРАВИЛЬНО - не используй colorScheme напрямую
+<Button colorScheme="teal">Плохо</Button>
+```
+
+**Важно:**
+- Всегда используй `variant` из темы
+- Не создавай inline стили для кнопок
+- Для специфичных случаев (например, white border на темном фоне) можно добавить минимальные переопределения, но база всегда - вариант из темы
 
 ### Responsive Design
 

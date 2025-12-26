@@ -124,66 +124,13 @@ const popularTopics = [
 
 // Styles
 const styles = {
-  hero: {
-    wrapper: {
-      bgGradient: 'linear(135deg, teal.600 0%, teal.500 25%, purple.500 75%, purple.600 100%)',
-      py: { base: '80px', md: '120px' },
-      textAlign: 'center' as const,
-      px: { base: 4, md: 8 },
-    },
-    heading: {
-      fontFamily: 'heading', // Russo One
-      fontSize: { base: '48px', md: '64px' },
-      fontWeight: 'normal',
-      color: 'white',
-      lineHeight: '1.1',
-      letterSpacing: '1px',
-      textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-      mb: 6,
-    },
-    subtitle: {
-      fontFamily: 'body', // Montserrat
-      fontSize: { base: '18px', md: '20px' },
-      fontWeight: 'normal',
-      color: 'rgba(255,255,255,0.95)',
-      lineHeight: '1.6',
-      mb: 10,
-      maxW: '600px',
-      mx: 'auto',
-    },
-    button: {
-      mb: 10,
-    },
-    stats: {
-      wrapper: {
-        justify: 'center' as const,
-        gap: { base: 3, md: 8 },
-        flexWrap: 'wrap' as const,
-        fontFamily: 'body',
-        fontSize: '14px',
-        color: 'rgba(255,255,255,0.85)',
-      },
-      item: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 2,
-      },
-      icon: {
-        fontSize: '20px',
-      },
-      separator: {
-        display: { base: 'none', md: 'block' },
-        mx: 2,
-      },
-    },
-  },
   latestMaterials: {
     wrapper: {
       py: '80px',
       px: { base: 4, md: 8 },
     },
     heading: {
-      fontFamily: 'heading', // Russo One
+      fontFamily: 'heading', // Montserrat
       fontSize: { base: '40px', md: '48px' },
       textAlign: 'center' as const,
       mb: 12,
@@ -195,90 +142,6 @@ const styles = {
       maxW: '1280px',
       mx: 'auto',
     },
-    card: {
-      bg: 'white',
-      borderWidth: '1px',
-      borderColor: 'gray.200',
-      borderRadius: '12px',
-      p: 5,
-      cursor: 'pointer',
-      transition: 'all 0.2s ease-in-out',
-      _dark: {
-        bg: 'gray.800',
-        borderColor: 'gray.700',
-      },
-      _hover: {
-        borderColor: 'teal.500',
-        boxShadow: '0 8px 24px rgba(49,151,149,0.12)',
-        transform: 'translateY(-4px)',
-      },
-    },
-    badges: {
-      display: 'flex',
-      gap: 2,
-      mb: 3,
-    },
-    title: {
-      fontFamily: 'body',
-      fontWeight: 'bold',
-      fontSize: '20px',
-      color: 'gray.900',
-      _dark: { color: 'white' },
-      my: 3,
-      lineHeight: '1.3',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      display: '-webkit-box',
-      sx: {
-        WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical',
-      },
-    },
-    description: {
-      fontFamily: 'body',
-      fontSize: '14px',
-      color: 'gray.600',
-      _dark: { color: 'gray.400' },
-      lineHeight: '1.5',
-      mb: 4,
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      display: '-webkit-box',
-      sx: {
-        WebkitLineClamp: 3,
-        WebkitBoxOrient: 'vertical',
-      },
-    },
-    meta: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      fontSize: '12px',
-      color: 'gray.500',
-    },
-    ctaWrapper: {
-      display: 'flex',
-      justifyContent: 'center',
-      mt: 12,
-    },
-    ctaButton: {
-      fontFamily: 'body',
-      fontWeight: 'semibold',
-      fontSize: '16px',
-      color: 'teal.600',
-      bg: 'transparent',
-      borderWidth: '2px',
-      borderColor: 'teal.600',
-      px: 8,
-      py: 3,
-      borderRadius: '8px',
-      transition: 'all 0.2s ease',
-      _hover: {
-        bg: 'teal.50',
-        _dark: { bg: 'teal.900' },
-        borderColor: 'teal.700',
-        color: 'teal.700',
-      },
-    },
   },
   popularTopics: {
     wrapper: {
@@ -286,7 +149,7 @@ const styles = {
       px: { base: 4, md: 8 },
     },
     heading: {
-      fontFamily: 'heading', // Russo One
+      fontFamily: 'heading', // Montserrat
       fontSize: '48px',
       textAlign: 'center' as const,
       mb: 12,
@@ -325,118 +188,32 @@ const styles = {
       px: { base: 4, md: 8 },
     },
     heading: {
-      fontFamily: 'heading', // Russo One
+      fontFamily: 'heading', // Montserrat
       fontSize: '48px',
       textAlign: 'center' as const,
       mb: 12,
-    },
-    grid: {
-      columns: { base: 1, md: 2 },
-      gap: 8,
-      maxW: '1000px',
-      mx: 'auto',
-    },
-    card: {
-      p: 8,
-      borderWidth: '2px',
-      borderRadius: '16px',
-      transition: 'all 0.2s ease',
-      _hover: {
-        borderColor: 'teal.500',
-        boxShadow: '0 12px 32px rgba(49,151,149,0.15)',
-      },
-    },
-    levelBadge: {
-      fontFamily: 'body',
-      fontWeight: 'semibold',
-      fontSize: '12px',
-      bg: 'purple.500',
-      color: 'white',
-      px: 4,
-      py: 1.5,
-      borderRadius: '6px',
-      textTransform: 'uppercase' as const,
-      letterSpacing: '0.8px',
-      display: 'inline-block',
-      mb: 5,
-    },
-    title: {
-      fontFamily: 'body',
-      fontWeight: 'bold',
-      fontSize: '28px',
-      lineHeight: '1.2',
-      mb: 4,
-    },
-    description: {
-      fontFamily: 'body',
-      fontSize: '16px',
-      lineHeight: '1.6',
-      mb: 6,
-    },
-    features: {
-      listStyleType: 'none',
-      p: 0,
-      m: 0,
-      mb: 6,
-    },
-    featureItem: {
-      fontFamily: 'body',
-      fontSize: '14px',
-      lineHeight: '2',
-      display: 'flex',
-      alignItems: 'center',
-    },
-    featureIcon: {
-      mr: 2.5,
-      fontSize: '18px',
-      color: 'teal.500',
-    },
-    ctaButton: {
-      fontFamily: 'body',
-      fontWeight: 'semibold',
-      fontSize: '16px',
-      w: '100%',
-      bg: 'teal.500',
-      color: 'white',
-      px: 6,
-      py: 3.5,
-      borderRadius: '8px',
-      transition: 'all 0.2s ease',
-      _hover: {
-        bg: 'teal.600',
-        boxShadow: '0 4px 12px rgba(49,151,149,0.3)',
-      },
-    },
-    ctaWrapper: {
-      display: 'flex',
-      justifyContent: 'center',
-      mt: 12,
-    },
-    viewAllButton: {
-      fontFamily: 'body',
-      fontWeight: 'semibold',
-      fontSize: '16px',
-      color: 'teal.600',
-      bg: 'transparent',
-      borderWidth: '2px',
-      borderColor: 'teal.600',
-      px: 8,
-      py: 3,
-      borderRadius: '8px',
-      transition: 'all 0.2s ease',
-      _hover: {
-        bg: 'teal.50',
-        _dark: { bg: 'teal.900' },
-        borderColor: 'teal.700',
-        color: 'teal.700',
-      },
     },
   },
 } as const;
 
 export const Home = () => {
+  // Section backgrounds
   const sectionBg = useColorModeValue('white', 'gray.900');
   const topicsSectionBg = useColorModeValue('gray.50', 'gray.800');
+
+  // Hero section colors
+  const heroBg = useColorModeValue('white', 'gray.900');
+  const heroHeadingColor = useColorModeValue('gray.900', 'white');
+  const heroSubtitleColor = useColorModeValue('gray.600', 'gray.400');
+  const heroStatsColor = useColorModeValue('gray.600', 'gray.400');
+
+  // Search input colors
+  const searchBg = useColorModeValue('white', 'gray.800');
+  const searchBorderColor = useColorModeValue('gray.300', 'gray.600');
+  const searchPlaceholderColor = useColorModeValue('gray.400', 'gray.500');
+  const searchFocusBorderColor = useColorModeValue('teal.500', 'teal.400');
+
+  // General colors
   const headingColor = useColorModeValue('gray.800', 'white');
   const tagBg = useColorModeValue('white', 'gray.700');
   const tagBorderColor = useColorModeValue('gray.200', 'gray.600');
@@ -446,39 +223,53 @@ export const Home = () => {
   return (
     <VStack spacing={0} align="stretch">
       {/* Hero Section */}
-      <Box {...styles.hero.wrapper}>
+      <Box
+        bg={heroBg}
+        py={{ base: '80px', md: '120px' }}
+        px={{ base: 4, md: 8 }}
+        textAlign="center"
+      >
         <VStack spacing={0}>
-          <Heading {...styles.hero.heading}>
+          <Heading
+            size="4xl"
+            color={heroHeadingColor}
+            lineHeight="1.1"
+            letterSpacing="1px"
+            mb={6}
+          >
             DE LEARNING HUB
           </Heading>
 
-          <Text {...styles.hero.subtitle}>
+          <Text
+            fontSize={{ base: '18px', md: '20px' }}
+            color={heroSubtitleColor}
+            lineHeight="1.6"
+            mb={10}
+            maxW="600px"
+            mx="auto"
+          >
             Открытая база знаний для Data Engineers. Создаётся сообществом, доступна всем бесплатно
           </Text>
 
           {/* Search bar */}
           <InputGroup maxW="600px" mb={6} size="lg">
             <InputLeftElement pointerEvents="none" h="100%">
-              <FaSearch color="rgba(255,255,255,0.6)" />
+              <FaSearch color={searchPlaceholderColor} />
             </InputLeftElement>
             <Input
               placeholder="Поиск по статьям, roadmaps, вопросам..."
-              bg="whiteAlpha.200"
+              bg={searchBg}
               border="2px solid"
-              borderColor="whiteAlpha.300"
-              color="white"
+              borderColor={searchBorderColor}
               h="56px"
               fontSize="16px"
-              _placeholder={{ color: 'whiteAlpha.700' }}
+              _placeholder={{ color: searchPlaceholderColor }}
               _hover={{
-                bg: 'whiteAlpha.300',
-                borderColor: 'whiteAlpha.400',
+                borderColor: 'gray.400',
               }}
               _focus={{
-                bg: 'white',
-                color: 'gray.800',
-                borderColor: 'teal.400',
-                _placeholder: { color: 'gray.400' },
+                borderColor: searchFocusBorderColor,
+                boxShadow: `0 0 0 1px ${searchFocusBorderColor}`,
               }}
               onClick={() => {
                 // TODO: Open search modal or navigate to search page
@@ -499,39 +290,36 @@ export const Home = () => {
               as={RouterLink}
               to="/about"
               variant="outline"
-              color="white"
-              borderColor="white"
-              h="48px"
-              px={8}
-              fontSize="14px"
-              fontWeight="semibold"
-              letterSpacing="0.5px"
-              _hover={{
-                bg: 'whiteAlpha.200',
-                borderColor: 'white',
-              }}
+              size="lg"
             >
               О ПРОЕКТЕ
             </Button>
           </HStack>
 
-          <HStack {...styles.hero.stats.wrapper}>
-            <Box {...styles.hero.stats.item}>
-              <Text {...styles.hero.stats.icon}>📚</Text>
+          <HStack
+            justify="center"
+            gap={{ base: 3, md: 8 }}
+            flexWrap="wrap"
+            fontFamily="body"
+            fontSize="14px"
+            color={heroStatsColor}
+          >
+            <Box display="flex" alignItems="center" gap={2}>
+              <Text fontSize="20px">📚</Text>
               <Text>120+ статей</Text>
             </Box>
 
-            <Text {...styles.hero.stats.separator}>•</Text>
+            <Text display={{ base: 'none', md: 'block' }} mx={2}>•</Text>
 
-            <Box {...styles.hero.stats.item}>
-              <Text {...styles.hero.stats.icon}>📝</Text>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Text fontSize="20px">📝</Text>
               <Text>200+ вопросов</Text>
             </Box>
 
-            <Text {...styles.hero.stats.separator}>•</Text>
+            <Text display={{ base: 'none', md: 'block' }} mx={2}>•</Text>
 
-            <Box {...styles.hero.stats.item}>
-              <Text {...styles.hero.stats.icon}>🚀</Text>
+            <Box display="flex" alignItems="center" gap={2}>
+              <Text fontSize="20px">🚀</Text>
               <Text>5 roadmaps</Text>
             </Box>
           </HStack>
@@ -559,13 +347,14 @@ export const Home = () => {
           ))}
         </SimpleGrid>
 
-        <Box {...styles.latestMaterials.ctaWrapper}>
+        <Box display="flex" justifyContent="center" mt={12}>
           <Button
             as={RouterLink}
             to="/catalog"
-            {...styles.latestMaterials.ctaButton}
+            variant="outline"
+            size="lg"
           >
-            Смотреть материалы
+            Смотреть все материалы
           </Button>
         </Box>
       </Box>
@@ -619,12 +408,9 @@ export const Home = () => {
             <Box
               key={way.id}
               p={8}
-              bgGradient={useColorModeValue(
-                'linear(135deg, teal.50, purple.50)',
-                'linear(135deg, gray.800, gray.700)'
-              )}
+              bg={useColorModeValue('white', 'gray.800')}
               borderWidth="2px"
-              borderColor={useColorModeValue('teal.200', 'teal.700')}
+              borderColor={useColorModeValue('gray.200', 'gray.700')}
               borderRadius="16px"
               transition="all 0.2s ease"
               _hover={{
@@ -656,19 +442,9 @@ export const Home = () => {
                 href={way.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                variant="primary"
+                size="lg"
                 w="100%"
-                bg="teal.500"
-                color="white"
-                fontWeight="semibold"
-                fontSize="16px"
-                px={6}
-                py={3.5}
-                borderRadius="8px"
-                transition="all 0.2s ease"
-                _hover={{
-                  bg: 'teal.600',
-                  boxShadow: '0 4px 12px rgba(49,151,149,0.3)',
-                }}
               >
                 {way.action}
               </Button>
@@ -676,33 +452,15 @@ export const Home = () => {
           ))}
         </SimpleGrid>
 
-        <Box {...styles.roadmaps.ctaWrapper}>
+        <Box display="flex" justifyContent="center" mt={12}>
           <Button
             as="a"
             href="https://github.com/de-learning-hub"
             target="_blank"
             rel="noopener noreferrer"
-            fontFamily="body"
-            fontWeight="semibold"
-            fontSize="16px"
-            bg="gray.800"
-            color="white"
-            px={8}
-            py={3}
-            borderRadius="8px"
-            transition="all 0.2s ease"
+            variant="secondary"
+            size="lg"
             leftIcon={<Text fontSize="20px">⭐</Text>}
-            _hover={{
-              bg: 'gray.900',
-              transform: 'translateY(-2px)',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-            }}
-            _dark={{
-              bg: 'whiteAlpha.200',
-              _hover: {
-                bg: 'whiteAlpha.300',
-              },
-            }}
           >
             Contribute on GitHub
           </Button>

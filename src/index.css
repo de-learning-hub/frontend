@@ -1,8 +1,5 @@
-/* Import Montserrat with multiple weights for versatility */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-
-/* Import Russo One for accent/display typography */
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+/* Import Montserrat with weights used in the project: 400, 500, 600, 700 */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 /* Minimal global styles - Chakra UI handles most styling */
 body {

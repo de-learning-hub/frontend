@@ -76,8 +76,9 @@ const styles = {
       position: 'relative' as const,
     },
     logoText: {
-      fontFamily: 'heading', // Russo One
+      fontFamily: 'heading', // Montserrat
       fontSize: '20px',
+      fontWeight: 'bold', // Bold (700) для логотипа
       color: 'white',
       ml: 3,
       letterSpacing: '1px',
@@ -411,13 +412,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
               {/* Login Button (Desktop only) */}
               <Button
-                variant="outline"
+                variant="ghost"
+                size="sm"
                 color="white"
+                borderWidth="1px"
                 borderColor="white"
-                h="36px"
-                px={4}
-                fontSize="sm"
-                fontWeight="medium"
                 display={{ base: 'none', md: 'flex' }}
                 _hover={{
                   bg: 'whiteAlpha.200',

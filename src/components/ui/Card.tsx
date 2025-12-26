@@ -127,22 +127,6 @@ const styles = {
     fontSize: '13px',
     mt: 'auto',
   },
-  ctaButton: {
-    fontFamily: 'body',
-    fontWeight: 'semibold',
-    fontSize: '16px',
-    w: '100%',
-    bg: 'teal.500',
-    color: 'white',
-    px: 6,
-    py: 3.5,
-    borderRadius: '8px',
-    transition: 'all 0.2s ease',
-    _hover: {
-      bg: 'teal.600',
-      boxShadow: '0 4px 12px rgba(49,151,149,0.3)',
-    },
-  },
 } as const;
 
 /**
@@ -210,7 +194,9 @@ export const Card: React.FC<CardProps> = ({
           <Button
             as={RouterLink}
             to={ctaLink}
-            {...styles.ctaButton}
+            variant="primary"
+            size="lg"
+            w="100%"
           >
             {ctaText}
           </Button>
