@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
+import { IoLibrary, IoDocument, IoRocket, IoMap, IoBriefcase, IoCreate, IoConstruct, IoMegaphone, IoStar } from 'react-icons/io5';
 import { Card } from '@/components/ui';
 
 // Mock data for latest materials
@@ -103,7 +104,7 @@ const latestMaterials = [
 const contributionWays = [
   {
     id: 1,
-    icon: '✍️',
+    icon: 'create',
     title: 'Добавь статью',
     description: 'Поделись своими знаниями и опытом. Напиши статью о технологии, которую хорошо знаешь',
     action: 'Написать статью',
@@ -111,7 +112,7 @@ const contributionWays = [
   },
   {
     id: 2,
-    icon: '🔧',
+    icon: 'construct',
     title: 'Улучши материал',
     description: 'Заметил ошибку или неточность? Дополни существующий материал своим опытом',
     action: 'Предложить улучшение',
@@ -119,7 +120,7 @@ const contributionWays = [
   },
   {
     id: 3,
-    icon: '📢',
+    icon: 'megaphone',
     title: 'Поделись проектом',
     description: 'Расскажи коллегам о проекте. Чем больше нас, тем качественнее база знаний',
     action: 'Поделиться',
@@ -213,6 +214,21 @@ const styles = {
     },
   },
 } as const;
+
+// Icon mapper for contribution cards
+const getContributionIcon = (iconName: string) => {
+  const iconProps = { fontSize: '48px', mb: 4 };
+  switch (iconName) {
+    case 'create':
+      return <IoCreate {...iconProps} />;
+    case 'construct':
+      return <IoConstruct {...iconProps} />;
+    case 'megaphone':
+      return <IoMegaphone {...iconProps} />;
+    default:
+      return null;
+  }
+};
 
 export const Home = () => {
   // Section backgrounds - soft off-white instead of pure white
@@ -310,7 +326,7 @@ export const Home = () => {
               to="/catalog"
               variant="outline"
               size="md"
-              leftIcon={<Text fontSize="18px">📚</Text>}
+              leftIcon={<IoLibrary />}
             >
               Материалы
             </Button>
@@ -319,7 +335,7 @@ export const Home = () => {
               to="/roadmaps"
               variant="outline"
               size="md"
-              leftIcon={<Text fontSize="18px">🗺️</Text>}
+              leftIcon={<IoMap />}
             >
               Roadmaps
             </Button>
@@ -328,7 +344,7 @@ export const Home = () => {
               to="/interview"
               variant="outline"
               size="md"
-              leftIcon={<Text fontSize="18px">💼</Text>}
+              leftIcon={<IoBriefcase />}
             >
               Собесы
             </Button>
@@ -344,21 +360,21 @@ export const Home = () => {
             color={heroStatsColor}
           >
             <Box display="flex" alignItems="center" gap={2}>
-              <Text fontSize="20px">📚</Text>
+              <IoLibrary fontSize="18px" />
               <Text>120+ статей</Text>
             </Box>
 
             <Text display={{ base: 'none', md: 'block' }} mx={2}>•</Text>
 
             <Box display="flex" alignItems="center" gap={2}>
-              <Text fontSize="20px">📝</Text>
+              <IoDocument fontSize="18px" />
               <Text>200+ вопросов</Text>
             </Box>
 
             <Text display={{ base: 'none', md: 'block' }} mx={2}>•</Text>
 
             <Box display="flex" alignItems="center" gap={2}>
-              <Text fontSize="20px">🚀</Text>
+              <IoRocket fontSize="18px" />
               <Text>5 roadmaps</Text>
             </Box>
           </HStack>
@@ -463,7 +479,7 @@ export const Home = () => {
                 transform: 'translateY(-4px)',
               }}
             >
-              <Text fontSize="48px" mb={4}>{way.icon}</Text>
+              {getContributionIcon(way.icon)}
               <Heading
                 as="h3"
                 fontSize="24px"
@@ -504,7 +520,7 @@ export const Home = () => {
             rel="noopener noreferrer"
             variant="secondary"
             size="lg"
-            leftIcon={<Text fontSize="20px">⭐</Text>}
+            leftIcon={<IoStar />}
           >
             Contribute on GitHub
           </Button>
