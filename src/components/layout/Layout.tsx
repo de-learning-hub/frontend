@@ -453,7 +453,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Container {...styles.footer.container}>
           <Flex {...styles.footer.flex}>
             <Text {...styles.footer.text}>
-              © {new Date().getFullYear()} Pipecraft. Мастерство Data Engineering
+              © {new Date().getFullYear()} Pipecraft. База знаний по Data Engineering
             </Text>
             <HStack {...styles.footer.links}>
               <ChakraLink

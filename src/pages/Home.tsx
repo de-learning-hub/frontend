@@ -258,7 +258,7 @@ export const Home = () => {
             maxW="600px"
             mx="auto"
           >
-            Мастерство Data Engineering. Roadmaps, статьи и подготовка к собесам
+            База знаний по Data Engineering: статьи, roadmaps, собеседования
           </Text>
 
           {/* Stats - social proof */}
