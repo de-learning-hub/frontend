@@ -64,13 +64,14 @@ const styles = {
     justifyContent: 'space-between',
   },
   rightHeader: {
-    fontSize: 'lg',
-    fontWeight: 'bold',
-    mb: 2,
+    fontSize: 'sm',
+    fontWeight: 'semibold',
+    mb: 1,
   },
   rightDescription: {
-    fontSize: 'sm',
-    mb: 4,
+    fontSize: 'xs',
+    mb: 3,
+    lineHeight: '1.5',
   },
   topicsList: {
     spacing: 1,
