@@ -259,9 +259,10 @@ export const Home = () => {
           </Heading>
 
           <Text
-            fontSize={{ base: '18px', md: '20px' }}
+            fontSize={{ base: '20px', md: '22px' }}
+            fontWeight="medium"
             color={heroSubtitleColor}
-            lineHeight="1.6"
+            lineHeight="1.7"
             mb={10}
             maxW="600px"
             mx="auto"
