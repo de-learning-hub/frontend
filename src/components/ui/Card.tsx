@@ -1,5 +1,6 @@
 import { Box, Badge, Heading, Text, VStack, Button, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
+import { IoTimeOutline, IoEyeOutline, IoHeartOutline, IoThumbsDownOutline, IoChatbubbleOutline, IoBookmarkOutline } from 'react-icons/io5';
 
 // Types
 interface Feature {
@@ -270,43 +271,42 @@ export const Card: React.FC<CardProps> = ({
           <Box {...styles.metricsInfo} color={metaColor}>
             {readingTime && (
               <Box {...styles.metricItem}>
-                <Text>⏱</Text>
-                <Text>{readingTime} чтения</Text>
+                <IoTimeOutline />
+                <Text>{readingTime}</Text>
               </Box>
             )}
             {views !== undefined && (
               <Box {...styles.metricItem}>
-                <Text>👁️</Text>
+                <IoEyeOutline />
                 <Text>{views >= 1000 ? `${(views / 1000).toFixed(1)}k` : views}</Text>
               </Box>
             )}
           </Box>
         )}
 
-        {/* Actions row: likes, dislikes, share, comments */}
+        {/* Actions row: likes, dislikes, comments, bookmarks */}
         {(likes !== undefined || dislikes !== undefined || comments !== undefined) && (
           <Box {...styles.metricsActions} color={metaColor}>
             {likes !== undefined && (
-              <Box {...styles.metricItem} cursor="pointer" _hover={{ color: 'red.500' }}>
-                <Text>❤️</Text>
+              <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+                <IoHeartOutline />
                 <Text>{likes}</Text>
               </Box>
             )}
             {dislikes !== undefined && (
-              <Box {...styles.metricItem} cursor="pointer" _hover={{ color: 'gray.600' }}>
-                <Text>👎</Text>
+              <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+                <IoThumbsDownOutline />
                 <Text>{dislikes}</Text>
               </Box>
             )}
             {comments !== undefined && (
-              <Box {...styles.metricItem} cursor="pointer" _hover={{ color: 'teal.500' }}>
-                <Text>💬</Text>
+              <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+                <IoChatbubbleOutline />
                 <Text>{comments}</Text>
               </Box>
             )}
-            <Box {...styles.metricItem} cursor="pointer" _hover={{ color: 'teal.500' }}>
-              <Text>🔖</Text>
-              <Text fontSize="xs">В закладки</Text>
+            <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+              <IoBookmarkOutline />
             </Box>
           </Box>
         )}
