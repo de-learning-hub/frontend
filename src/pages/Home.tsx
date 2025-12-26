@@ -5,7 +5,6 @@ import {
   Text,
   VStack,
   HStack,
-  SimpleGrid,
   Flex,
   Tag,
   Input,
@@ -135,12 +134,6 @@ const styles = {
       textAlign: 'center' as const,
       mb: 12,
       letterSpacing: '0.5px',
-    },
-    grid: {
-      columns: { base: 1, md: 2, lg: 3 },
-      gap: 6,
-      maxW: '1280px',
-      mx: 'auto',
     },
   },
   popularTopics: {
@@ -352,7 +345,8 @@ export const Home = () => {
           Последние материалы
         </Heading>
 
-        <SimpleGrid {...styles.latestMaterials.grid}>
+        {/* Single column layout like DEV.to */}
+        <VStack spacing={4} align="stretch" maxW="800px" mx="auto">
           {latestMaterials.map((material) => (
             <Card
               key={material.id}
@@ -365,7 +359,7 @@ export const Home = () => {
               readingTime={material.readingTime}
             />
           ))}
-        </SimpleGrid>
+        </VStack>
 
         <Box display="flex" justifyContent="center" mt={12}>
           <Button

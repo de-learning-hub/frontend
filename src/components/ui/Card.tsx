@@ -60,7 +60,7 @@ const styles = {
   badges: {
     display: 'flex',
     gap: 2,
-    mb: 4, // 16px spacing to title (recommended for related components)
+    mb: 3, // 12px spacing to description below
   },
   title: {
     fontFamily: 'body',
@@ -71,10 +71,10 @@ const styles = {
   },
   materialTitle: {
     fontFamily: 'body',
-    fontWeight: 'semibold',
-    fontSize: 'lg', // 18px
-    lineHeight: '1.25', // tighter line-height like Hashnode
-    mb: 2, // 8px spacing to description (related elements)
+    fontWeight: 'bold', // 700 - dominant like DEV.to
+    fontSize: 'xl', // 20px - larger, more prominent
+    lineHeight: '1.3', // slightly relaxed for larger size
+    mb: 3, // 12px spacing to tags below
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     display: '-webkit-box',
@@ -201,7 +201,7 @@ export const Card: React.FC<CardProps> = ({
     );
   }
 
-  // Material card variant
+  // Material card variant - DEV.to style
   return (
     <Box
       bg={cardBg}
@@ -211,6 +211,19 @@ export const Card: React.FC<CardProps> = ({
       display="flex"
       flexDirection="column"
     >
+      {/* Date at top (like DEV.to author section) */}
+      {date && (
+        <Text fontSize="sm" color={metaColor} mb={3}>
+          {date}
+        </Text>
+      )}
+
+      {/* Title - large and dominant like DEV.to */}
+      <Heading as="h2" color={titleColor} {...styles.materialTitle}>
+        {title}
+      </Heading>
+
+      {/* Tags after title (DEV.to pattern) */}
       {(techTag || level) && (
         <Box {...styles.badges}>
           {techTag && <Badge variant="solid">{techTag}</Badge>}
@@ -218,19 +231,16 @@ export const Card: React.FC<CardProps> = ({
         </Box>
       )}
 
-      <Heading as="h3" color={titleColor} {...styles.materialTitle}>
-        {title}
-      </Heading>
-
+      {/* Description */}
       <Text color={descColor} {...styles.materialDescription}>
         {description}
       </Text>
 
-      {(date || readingTime) && (
-        <Box color={metaColor} {...styles.meta}>
-          {date && <Text>📅 {date}</Text>}
-          {readingTime && <Text>⏱ {readingTime} чтения</Text>}
-        </Box>
+      {/* Reading time at bottom */}
+      {readingTime && (
+        <Text fontSize="sm" color={metaColor} mt="auto">
+          ⏱ {readingTime} чтения
+        </Text>
       )}
     </Box>
   );
