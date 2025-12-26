@@ -732,6 +732,82 @@ export const Card: React.FC<CardProps> = ({ isHighlighted, customWidth }) => {
 };
 ```
 
+### Spacing Patterns & Best Practices
+
+**Based on research from popular knowledge bases (Hashnode, DEV.to, Medium):**
+
+#### Spacing Rules
+
+Use consistent spacing to create visual hierarchy and improve readability:
+
+```typescript
+// ✅ CORRECT spacing patterns
+const styles = {
+  card: {
+    p: 6,              // 24px - container padding
+    borderRadius: '2xl', // 16px - soft corners like modern platforms
+  },
+  badges: {
+    gap: 2,           // 8px - gap between badges
+    mb: 4,            // 16px - spacing to next component
+  },
+  title: {
+    mb: 2,            // 8px - spacing to related element (description)
+    lineHeight: '1.25', // Tight line-height for headings
+  },
+  description: {
+    lineHeight: '1.625', // 1.5-1.625x font size for readability
+    mb: 5,             // 20px - spacing to next section
+  },
+  meta: {
+    fontSize: '14px',   // Standard metadata size
+    mt: 'auto',        // Push to bottom with flexbox
+  },
+} as const;
+```
+
+**Spacing Guidelines:**
+- **8px (mb: 2)** - Closely related elements (title → description)
+- **16px (mb: 4)** - Related components (badges → title, description → meta)
+- **24px (p: 6)** - Card/container padding
+- **Line-height:**
+  - Headings: `1.25` (tight)
+  - Body text: `1.5-1.625` (readable)
+  - Paragraph spacing: 30-50% of line-height
+
+**Typography Best Practices:**
+```typescript
+// ✅ Card typography patterns
+materialTitle: {
+  fontSize: 'lg',        // 18px - scannable size
+  fontWeight: 'semibold', // 600 - clear hierarchy
+  lineHeight: '1.25',     // Tight for headings
+  mb: 2,                 // 8px to description
+},
+materialDescription: {
+  fontSize: '15px',      // 14-16px range
+  lineHeight: '1.625',   // 1.5-1.625x for readability
+  mb: 5,                 // 20px spacing
+},
+meta: {
+  fontSize: '14px',      // Standard metadata
+  color: 'gray.500',     // Subtle, secondary info
+}
+```
+
+**Badge/Tag Styling:**
+```typescript
+Badge: {
+  baseStyle: {
+    fontSize: 'xs',        // 12px
+    fontWeight: 'medium',   // 500
+    borderRadius: 'full',   // Pill shape (modern pattern)
+    px: 3,                 // 12px horizontal padding
+    py: 1,                 // 4px vertical padding
+  }
+}
+```
+
 ### Theme Customization
 
 **Наша тема в `src/theme/index.ts` настроена со следующими параметрами:**
