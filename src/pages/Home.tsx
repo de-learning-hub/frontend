@@ -242,10 +242,7 @@ export const Home = () => {
     <VStack spacing={0} align="stretch">
       {/* Hero Section */}
       <Box
-        bgGradient={useColorModeValue(
-          'radial(white 0%, gray.50 100%)',
-          'radial(gray.900 0%, gray.900 100%)'
-        )}
+        bg={heroBg}
         py={{ base: '80px', md: '120px' }}
         px={{ base: 4, md: 8 }}
         textAlign="center"
