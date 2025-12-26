@@ -279,15 +279,45 @@ export const Home = () => {
             fontWeight="medium"
             color={heroSubtitleColor}
             lineHeight="1.3"
-            mb={10}
+            mb={6}
             maxW="600px"
             mx="auto"
           >
             Открытая база знаний для Data Engineers. Создаётся сообществом, доступна всем бесплатно
           </Text>
 
+          {/* Stats - social proof */}
+          <HStack
+            justify="center"
+            gap={{ base: 3, md: 6 }}
+            flexWrap="wrap"
+            fontFamily="body"
+            fontSize="sm"
+            color={heroStatsColor}
+            mb={6}
+          >
+            <Box display="flex" alignItems="center" gap={1.5}>
+              <IoLibrary fontSize="16px" />
+              <Text>120+ статей</Text>
+            </Box>
+
+            <Text display={{ base: 'none', md: 'block' }}>•</Text>
+
+            <Box display="flex" alignItems="center" gap={1.5}>
+              <IoDocument fontSize="16px" />
+              <Text>200+ вопросов</Text>
+            </Box>
+
+            <Text display={{ base: 'none', md: 'block' }}>•</Text>
+
+            <Box display="flex" alignItems="center" gap={1.5}>
+              <IoRocket fontSize="16px" />
+              <Text>5 roadmaps</Text>
+            </Box>
+          </HStack>
+
           {/* Search bar */}
-          <InputGroup maxW="600px" mb={8} size="lg">
+          <InputGroup maxW="600px" mb={16} size="lg">
             <InputLeftElement pointerEvents="none" h="100%">
               <FaSearch color={searchPlaceholderColor} />
             </InputLeftElement>
@@ -320,7 +350,7 @@ export const Home = () => {
           >
             Или начните с:
           </Text>
-          <HStack spacing={4} mb={12}>
+          <HStack spacing={4}>
             <Button
               as={RouterLink}
               to="/catalog"
@@ -348,35 +378,6 @@ export const Home = () => {
             >
               Собесы
             </Button>
-          </HStack>
-
-          {/* Stats */}
-          <HStack
-            justify="center"
-            gap={{ base: 3, md: 8 }}
-            flexWrap="wrap"
-            fontFamily="body"
-            fontSize="14px"
-            color={heroStatsColor}
-          >
-            <Box display="flex" alignItems="center" gap={2}>
-              <IoLibrary fontSize="18px" />
-              <Text>120+ статей</Text>
-            </Box>
-
-            <Text display={{ base: 'none', md: 'block' }} mx={2}>•</Text>
-
-            <Box display="flex" alignItems="center" gap={2}>
-              <IoDocument fontSize="18px" />
-              <Text>200+ вопросов</Text>
-            </Box>
-
-            <Text display={{ base: 'none', md: 'block' }} mx={2}>•</Text>
-
-            <Box display="flex" alignItems="center" gap={2}>
-              <IoRocket fontSize="18px" />
-              <Text>5 roadmaps</Text>
-            </Box>
           </HStack>
         </VStack>
       </Box>
