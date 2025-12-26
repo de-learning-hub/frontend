@@ -1,6 +1,6 @@
 import { Box, Badge, Heading, Text, VStack, Button, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { IoTime, IoEye, IoThumbsUp, IoThumbsDown, IoChatbubble, IoBookmark } from 'react-icons/io5';
+import { IoTime, IoEye, IoChatbubble, IoBookmark, IoShareSocial } from 'react-icons/io5';
 
 // Types
 interface Feature {
@@ -21,8 +21,6 @@ interface CardProps {
   date?: string;
   readingTime?: string;
   views?: number;
-  likes?: number;
-  dislikes?: number;
   comments?: number;
 
   // Roadmap card props
@@ -165,8 +163,6 @@ export const Card: React.FC<CardProps> = ({
   date,
   readingTime,
   views,
-  likes,
-  dislikes,
   comments,
   levelBadge,
   features,
@@ -284,29 +280,18 @@ export const Card: React.FC<CardProps> = ({
         {description}
       </Text>
 
-      {/* Actions footer: likes, dislikes, comments, bookmarks */}
-      {(likes !== undefined || dislikes !== undefined || comments !== undefined) && (
+      {/* Actions footer: comments, bookmarks, share */}
+      {comments !== undefined && (
         <Box {...styles.metricsActions} color={metaColor} mt="auto">
-          {likes !== undefined && (
-            <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-              <IoThumbsUp />
-              <Text>{likes}</Text>
-            </Box>
-          )}
-          {dislikes !== undefined && (
-            <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-              <IoThumbsDown />
-              <Text>{dislikes}</Text>
-            </Box>
-          )}
-          {comments !== undefined && (
-            <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
-              <IoChatbubble />
-              <Text>{comments}</Text>
-            </Box>
-          )}
+          <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+            <IoChatbubble />
+            <Text>{comments}</Text>
+          </Box>
           <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
             <IoBookmark />
+          </Box>
+          <Box {...styles.metricItem} cursor="pointer" _hover={{ opacity: 0.7 }}>
+            <IoShareSocial />
           </Box>
         </Box>
       )}

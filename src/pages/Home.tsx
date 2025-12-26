@@ -35,8 +35,6 @@ const latestMaterials = [
     date: '24 дек 2024',
     readingTime: '8 мин',
     views: 1243,
-    likes: 45,
-    dislikes: 2,
     comments: 12,
   },
   {
@@ -48,8 +46,6 @@ const latestMaterials = [
     date: '22 дек 2024',
     readingTime: '12 мин',
     views: 2856,
-    likes: 128,
-    dislikes: 5,
     comments: 34,
   },
   {
@@ -61,48 +57,7 @@ const latestMaterials = [
     date: '20 дек 2024',
     readingTime: '15 мин',
     views: 1567,
-    likes: 67,
-    dislikes: 3,
     comments: 18,
-  },
-  {
-    id: 4,
-    title: 'Docker для Data Engineer',
-    description: 'Изучаем Docker с нуля: контейнеризация приложений, создание образов, docker-compose для локальной разработки data pipelines.',
-    techTag: 'Docker',
-    level: 'beginner',
-    date: '18 дек 2024',
-    readingTime: '10 мин',
-    views: 3421,
-    likes: 156,
-    dislikes: 8,
-    comments: 45,
-  },
-  {
-    id: 5,
-    title: 'Оптимизация Spark Jobs',
-    description: 'Продвинутые техники оптимизации Apache Spark приложений: партиционирование, кэширование, broadcast joins и настройка ресурсов.',
-    techTag: 'Spark',
-    level: 'advanced',
-    date: '15 дек 2024',
-    readingTime: '20 мин',
-    views: 892,
-    likes: 34,
-    dislikes: 1,
-    comments: 9,
-  },
-  {
-    id: 6,
-    title: 'PostgreSQL Performance Tuning',
-    description: 'Глубокое погружение в настройку производительности PostgreSQL: индексы, vacuum, analyze, query планы и конфигурация памяти.',
-    techTag: 'PostgreSQL',
-    level: 'intermediate',
-    date: '12 дек 2024',
-    readingTime: '18 мин',
-    views: 1789,
-    likes: 89,
-    dislikes: 4,
-    comments: 23,
   },
 ];
 
@@ -420,8 +375,6 @@ export const Home = () => {
               date={material.date}
               readingTime={material.readingTime}
               views={material.views}
-              likes={material.likes}
-              dislikes={material.dislikes}
               comments={material.comments}
             />
           ))}
