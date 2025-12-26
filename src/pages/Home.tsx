@@ -27,6 +27,10 @@ const latestMaterials = [
     level: 'beginner',
     date: '24 дек 2024',
     readingTime: '8 мин',
+    views: 1243,
+    likes: 45,
+    dislikes: 2,
+    comments: 12,
   },
   {
     id: 2,
@@ -36,6 +40,10 @@ const latestMaterials = [
     level: 'beginner',
     date: '22 дек 2024',
     readingTime: '12 мин',
+    views: 2856,
+    likes: 128,
+    dislikes: 5,
+    comments: 34,
   },
   {
     id: 3,
@@ -45,6 +53,10 @@ const latestMaterials = [
     level: 'intermediate',
     date: '20 дек 2024',
     readingTime: '15 мин',
+    views: 1567,
+    likes: 67,
+    dislikes: 3,
+    comments: 18,
   },
   {
     id: 4,
@@ -54,6 +66,10 @@ const latestMaterials = [
     level: 'beginner',
     date: '18 дек 2024',
     readingTime: '10 мин',
+    views: 3421,
+    likes: 156,
+    dislikes: 8,
+    comments: 45,
   },
   {
     id: 5,
@@ -63,6 +79,10 @@ const latestMaterials = [
     level: 'advanced',
     date: '15 дек 2024',
     readingTime: '20 мин',
+    views: 892,
+    likes: 34,
+    dislikes: 1,
+    comments: 9,
   },
   {
     id: 6,
@@ -72,6 +92,10 @@ const latestMaterials = [
     level: 'intermediate',
     date: '12 дек 2024',
     readingTime: '18 мин',
+    views: 1789,
+    likes: 89,
+    dislikes: 4,
+    comments: 23,
   },
 ];
 
@@ -358,6 +382,10 @@ export const Home = () => {
               level={material.level}
               date={material.date}
               readingTime={material.readingTime}
+              views={material.views}
+              likes={material.likes}
+              dislikes={material.dislikes}
+              comments={material.comments}
             />
           ))}
         </VStack>

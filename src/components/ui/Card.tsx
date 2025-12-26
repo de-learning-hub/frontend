@@ -19,6 +19,10 @@ interface CardProps {
   level?: string;
   date?: string;
   readingTime?: string;
+  views?: number;
+  likes?: number;
+  dislikes?: number;
+  comments?: number;
 
   // Roadmap card props
   levelBadge?: string;
@@ -126,6 +130,25 @@ const styles = {
     fontSize: '14px', // 0.875rem like Hashnode metadata
     mt: 'auto',
   },
+  // Habr-style metrics footer
+  metricsInfo: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 3, // 12px
+    fontSize: 'sm', // 14px
+    mb: 2, // 8px
+  },
+  metricsActions: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 4, // 16px
+    fontSize: 'sm', // 14px
+  },
+  metricItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 1, // 4px
+  },
 } as const;
 
 /**
@@ -140,6 +163,10 @@ export const Card: React.FC<CardProps> = ({
   level,
   date,
   readingTime,
+  views,
+  likes,
+  dislikes,
+  comments,
   levelBadge,
   features,
   ctaText,
@@ -236,12 +263,54 @@ export const Card: React.FC<CardProps> = ({
         {description}
       </Text>
 
-      {/* Reading time at bottom */}
-      {readingTime && (
-        <Text fontSize="sm" color={metaColor} mt="auto">
-          ⏱ {readingTime} чтения
-        </Text>
-      )}
+      {/* Metrics footer - Habr style */}
+      <Box mt="auto">
+        {/* Info row: reading time & views */}
+        {(readingTime || views) && (
+          <Box {...styles.metricsInfo} color={metaColor}>
+            {readingTime && (
+              <Box {...styles.metricItem}>
+                <Text>⏱</Text>
+                <Text>{readingTime} чтения</Text>
+              </Box>
+            )}
+            {views !== undefined && (
+              <Box {...styles.metricItem}>
+                <Text>👁️</Text>
+                <Text>{views >= 1000 ? `${(views / 1000).toFixed(1)}k` : views}</Text>
+              </Box>
+            )}
+          </Box>
+        )}
+
+        {/* Actions row: likes, dislikes, share, comments */}
+        {(likes !== undefined || dislikes !== undefined || comments !== undefined) && (
+          <Box {...styles.metricsActions} color={metaColor}>
+            {likes !== undefined && (
+              <Box {...styles.metricItem} cursor="pointer" _hover={{ color: 'red.500' }}>
+                <Text>❤️</Text>
+                <Text>{likes}</Text>
+              </Box>
+            )}
+            {dislikes !== undefined && (
+              <Box {...styles.metricItem} cursor="pointer" _hover={{ color: 'gray.600' }}>
+                <Text>👎</Text>
+                <Text>{dislikes}</Text>
+              </Box>
+            )}
+            {comments !== undefined && (
+              <Box {...styles.metricItem} cursor="pointer" _hover={{ color: 'teal.500' }}>
+                <Text>💬</Text>
+                <Text>{comments}</Text>
+              </Box>
+            )}
+            <Box {...styles.metricItem} cursor="pointer" _hover={{ color: 'teal.500' }}>
+              <Text>🔖</Text>
+              <Text fontSize="xs">В закладки</Text>
+            </Box>
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };
