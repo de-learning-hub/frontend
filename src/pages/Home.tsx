@@ -11,12 +11,18 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
-import { IoLibrary, IoDocument, IoRocket, IoMap, IoBriefcase, IoCreate, IoConstruct, IoMegaphone, IoStar } from 'react-icons/io5';
+import { FaSearch, FaChevronDown } from 'react-icons/fa';
+import { IoLibrary, IoDocument, IoRocket, IoCreate, IoConstruct, IoMegaphone, IoStar } from 'react-icons/io5';
 import { Card } from '@/components/ui';
+import { useState } from 'react';
 
 // Mock data for latest materials
 const latestMaterials = [
@@ -231,6 +237,9 @@ const getContributionIcon = (iconName: string) => {
 };
 
 export const Home = () => {
+  // Search filter state
+  const [searchFilter, setSearchFilter] = useState('all');
+
   // Section backgrounds - soft off-white instead of pure white
   const sectionBg = useColorModeValue('gray.50', 'gray.900');
   const topicsSectionBg = useColorModeValue('white', 'gray.800');
@@ -253,6 +262,20 @@ export const Home = () => {
   const tagBorderColor = useColorModeValue('gray.200', 'gray.600');
   const tagColor = useColorModeValue('gray.700', 'gray.200');
   const tagCountColor = useColorModeValue('gray.500', 'gray.400');
+
+  // Get filter label
+  const getFilterLabel = () => {
+    switch (searchFilter) {
+      case 'materials':
+        return 'Материалы';
+      case 'roadmaps':
+        return 'Roadmaps';
+      case 'interviews':
+        return 'Собесы';
+      default:
+        return 'Всё';
+    }
+  };
 
   return (
     <VStack spacing={0} align="stretch">
@@ -316,9 +339,9 @@ export const Home = () => {
             </Box>
           </HStack>
 
-          {/* Search bar */}
-          <InputGroup maxW="600px" mb={16} size="lg">
-            <InputLeftElement pointerEvents="none" h="100%">
+          {/* Search bar with integrated filter */}
+          <InputGroup maxW="600px" size="lg">
+            <InputLeftElement pointerEvents="none" h="56px">
               <FaSearch color={searchPlaceholderColor} />
             </InputLeftElement>
             <Input
@@ -328,6 +351,7 @@ export const Home = () => {
               borderColor={searchBorderColor}
               h="56px"
               fontSize="16px"
+              pr="140px" // Space for filter dropdown
               _placeholder={{ color: searchPlaceholderColor }}
               _hover={{
                 borderColor: 'gray.400',
@@ -340,45 +364,40 @@ export const Home = () => {
                 // TODO: Open search modal or navigate to search page
               }}
             />
+            <InputRightElement h="56px" w="auto" pr={2}>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  variant="ghost"
+                  size="sm"
+                  rightIcon={<FaChevronDown />}
+                  fontWeight="medium"
+                  fontSize="14px"
+                  h="40px"
+                  px={3}
+                  _hover={{
+                    bg: useColorModeValue('gray.100', 'gray.700'),
+                  }}
+                >
+                  {getFilterLabel()}
+                </MenuButton>
+                <MenuList>
+                  <MenuItem onClick={() => setSearchFilter('all')}>
+                    Всё
+                  </MenuItem>
+                  <MenuItem onClick={() => setSearchFilter('materials')}>
+                    Материалы
+                  </MenuItem>
+                  <MenuItem onClick={() => setSearchFilter('roadmaps')}>
+                    Roadmaps
+                  </MenuItem>
+                  <MenuItem onClick={() => setSearchFilter('interviews')}>
+                    Собесы
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </InputRightElement>
           </InputGroup>
-
-          {/* Quick Links */}
-          <Text
-            fontSize="sm"
-            color={heroSubtitleColor}
-            mb={4}
-          >
-            Или начните с:
-          </Text>
-          <HStack spacing={4}>
-            <Button
-              as={RouterLink}
-              to="/catalog"
-              variant="outline"
-              size="md"
-              leftIcon={<IoLibrary />}
-            >
-              Материалы
-            </Button>
-            <Button
-              as={RouterLink}
-              to="/roadmaps"
-              variant="outline"
-              size="md"
-              leftIcon={<IoMap />}
-            >
-              Roadmaps
-            </Button>
-            <Button
-              as={RouterLink}
-              to="/interview"
-              variant="outline"
-              size="md"
-              leftIcon={<IoBriefcase />}
-            >
-              Собесы
-            </Button>
-          </HStack>
         </VStack>
       </Box>
 
