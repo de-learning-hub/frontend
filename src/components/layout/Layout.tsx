@@ -453,11 +453,11 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Container {...styles.footer.container}>
           <Flex {...styles.footer.flex}>
             <Text {...styles.footer.text}>
-              © {new Date().getFullYear()} DE Learning Hub. Открытая база знаний для Data Engineers
+              © {new Date().getFullYear()} Pipecraft. Мастерство Data Engineering
             </Text>
             <HStack {...styles.footer.links}>
               <ChakraLink
-                href="https://github.com/de-learning-hub"
+                href="https://github.com/pipecraft-net/pipecraft"
                 isExternal
                 color={styles.footer.text.color}
                 fontSize={styles.footer.text.fontSize}
@@ -465,7 +465,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 GitHub
               </ChakraLink>
               <ChakraLink
-                href="https://github.com/de-learning-hub/frontend/blob/main/CONTRIBUTING.md"
+                href="https://github.com/pipecraft-net/pipecraft/blob/main/CONTRIBUTING.md"
                 isExternal
                 color={styles.footer.text.color}
                 fontSize={styles.footer.text.fontSize}

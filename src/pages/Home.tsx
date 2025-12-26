@@ -66,7 +66,7 @@ const contributionWays = [
     title: 'Добавь статью',
     description: 'Поделись своими знаниями и опытом. Напиши статью о технологии, которую хорошо знаешь',
     action: 'Написать статью',
-    link: 'https://github.com/de-learning-hub/frontend/blob/main/CONTRIBUTING.md',
+    link: 'https://github.com/pipecraft-net/pipecraft/blob/main/CONTRIBUTING.md',
   },
   {
     id: 2,
@@ -74,7 +74,7 @@ const contributionWays = [
     title: 'Улучши материал',
     description: 'Заметил ошибку или неточность? Дополни существующий материал своим опытом',
     action: 'Предложить улучшение',
-    link: 'https://github.com/de-learning-hub/frontend/issues',
+    link: 'https://github.com/pipecraft-net/pipecraft/issues',
   },
   {
     id: 3,
@@ -82,7 +82,7 @@ const contributionWays = [
     title: 'Поделись проектом',
     description: 'Расскажи коллегам о проекте. Чем больше нас, тем качественнее база знаний',
     action: 'Поделиться',
-    link: 'https://github.com/de-learning-hub',
+    link: 'https://github.com/pipecraft-net/pipecraft',
   },
 ];
 
@@ -246,7 +246,7 @@ export const Home = () => {
             letterSpacing="1px"
             mb={6}
           >
-            DE LEARNING HUB
+            PIPECRAFT
           </Heading>
 
           <Text
@@ -258,7 +258,7 @@ export const Home = () => {
             maxW="600px"
             mx="auto"
           >
-            Открытая база знаний для Data Engineers. Создаётся сообществом, доступна всем бесплатно
+            Мастерство Data Engineering. Roadmaps, статьи и подготовка к собесам
           </Text>
 
           {/* Stats - social proof */}
@@ -429,7 +429,7 @@ export const Home = () => {
           mx="auto"
           mb={12}
         >
-          DE Learning Hub создаётся силами сообщества. Каждый может внести свой вклад
+          Pipecraft создаётся силами сообщества. Каждый может внести свой вклад
         </Text>
 
         <SimpleGrid columns={{ base: 1, md: 3 }} gap={6} maxW="1200px" mx="auto" mb={12}>
@@ -484,7 +484,7 @@ export const Home = () => {
         <Box display="flex" justifyContent="center" mt={12}>
           <Button
             as="a"
-            href="https://github.com/de-learning-hub"
+            href="https://github.com/pipecraft-net/pipecraft"
             target="_blank"
             rel="noopener noreferrer"
             variant="secondary"

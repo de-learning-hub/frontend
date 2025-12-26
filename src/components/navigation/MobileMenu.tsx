@@ -93,7 +93,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         <DrawerCloseButton />
         <DrawerHeader {...styles.header} borderColor={borderColor}>
           <Text fontSize="lg" fontWeight="bold" color={headerColor}>
-            📚 DE Learning Hub
+            PIPECRAFT
           </Text>
         </DrawerHeader>
 

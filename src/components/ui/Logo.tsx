@@ -1,4 +1,4 @@
-import logoDark from '@/assets/icons/logo_in_dark.svg';
+import logoMain from '@/assets/logo_main.svg';
 
 interface LogoProps {
   height?: string;
@@ -6,14 +6,13 @@ interface LogoProps {
 }
 
 /**
- * Logo component for dark header background
- * Always uses logo_in_dark.svg (white square with teal icon)
+ * Logo component - Pipecraft wordmark with icon
  */
 export const Logo: React.FC<LogoProps> = ({ height = '40px', width = 'auto' }) => {
   return (
     <img
-      src={logoDark}
-      alt="DE Learning Hub Logo"
+      src={logoMain}
+      alt="Pipecraft Logo"
       style={{ height, width }}
     />
   );
